@@ -1,6 +1,6 @@
 package finalproject.emag.controller;
 
-import finalproject.emag.model.pojo.ErrorMsg;
+import finalproject.emag.util.ErrorMsg;
 import finalproject.emag.model.pojo.User;
 import finalproject.emag.util.exception.AlreadyLoggedException;
 import finalproject.emag.util.exception.BaseException;

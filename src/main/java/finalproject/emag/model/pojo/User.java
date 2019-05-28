@@ -1,52 +1,35 @@
 package finalproject.emag.model.pojo;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
+@Entity
+@Table(name = "users")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
+    @Column(name = "full_name" ,nullable = false)
     private String name;
     private String username;
     private String phoneNumber;
     private LocalDate birthDate;
     private boolean subscribed;
+    @Column(nullable = false)
     private boolean admin;
     private String imageUrl;
-    private HashSet<Order> orders;
+//    private HashSet<Order> orders;
 
-    public User(String email, String password, String name, String username, String phoneNumber, LocalDate birthDate, boolean subscribed,boolean admin,String imageUrl) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.username = username;
-        this.phoneNumber = phoneNumber;
-        this.birthDate = birthDate;
-        this.subscribed = subscribed;
-        this.admin = admin;
-        this.imageUrl = imageUrl;
-    }
-
-    public User(String name, String username, String phoneNumber, LocalDate birthDate, boolean subscribed,String email) {
-        this.name = name;
-        this.username = username;
-        this.phoneNumber = phoneNumber;
-        this.birthDate = birthDate;
-        this.subscribed = subscribed;
-        this.email = email;
-    }
-
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
 }

@@ -1,4 +1,4 @@
-package finalproject.emag.model.pojo;
+package finalproject.emag.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

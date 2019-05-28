@@ -1,44 +1,28 @@
 package finalproject.emag.model.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.util.Objects;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "stats")
 public class Stat {
 
-    @JsonIgnore
-    private long id;
-    @JsonIgnore
-    private long subcategoryId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToOne
+    @NotNull
+    private Category subCategory;
+    @Column(name = "stat_name",nullable = false)
     private String name;
     private String unit;
+    @Column(nullable = false)
     private String value;
-
-    public Stat(long id, long subcategoryId, String name, String unit, String value) {
-        this.id = id;
-        this.subcategoryId = subcategoryId;
-        this.name = name;
-        this.unit = unit;
-        this.value = value;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Stat stat = (Stat) o;
-        return id == stat.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
 }

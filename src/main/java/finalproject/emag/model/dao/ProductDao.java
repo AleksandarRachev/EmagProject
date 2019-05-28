@@ -224,18 +224,18 @@ public class ProductDao {
             Product p = new Product();
             while (rs.next()) {
                 p.setId(rs.getLong(1));
-                p.setSubcategoryId(rs.getLong(2));
+//                p.setSubcategoryId(rs.getLong(2));
                 p.setName(rs.getString(3));
                 p.setPrice(rs.getDouble(4));
                 p.setQuantity(rs.getInt(5));
                 p.setImageUrl(rs.getString(6));
                 Stat s = new Stat();
                 s.setName(rs.getString(7));
-                s.setValue(rs.getString(8));
+//                s.setValue(rs.getString(8));
                 s.setUnit(rs.getString(9));
                 s.setId(rs.getLong(10));
-                s.setSubcategoryId(rs.getLong(2));
-                p.addToStats(s);
+//                s.setSubcategoryId(rs.getLong(2));
+//                p.addToStats(s);
                 addReviewsToProduct(p, rs.getLong(1));
             }
             return p;
@@ -250,12 +250,12 @@ public class ProductDao {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Review review = new Review();
-                review.setUserId(rs.getLong(1));
-                review.setProductId(id);
+//                review.setUserId(rs.getLong(1));
+//                review.setProductId(id);
                 review.setTitle(rs.getString(2));
                 review.setComment(rs.getString(3));
                 review.setGrade(rs.getInt(4));
-                p.addToReviews(review);
+//                p.addToReviews(review);
             }
         }
     }
@@ -448,7 +448,7 @@ public class ProductDao {
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setLong(1, id);
             ps.setLong(2, stat.getId());
-            ps.setString(3, stat.getValue());
+//            ps.setString(3, stat.getValue());
             ps.execute();
             ps.close();
         }

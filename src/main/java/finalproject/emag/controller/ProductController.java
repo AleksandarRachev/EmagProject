@@ -92,8 +92,8 @@ public class ProductController extends BaseController {
                 String statName = (objNode.path("name").asText());
                 String unit = (checkIfNull(objNode, "unit"));
                 String value = (objNode.path("value").asText());
-                Stat stat = new Stat(id, subId, name, unit, value);
-                product.addStat(stat);
+//                Stat stat = new Stat(id, subId, name, unit, value);
+//                product.addStat(stat);
             }
         }
         dao.insertProductInDB(product);

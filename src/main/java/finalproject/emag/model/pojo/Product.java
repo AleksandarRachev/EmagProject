@@ -1,33 +1,40 @@
 package finalproject.emag.model.pojo;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Objects;
 
+@Data
+@Entity
 @NoArgsConstructor
-@Getter
-@Setter
+@AllArgsConstructor
+@Table(name = "products")
 public class Product {
 
-    private long id;
-    private long subcategoryId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToOne
+    @NotNull
+    private Category subcategory;
+    @Column(name = "product_name",nullable = false)
     private String name;
     private double price;
     private int quantity;
     private String imageUrl;
-    private HashSet<Stat> stats = new HashSet<>();
-    private HashSet<Review> reviews = new HashSet<>();
+//    private HashSet<Stat> stats = new HashSet<>();
+//    private HashSet<Review> reviews = new HashSet<>();
 
-    public void addToStats(Stat stat) {
-        stats.add(stat);
-    }
-
-    public void addToReviews(Review review) {
-        reviews.add(review);
-    }
+//    public void addToStats(Stat stat) {
+//        stats.add(stat);
+//    }
+//
+//    public void addToReviews(Review review) {
+//        reviews.add(review);
+//    }
 
     @Override
     public boolean equals(Object o) {
