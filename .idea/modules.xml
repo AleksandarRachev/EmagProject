@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EmagProject.iml" filepath="$PROJECT_DIR$/EmagProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emag.iml" filepath="$PROJECT_DIR$/emag.iml" />
     </modules>
   </component>
 </project>
