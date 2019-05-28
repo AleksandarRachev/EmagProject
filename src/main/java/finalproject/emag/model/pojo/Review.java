@@ -1,36 +1,34 @@
 package finalproject.emag.model.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-import java.util.Objects;
+import javax.persistence.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
+@Entity
+@Table(name = "reviews")
 public class Review {
 
-    @JsonIgnore
-    private long userId;
-    @JsonIgnore
-    private long productId;
+    @EmbeddedId
+    private ReviewId id;
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String comment;
+    @Column(nullable = false)
     private int grade;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Review review = (Review) o;
-        return userId == review.userId &&
-                productId == review.productId;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId, productId);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Review review = (Review) o;
+//        return userId == review.userId &&
+//                productId == review.productId;
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(userId, productId);
+//    }
 }

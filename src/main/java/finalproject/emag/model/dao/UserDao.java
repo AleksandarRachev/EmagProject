@@ -27,15 +27,16 @@ public class UserDao {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                User user = new User(rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getDate(7) == null ? null : rs.getDate(7).toLocalDate(),
-                        rs.getBoolean(8),
-                        rs.getBoolean(9),
-                        rs.getString(10));
+                User user = new User();
+                user.setEmail(rs.getString(2));
+                user.setPassword(rs.getString(3));
+                user.setName(rs.getString(4));
+                user.setUsername(rs.getString(5));
+                user.setPhoneNumber(rs.getString(6));
+                user.setBirthDate(rs.getDate(7)==null ? null:rs.getDate(7).toLocalDate());
+                user.setSubscribed(rs.getBoolean(8));
+                user.setAdmin(rs.getBoolean(9));
+                user.setImageUrl(rs.getString(10));
                 user.setId(rs.getLong(1));
                 return user;
             }

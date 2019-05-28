@@ -90,7 +90,17 @@ public class UserController extends BaseController {
                 response.getWriter().append("Invalid phone number");
             }
         }
-        return new User(email, password, fullName, username, phone, date, subscribed, admin, imageUrl);
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setName(fullName);
+        user.setUsername(username);
+        user.setPhoneNumber(phone);
+        user.setBirthDate(date);
+        user.setSubscribed(subscribed);
+        user.setAdmin(admin);
+        user.setImageUrl(imageUrl);
+        return user;
     }
 
     @PostMapping(value = "/register")
