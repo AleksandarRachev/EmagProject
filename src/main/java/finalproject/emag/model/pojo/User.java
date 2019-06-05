@@ -1,9 +1,7 @@
 package finalproject.emag.model.pojo;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
