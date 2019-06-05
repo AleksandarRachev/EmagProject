@@ -1,28 +1,15 @@
 package finalproject.emag.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import finalproject.emag.model.dto.ShowUserDto;
-import finalproject.emag.model.pojo.User;
 import finalproject.emag.model.services.UserService;
-import finalproject.emag.repositories.UserRepository;
-import finalproject.emag.util.GetDate;
 import finalproject.emag.util.SuccessMessage;
 import finalproject.emag.util.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping(value = "/users",produces = "application/json")
@@ -47,56 +34,7 @@ public class UserController extends BaseController {
         session.invalidate();
         return new SuccessMessage("You logged out",HttpStatus.OK.value(),LocalDateTime.now());
     }
-//
-//    private User getUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
-//        String email = request.getParameter("email");
-//        String password = checkIfNull(request, "password");
-//        String fullName = request.getParameter("full_name");
-//        String username = checkIfNull(request, "username");
-//        String phone = checkIfNull(request, "phone");
-//        String birthDate = checkIfNull(request, "birth_date");
-//        String imageUrl = checkIfNull(request, "image_url");
-//        boolean subscribed = Boolean.parseBoolean(request.getParameter("subscribed"));
-//        boolean admin;
-//        if (request.getParameter("admin") != null) {
-//            admin = Boolean.parseBoolean(request.getParameter("admin"));
-//        } else {
-//            admin = false;
-//        }
-//        LocalDate date = GetDate.getDate(birthDate);
-//        String phoneRegex = "08[789]\\d{7}";
-//        String emailRegex = "([A-Za-z0-9-_.]+@[A-Za-z0-9-_]+(?:\\.[A-Za-z]+)+)";
-//        if (!email.matches(emailRegex)) {
-//            response.setStatus(400);
-//            response.getWriter().append("Invalid email.");
-//        }
-//        if (phone != null) {
-//            if (!phone.matches(phoneRegex)) {
-//                response.setStatus(400);
-//                response.getWriter().append("Invalid phone number");
-//            }
-//        }
-//        User user = new User();
-//        user.setEmail(email);
-//        user.setPassword(password);
-//        user.setName(fullName);
-//        user.setUsername(username);
-//        user.setPhoneNumber(phone);
-//        user.setBirthDate(date);
-//        user.setSubscribed(subscribed);
-//        user.setAdmin(admin);
-//        user.setImageUrl(imageUrl);
-//        return user;
-//    }
-//
 
-//
-//    @PostMapping(value = "/logout")
-//    public String logoutUser(HttpSession session) throws NotLoggedException {
-//        validateLogin(session);
-//        session.invalidate();
-//        return "You logged out";
-//    }
 //
 //    @PutMapping(value = "/subscribe")
 //    public String subscribe(HttpSession session) throws NotLoggedException, SQLException {

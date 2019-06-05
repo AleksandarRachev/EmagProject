@@ -3,10 +3,12 @@ package finalproject.emag.model.services;
 import finalproject.emag.model.dto.ShowUserDto;
 import finalproject.emag.model.pojo.User;
 import finalproject.emag.repositories.UserRepository;
+import finalproject.emag.util.PasswordEncoder;
 import finalproject.emag.util.SuccessMessage;
 import finalproject.emag.util.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +52,7 @@ public class UserService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         LocalDate birthDate = LocalDate.parse(date,formatter);
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(PasswordEncoder.hashPassword(password));
         user.setName(fullName);
         user.setSubscribed(subscribed);
         user.setUsername(username);
@@ -79,11 +81,8 @@ public class UserService {
             throw new MissingValuableFieldsException();
         }
         List<User> users = userRepository.findAllByEmail(email);
-        if(users.size() < 1){
-            throw new WrongCredentialsException();
-        }
         User getUser = userRepository.findByEmail(email);
-        if(!getUser.getPassword().matches(password)){
+        if(users.size() < 1 || !BCrypt.checkpw(password,getUser.getPassword())){
             throw new WrongCredentialsException();
         }
         ShowUserDto user = new ShowUserDto(getUser.getId(),getUser.getEmail(),getUser.getName(),getUser.getUsername(),
