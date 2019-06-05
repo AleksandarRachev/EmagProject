@@ -1,3 +1,0 @@
-05 Jun 2019 16:11:57,891  method:handleNotLogged  row:27  class name:BaseController.java  :exception: finalproject.emag.util.exception.NotLoggedException: You are not logged.
-05 Jun 2019 16:12:01,296  method:handleMyErrors  row:34  class name:BaseController.java  :exception: finalproject.emag.util.exception.WrongCredentialsException: Wrong credentials
-05 Jun 2019 16:21:42,679  method:handleMyErrors  row:34  class name:BaseController.java  :exception: finalproject.emag.util.exception.WrongCredentialsException: Wrong credentials

@@ -59,7 +59,9 @@ public class UserService {
         user.setPhoneNumber(phoneNumber);
         user.setBirthDate(birthDate);
         userRepository.save(user);
-        session.setAttribute(USER,user);
+        ShowUserDto userSession = new ShowUserDto(user.getId(),user.getEmail(),user.getName(),user.getUsername(),
+                user.getPhoneNumber(),user.getBirthDate(),user.isSubscribed(),user.isAdmin(),user.getImageUrl());
+        session.setAttribute(USER,userSession);
         session.setMaxInactiveInterval((60*60));
         return new SuccessMessage("Register successful", HttpStatus.OK.value(), LocalDateTime.now());
     }
@@ -90,6 +92,30 @@ public class UserService {
         session.setAttribute(USER,user);
         session.setMaxInactiveInterval((60*60));
         return user;
+    }
+
+    public SuccessMessage subscribeUser(HttpSession session) throws AlreadySubscribedException {
+        ShowUserDto userSession = (ShowUserDto) session.getAttribute(USER);
+        User user = userRepository.findByEmail(userSession.getEmail());
+        if(user.isSubscribed()){
+            throw new AlreadySubscribedException();
+        }
+        userSession.setSubscribed(true);
+        user.setSubscribed(true);
+        userRepository.save(user);
+        return new SuccessMessage("You subscribed",HttpStatus.OK.value(),LocalDateTime.now());
+    }
+
+    public SuccessMessage unsubscribeUser(HttpSession session) throws NotSubscribedException {
+        ShowUserDto userSession = (ShowUserDto) session.getAttribute(USER);
+        User user = userRepository.findByEmail(userSession.getEmail());
+        if(!user.isSubscribed()){
+            throw new NotSubscribedException();
+        }
+        userSession.setSubscribed(false);
+        user.setSubscribed(false);
+        userRepository.save(user);
+        return new SuccessMessage("You unsubscribed",HttpStatus.OK.value(),LocalDateTime.now());
     }
 
 

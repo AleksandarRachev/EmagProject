@@ -35,6 +35,18 @@ public class UserController extends BaseController {
         return new SuccessMessage("You logged out",HttpStatus.OK.value(),LocalDateTime.now());
     }
 
+    @PutMapping(value = "/subscribe")
+    public SuccessMessage subscribe(HttpSession session) throws BaseException{
+        validateLogin(session);
+        return userService.subscribeUser(session);
+    }
+
+    @PutMapping(value = "/unsubscribe")
+    public SuccessMessage unsubscribe(HttpSession session) throws BaseException{
+        validateLogin(session);
+        return userService.unsubscribeUser(session);
+    }
+
 //
 //    @PutMapping(value = "/subscribe")
 //    public String subscribe(HttpSession session) throws NotLoggedException, SQLException {

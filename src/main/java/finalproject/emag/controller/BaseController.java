@@ -19,26 +19,26 @@ import java.time.LocalDateTime;
 @RestController
 public abstract class BaseController {
 
-    private static Logger log = Logger.getLogger(BaseController.class.getName());
+//    private static Logger log = Logger.getLogger(BaseController.class.getName());
 
     @ExceptionHandler({NotLoggedException.class, NotAdminException.class})
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
     public ErrorMsg handleNotLogged(Exception e){
-        log.error("exception: "+e);
+//        log.error("exception: "+e);
         return new ErrorMsg(e.getMessage(), HttpStatus.UNAUTHORIZED.value(), LocalDateTime.now());
     }
 
     @ExceptionHandler({BaseException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ErrorMsg handleMyErrors(Exception e){
-        log.error("exception: "+e);
+//        log.error("exception: "+e);
         return new ErrorMsg(e.getMessage(), HttpStatus.BAD_REQUEST.value(), LocalDateTime.now());
     }
 
     @ExceptionHandler({Exception.class})
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorMsg handleOtherErrors(Exception e){
-        log.error("exception: "+e);
+//        log.error("exception: "+e);
         return new ErrorMsg(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), LocalDateTime.now());
     }
 
@@ -63,12 +63,6 @@ public abstract class BaseController {
             if(!logged.isAdmin()){
                 throw new NotAdminException();
             }
-        }
-    }
-
-    protected void validateAlreadyLogged(HttpSession session) throws AlreadyLoggedException {
-        if(session.getAttribute("user")!=null){
-            throw new AlreadyLoggedException();
         }
     }
 }
