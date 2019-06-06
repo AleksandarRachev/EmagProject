@@ -1,5 +1,6 @@
 package finalproject.emag.controller;
 
+import finalproject.emag.model.dto.ShowUserDto;
 import finalproject.emag.util.ErrorMsg;
 import finalproject.emag.model.pojo.User;
 import finalproject.emag.util.exception.AlreadyLoggedException;
@@ -59,7 +60,7 @@ public abstract class BaseController {
             throw new NotLoggedException();
         }
         else{
-            User logged = (User) (session.getAttribute("user"));
+            ShowUserDto logged = (ShowUserDto) (session.getAttribute("user"));
             if(!logged.isAdmin()){
                 throw new NotAdminException();
             }

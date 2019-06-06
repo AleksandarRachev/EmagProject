@@ -1,37 +1,3 @@
-//package finalproject.emag.model.dao;
-//
-//import finalproject.emag.model.dto.*;
-//import finalproject.emag.model.pojo.Product;
-//import finalproject.emag.model.pojo.Review;
-//import finalproject.emag.model.pojo.Stat;
-//import finalproject.emag.model.pojo.User;
-//import finalproject.emag.util.MailUtil;
-//import finalproject.emag.util.exception.BaseException;
-//import finalproject.emag.util.exception.ProductNotFoundException;
-//import finalproject.emag.util.exception.ProductOutOfStockException;
-//import finalproject.emag.util.exception.WrongSearchWordException;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.jdbc.core.JdbcTemplate;
-//import org.springframework.stereotype.Component;
-//
-//import javax.mail.MessagingException;
-//import javax.servlet.http.HttpSession;
-//import java.sql.*;
-//import java.time.LocalDate;
-//import java.util.ArrayList;
-//import java.util.HashMap;
-//import java.util.HashSet;
-//import java.util.Map;
-//
-//@Component
-//public class ProductDao {
-//
-//    @Autowired
-//    private JdbcTemplate jdbcTemplate;
-//
-//    public ProductDao() {
-//    }
-//
 //    private ArrayList<GlobalViewProductDto> products(ResultSet rs) throws SQLException {
 //        ArrayList<GlobalViewProductDto> products = new ArrayList<>();
 //        while (rs.next()) {
@@ -59,15 +25,6 @@
 //        }
 //        return sql;
 //    }
-//
-//    public ArrayList<GlobalViewProductDto> getAllProducts() throws SQLException {
-//        try (Connection c = jdbcTemplate.getDataSource().getConnection();) {
-//            PreparedStatement ps = c.prepareStatement("SELECT id, product_name, price, quantity FROM products;");
-//            ResultSet rs = ps.executeQuery();
-//            return products(rs);
-//        }
-//    }
-//
 //    public ArrayList<GlobalViewProductDto> getAllProductsBySubcategory(long subcatId) throws Exception {
 //        checkSubcategoryId(subcatId);
 //        try (Connection c = jdbcTemplate.getDataSource().getConnection();) {

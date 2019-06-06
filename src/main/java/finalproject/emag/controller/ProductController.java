@@ -1,41 +1,44 @@
 package finalproject.emag.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import finalproject.emag.model.dto.*;
+import finalproject.emag.model.pojo.Category;
 import finalproject.emag.model.pojo.Product;
-import finalproject.emag.model.pojo.User;
-import finalproject.emag.util.exception.EmptyCartException;
-import finalproject.emag.util.exception.InvalidQuantityException;
-import finalproject.emag.util.exception.MissingValuableFieldsException;
+import finalproject.emag.model.service.ProductService;
+import finalproject.emag.util.SuccessMessage;
+import finalproject.emag.util.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
-@RequestMapping(produces = "application/json")
+@RequestMapping(value = "/products",produces = "application/json")
 public class ProductController extends BaseController {
 
-    private static final int MIN_NUMBER_OF_PRODUCTS = 0;
-    private static final int MAX_NUMBER_OF_PRODUCTS = 9999;
-    private static final String MIN_PRICE = "0";
-    private static final String MAX_PRICE = "99999";
-    private static final String CART = "cart";
-    private static final String USER = "user";
+    @Autowired
+    private ProductService productService;
 
-//    @Autowired
-//    private ProductDao dao;
-//    private ObjectMapper objectMapper = new ObjectMapper();
-//
-//    @GetMapping(value = ("/products"))
-//    public ArrayList<GlobalViewProductDto> getAllProducts() throws SQLException {
-//        return dao.getAllProducts();
-//    }
+    @PostMapping
+    public SuccessMessage addProduct(HttpServletRequest request, HttpSession session) throws BaseException {
+        validateLoginAdmin(session);
+        return productService.addProduct(request);
+    }
+
+    @GetMapping()
+    public List<Product> getAllProducts(){
+        return productService.getAllProducts();
+    }
+
+    @GetMapping(value = ("/category/{id}"))
+    public List<Product> getAllProductsByCategory(@PathVariable("id") long categoryId){
+        return productService.getProductsByCategory(categoryId);
+    }
+
+    @GetMapping(value = ("/{id}"))
+    public Product getProduct(@PathVariable("id") long productId) throws ProductNotFoundException {
+        return productService.getProduct(productId);
+    }
 //
 //    @GetMapping(value = ("/products/filter"))
 //    public ArrayList<GlobalViewProductDto> getAllProductsFiltered(
@@ -44,12 +47,6 @@ public class ProductController extends BaseController {
 //            @RequestParam(value = "to", required = false, defaultValue = MAX_PRICE) Double max
 //    ) throws Exception {
 //        return dao.getAllProductsFiltered(order, min, max);
-//    }
-//
-//    @GetMapping(value = ("/products/subcategory/{id}"))
-//    public ArrayList<GlobalViewProductDto> getAllProductsBySubcategory(
-//            @PathVariable("id") long subcatId) throws Exception {
-//        return dao.getAllProductsBySubcategory(subcatId);
 //    }
 //
 //    @GetMapping(value = ("/products/subcategory/{id}/filter"))
@@ -61,47 +58,9 @@ public class ProductController extends BaseController {
 //        return dao.getAllProductsBySubcategoryFiltered(subcatId, order, min, max);
 //    }
 //
-//    @GetMapping(value = ("/products/{id}"))
-//    public Product getProductById(@PathVariable("id") long productId) throws Exception {
-//        return dao.getProductById(productId);
-//    }
-//
 //    @GetMapping(value = ("/products/search/{name}"))
 //    public ArrayList<GlobalViewProductDto> searchProducts(@PathVariable("name") String name) throws Exception {
 //        return dao.searchProducts(name);
-//    }
-//
-//    @PostMapping(value = ("/products/add"))
-//    public String addProduct(@RequestBody String input, HttpServletRequest request) throws Exception {
-//        validateLoginAdmin(request.getSession());
-//        JsonNode jsonNode = objectMapper.readTree(input);
-//        int subCatId = (jsonNode.path("subcaregoryId").intValue());
-//        String name = (jsonNode.path("name").asText());
-//        double price = (jsonNode.path("price").doubleValue());
-//        int quantity = (jsonNode.path("quantity").intValue());
-//        String image = (jsonNode.path("image").asText());
-//        AddProductDto product = new AddProductDto(subCatId, name, price, quantity, image);
-//        JsonNode arrNode = objectMapper.readTree(input).get("stats");
-//        if (arrNode.isArray()) {
-//            for (JsonNode objNode : arrNode) {
-//                long id = (objNode.path("id").longValue());
-//                long subId = (objNode.path("subcategoryId").longValue());
-//                String statName = (objNode.path("name").asText());
-//                String unit = (checkIfNull(objNode, "unit"));
-//                String value = (objNode.path("value").asText());
-////                Stat stat = new Stat(id, subId, name, unit, value);
-////                product.addStat(stat);
-//            }
-//        }
-//        dao.insertProductInDB(product);
-//        return "You successfully added the product to the DB!";
-//    }
-//
-//    private String checkIfNull(JsonNode node,String input){
-//        if(node.has(input)) {
-//            return node.path(input).asText();
-//        }
-//        return null;
 //    }
 //
 //    @PutMapping(value = ("/products/{id}/quantity/{quantity}"))

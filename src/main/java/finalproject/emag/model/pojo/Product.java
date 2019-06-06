@@ -19,7 +19,7 @@ public class Product {
     private Long id;
     @OneToOne
     @NotNull
-    private Category subcategory;
+    private Category category;
     @Column(name = "product_name",nullable = false)
     private String name;
     private double price;
