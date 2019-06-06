@@ -1,5 +1,6 @@
 package finalproject.emag.controller;
 
+import finalproject.emag.model.dto.ProductAddDTO;
 import finalproject.emag.model.pojo.Product;
 import finalproject.emag.model.service.ProductService;
 import finalproject.emag.util.SuccessMessage;
@@ -19,9 +20,9 @@ public class ProductController extends BaseController {
     private ProductService productService;
 
     @PostMapping
-    public SuccessMessage addProduct(HttpServletRequest request, HttpSession session) throws BaseException {
+    public SuccessMessage addProduct(@RequestBody ProductAddDTO product, HttpSession session) throws BaseException {
         validateLoginAdmin(session);
-        return productService.addProduct(request);
+        return productService.addProduct(product);
     }
 
     @GetMapping()

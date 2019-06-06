@@ -1,5 +1,6 @@
 package finalproject.emag.model.service;
 
+import finalproject.emag.model.dto.ProductAddDTO;
 import finalproject.emag.model.pojo.Category;
 import finalproject.emag.model.pojo.Product;
 import finalproject.emag.repositories.CategoryRepository;
@@ -31,18 +32,14 @@ public class ProductService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public SuccessMessage addProduct(HttpServletRequest request) throws BaseException {
-        fieldsCheck(request);
-        String name = request.getParameter("name");
-        double price = Double.parseDouble(request.getParameter("price"));
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
-        long categoryId = Long.parseLong(request.getParameter("category_id"));
-        Category category = getCategory(categoryId);
-        checkIfProductExists(name);
+    public SuccessMessage addProduct(ProductAddDTO productAdd) throws BaseException {
+        fieldsCheck(productAdd);
+        Category category = getCategory(productAdd.getCategoryId());
+        checkIfProductExists(productAdd.getName());
         Product product = new Product();
-        product.setName(name);
-        product.setPrice(price);
-        product.setQuantity(quantity);
+        product.setName(productAdd.getName());
+        product.setPrice(productAdd.getPrice());
+        product.setQuantity(productAdd.getQuantity());
         product.setCategory(category);
         productRepository.save(product);
         return new SuccessMessage("Product added", HttpStatus.OK.value(), LocalDateTime.now());
@@ -56,9 +53,9 @@ public class ProductService {
         return category.get();
     }
 
-    private void fieldsCheck(HttpServletRequest request) throws MissingValuableFieldsException {
-        if(request.getParameter("price") == null || request.getParameter("category_id") == null ||
-                request.getParameter("quantity") == null || request.getParameter("name") == null){
+    private void fieldsCheck(ProductAddDTO product) throws MissingValuableFieldsException {
+        if(product.getPrice() == null || product.getCategoryId() == null ||
+                product.getQuantity() == null || product.getName() == null){
             throw new MissingValuableFieldsException();
         }
     }
