@@ -86,5 +86,11 @@ public class ProductService {
         return product.get();
     }
 
+    public SuccessMessage deleteProduct(long productId) throws ProductNotFoundException {
+        Product product = getProduct(productId);
+        productRepository.delete(product);
+        return new SuccessMessage("Product deleted",HttpStatus.OK.value(),LocalDateTime.now());
+    }
+
 
 }

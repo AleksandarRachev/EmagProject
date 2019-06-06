@@ -1,6 +1,6 @@
 package finalproject.emag.controller;
 
-import finalproject.emag.model.dto.ShowUserDto;
+import finalproject.emag.model.dto.*;
 import finalproject.emag.model.service.UserService;
 import finalproject.emag.util.SuccessMessage;
 import finalproject.emag.util.exception.*;
@@ -19,13 +19,13 @@ public class UserController extends BaseController {
     private UserService userService;
 
     @PostMapping(value = "/register")
-    public SuccessMessage register(HttpServletRequest request,HttpSession session) throws BaseException {
-        return userService.register(request,session);
+    public SuccessMessage register(@RequestBody RegisterUserDTO user, HttpSession session) throws BaseException {
+        return userService.register(user,session);
     }
 
     @PostMapping(value = "/login")
-    public ShowUserDto login(HttpServletRequest request,HttpSession session) throws BaseException {
-        return userService.login(request,session);
+    public ShowUserDto login(@RequestBody LoginUserDTO user, HttpSession session) throws BaseException {
+        return userService.login(user,session);
     }
 
     @PostMapping(value = "/logout")
@@ -48,20 +48,20 @@ public class UserController extends BaseController {
     }
 
     @PutMapping(value = "/edit-pass")
-    public SuccessMessage editPassword(HttpServletRequest request,HttpSession session) throws BaseException{
+    public SuccessMessage editPassword(@RequestBody EditPassDTO user, HttpSession session) throws BaseException{
         validateLogin(session);
-        return userService.editPassword(request,session);
+        return userService.editPassword(user,session);
     }
 
     @PutMapping(value = "/edit-email")
-    public SuccessMessage editEmail(HttpServletRequest request,HttpSession session) throws BaseException{
+    public SuccessMessage editEmail(@RequestBody EditEmailDTO user, HttpSession session) throws BaseException{
         validateLogin(session);
-        return userService.editEmail(request,session);
+        return userService.editEmail(user,session);
     }
 
     @PutMapping(value = "/edit-personal-info")
-    public SuccessMessage editPersonalInfo(HttpServletRequest request,HttpSession session) throws BaseException{
+    public SuccessMessage editPersonalInfo(@RequestBody EditPersonalInfoDTO user,HttpSession session) throws BaseException{
         validateLogin(session);
-        return userService.editPersonalInfo(request,session);
+        return userService.editPersonalInfo(user,session);
     }
 }

@@ -1,6 +1,5 @@
 package finalproject.emag.controller;
 
-import finalproject.emag.model.pojo.Category;
 import finalproject.emag.model.pojo.Product;
 import finalproject.emag.model.service.ProductService;
 import finalproject.emag.util.SuccessMessage;
@@ -39,6 +38,12 @@ public class ProductController extends BaseController {
     public Product getProduct(@PathVariable("id") long productId) throws ProductNotFoundException {
         return productService.getProduct(productId);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public SuccessMessage deleteProduct(@PathVariable("id") long productId,HttpSession session) throws BaseException{
+        validateLoginAdmin(session);
+        return productService.deleteProduct(productId);
+    }
 //
 //    @GetMapping(value = ("/products/filter"))
 //    public ArrayList<GlobalViewProductDto> getAllProductsFiltered(
@@ -76,14 +81,6 @@ public class ProductController extends BaseController {
 //        }
 //        return "Product with id - " + productId + " now has quantity - " + quantity + ".";
 //    }
-//
-//    @DeleteMapping(value = ("/products/{id}/delete"))
-//    public String deleteProduct(@PathVariable("id") long id, HttpServletRequest request) throws Exception {
-//        validateLoginAdmin(request.getSession());
-//        dao.deleteProduct(id);
-//        return "The product with id - " + id + " has been removed.";
-//    }
-//
 //
 //    @PostMapping(value = ("/products/{id}/add"))
 //    public Product addToCart(@PathVariable("id") long productId, HttpServletRequest request) throws Exception {

@@ -25,16 +25,6 @@
 //        }
 //        return sql;
 //    }
-//    public ArrayList<GlobalViewProductDto> getAllProductsBySubcategory(long subcatId) throws Exception {
-//        checkSubcategoryId(subcatId);
-//        try (Connection c = jdbcTemplate.getDataSource().getConnection();) {
-//            String sql = "SELECT id, product_name, price, quantity FROM products WHERE subcategory_id = ?;";
-//            PreparedStatement ps = c.prepareStatement(sql);
-//            ps.setLong(1, subcatId);
-//            ResultSet rs = ps.executeQuery();
-//            return products(rs);
-//        }
-//    }
 //
 //    public ArrayList<GlobalViewProductDto> getAllProductsBySubcategoryFiltered(
 //            long id, String order, Double min, Double max) throws Exception {
@@ -57,19 +47,6 @@
 //            return products(rs);
 //        }
 //    }
-//
-//    private void checkSubcategoryId(long subcatId) throws Exception {
-//        try (Connection c = jdbcTemplate.getDataSource().getConnection();) {
-//            PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM products WHERE subcategory_id = ?;");
-//            ps.setLong(1, subcatId);
-//            ResultSet rs = ps.executeQuery();
-//            rs.next();
-//            if (rs.getInt(1) <= 0) {
-//                throw new BaseException("No such subcategory!");
-//            }
-//        }
-//    }
-//
 //    public ArrayList<GlobalViewProductDto> getAllProductsFiltered(String order, Double min, Double max)
 //            throws Exception {
 //        try (Connection c = jdbcTemplate.getDataSource().getConnection();) {
@@ -165,39 +142,6 @@
 //        }
 //    }
 //
-//    public Product getProductById(long productId) throws Exception {
-//        checkIfProductExists(productId);
-//        try(Connection c = jdbcTemplate.getDataSource().getConnection();) {
-//            String sql = "SELECT p.id, p.subcategory_id, p.product_name, p.price, p.quantity, p.image_url, " +
-//                    "s.stat_name, w.value, s.unit, s.id FROM emag.products AS p \n" +
-//                    "JOIN products_with_stats AS w\n" +
-//                    "ON(p.id = w.product_id)\n" +
-//                    "JOIN stats AS s\n" +
-//                    "ON(w.stat_id = s.id)\n" +
-//                    "WHERE p.id = ?;";
-//            PreparedStatement ps = c.prepareStatement(sql);
-//            ps.setLong(1, productId);
-//            ResultSet rs = ps.executeQuery();
-//            Product p = new Product();
-//            while (rs.next()) {
-//                p.setId(rs.getLong(1));
-////                p.setSubcategoryId(rs.getLong(2));
-//                p.setName(rs.getString(3));
-//                p.setPrice(rs.getDouble(4));
-//                p.setQuantity(rs.getInt(5));
-//                p.setImageUrl(rs.getString(6));
-//                Stat s = new Stat();
-//                s.setName(rs.getString(7));
-////                s.setValue(rs.getString(8));
-//                s.setUnit(rs.getString(9));
-//                s.setId(rs.getLong(10));
-////                s.setSubcategoryId(rs.getLong(2));
-////                p.addToStats(s);
-//                addReviewsToProduct(p, rs.getLong(1));
-//            }
-//            return p;
-//        }
-//    }
 //
 //    private void addReviewsToProduct(Product p, long id) throws SQLException{
 //        try(Connection c = jdbcTemplate.getDataSource().getConnection();) {
@@ -217,20 +161,6 @@
 //        }
 //    }
 //
-//    private void checkIfProductExists(long productId) throws Exception {
-//        try (Connection c = jdbcTemplate.getDataSource().getConnection();) {
-//            String sql = "SELECT COUNT(*) FROM products WHERE id = ?";
-//            PreparedStatement ps = c.prepareStatement(sql);
-//            ps.setLong(1, productId);
-//            ResultSet rs = ps.executeQuery();
-//            rs.next();
-//            int productExists = rs.getInt(1);
-//            if (productExists != 0) {
-//                return;
-//            }
-//            throw new ProductNotFoundException("This product does not exist!");
-//        }
-//    }
 //
 //    public CartProductDto getProductForCart(long productId) throws Exception{
 //        checkIfProductExists(productId);
@@ -353,63 +283,6 @@
 //            ps.setLong(2, id);
 //            ps.execute();
 //        }
-//    }
-//
-//    public void deleteProduct(long id) throws Exception {
-//        checkIfProductExists(id);
-//        try(Connection c = jdbcTemplate.getDataSource().getConnection();) {
-//            String sql = "DELETE FROM products WHERE id=?";
-//            PreparedStatement ps = c.prepareStatement(sql);
-//            ps.setLong(1, id);
-//            ps.execute();
-//        }
-//    }
-//
-//    public void insertProductInDB(AddProductDto product) throws SQLException {
-//        Connection c = jdbcTemplate.getDataSource().getConnection();
-//        try {
-//            c.setAutoCommit(false);
-//            long id = addProduct(c, product);
-//            addStats(c, product, id);
-//            c.commit();
-//        }
-//        catch (SQLException e) {
-//            c.rollback();
-//            throw new SQLException();
-//        }
-//        finally {
-//            c.setAutoCommit(true);
-//            c.close();
-//        }
-//    }
-//
-//    private long addProduct(Connection c, AddProductDto product) throws SQLException {
-//        String sql = "INSERT INTO products (subcategory_id, product_name, price, quantity, image_url) " +
-//                "VALUES (?, ?, ?, ?, ?)";
-//        PreparedStatement ps = c.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-//        ps.setLong(1, product.getSubcategoryId());
-//        ps.setString(2, product.getName());
-//        ps.setDouble(3, product.getPrice());
-//        ps.setInt(4, product.getQuantity());
-//        ps.setString(5, product.getImage());
-//        ps.execute();
-//        ResultSet rs = ps.getGeneratedKeys();
-//        rs.next();
-//        return rs.getLong(1);
-//    }
-//
-//    private void addStats(Connection c, AddProductDto product, long id) throws SQLException {
-//        HashSet<Stat> stats = product.getStats();
-//        for (Stat stat : stats) {
-//            String sql = "INSERT INTO products_with_stats (product_id, stat_id, value) VALUES (?, ?, ?)";
-//            PreparedStatement ps = c.prepareStatement(sql);
-//            ps.setLong(1, id);
-//            ps.setLong(2, stat.getId());
-////            ps.setString(3, stat.getValue());
-//            ps.execute();
-//            ps.close();
-//        }
-//
 //    }
 //
 //    public void addPromotion(PromotionProductDto product) throws SQLException, MessagingException {

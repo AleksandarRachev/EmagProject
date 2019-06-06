@@ -1,6 +1,6 @@
 package finalproject.emag.model.service;
 
-import finalproject.emag.model.dto.ShowUserDto;
+import finalproject.emag.model.dto.*;
 import finalproject.emag.model.pojo.User;
 import finalproject.emag.repositories.UserRepository;
 import finalproject.emag.util.PasswordEncoder;
@@ -26,26 +26,17 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public SuccessMessage register(HttpServletRequest request, HttpSession session) throws BaseException {
+    public SuccessMessage register(RegisterUserDTO registerUser, HttpSession session) throws BaseException {
         User user = new User();
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String password2 = request.getParameter("password2");
-        String fullName = request.getParameter("full_name");
-        boolean subscribed = Boolean.parseBoolean(request.getParameter("subscribed"));
-        String phoneNumber = request.getParameter("phone_number");
-        String date = request.getParameter("birth_date");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        LocalDate birthDate = date == null?null:LocalDate.parse(date,formatter);
-        String username = request.getParameter("username");
-        registerValidation(email,password,password2,fullName,username);
-        user.setEmail(email);
-        user.setPassword(PasswordEncoder.hashPassword(password));
-        user.setName(fullName);
-        user.setSubscribed(subscribed);
-        user.setUsername(username);
-        user.setPhoneNumber(phoneNumber);
-        user.setBirthDate(birthDate);
+        registerValidation(registerUser.getEmail(),registerUser.getPassword(),registerUser.getPassword2(),
+                registerUser.getFullName(),registerUser.getUsername());
+        user.setEmail(registerUser.getEmail());
+        user.setPassword(PasswordEncoder.hashPassword(registerUser.getPassword()));
+        user.setName(registerUser.getFullName());
+        user.setSubscribed(registerUser.isSubscribed());
+        user.setUsername(registerUser.getUsername());
+        user.setPhoneNumber(registerUser.getPhoneNumber());
+        user.setBirthDate(registerUser.getBirthDate());
         userRepository.save(user);
         ShowUserDto userSession = new ShowUserDto(user.getId(),user.getEmail(),user.getName(),user.getUsername(),
                 user.getPhoneNumber(),user.getBirthDate(),user.isSubscribed(),user.isAdmin(),user.getImageUrl());
@@ -67,27 +58,25 @@ public class UserService {
 
     private void checkIfEmailFree(String email) throws EmailTakenException {
         int count = userRepository.findAllByEmail(email).size();
-        if(count > 0){
+        if(count > 0 && email != null){
             throw new EmailTakenException();
         }
     }
 
     private void checkIfUsernameFree(String username) throws UsernameTakenException {
         int count = userRepository.findAllByUsername(username).size();
-        if(count > 0 ){
+        if(count > 0 && username != null){
             throw new UsernameTakenException();
         }
     }
 
-    public ShowUserDto login(HttpServletRequest request,HttpSession session) throws BaseException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        if(email == null || password == null){
+    public ShowUserDto login(LoginUserDTO loginUser, HttpSession session) throws BaseException {
+        if(loginUser.getEmail() == null || loginUser.getPassword() == null){
             throw new MissingValuableFieldsException();
         }
-        List<User> users = userRepository.findAllByEmail(email);
-        User getUser = userRepository.findByEmail(email);
-        if(users.size() < 1 || !BCrypt.checkpw(password,getUser.getPassword())){
+        List<User> users = userRepository.findAllByEmail(loginUser.getEmail());
+        User getUser = userRepository.findByEmail(loginUser.getEmail());
+        if(users.size() < 1 || !BCrypt.checkpw(loginUser.getPassword(),getUser.getPassword())){
             throw new WrongCredentialsException();
         }
         ShowUserDto user = new ShowUserDto(getUser.getId(),getUser.getEmail(),getUser.getName(),getUser.getUsername(),
@@ -121,51 +110,54 @@ public class UserService {
         return new SuccessMessage("You unsubscribed",HttpStatus.OK.value(),LocalDateTime.now());
     }
 
-    public SuccessMessage editPassword(HttpServletRequest request,HttpSession session) throws WrongCredentialsException, PasswordsNotMatchingException {
+    private void passEditFieldsCheck(EditPassDTO user) throws MissingValuableFieldsException {
+        if(user.getCurrentPass() == null || user.getPassword() == null || user.getPassword2() == null){
+            throw new MissingValuableFieldsException();
+        }
+    }
+
+    public SuccessMessage editPassword(EditPassDTO userEdit, HttpSession session) throws BaseException {
         ShowUserDto userSession = (ShowUserDto) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
-        String currentPass = request.getParameter("current_pass");
-        String password = request.getParameter("password");
-        String password2 = request.getParameter("password2");
-        if(!BCrypt.checkpw(currentPass,user.getPassword())){
+        passEditFieldsCheck(userEdit);
+        if(!BCrypt.checkpw(userEdit.getCurrentPass(),user.getPassword())){
             throw new WrongCredentialsException();
         }
-        if(!password.matches(password2)){
+        if(!userEdit.getPassword().matches(userEdit.getPassword2())){
             throw new PasswordsNotMatchingException();
         }
-        user.setPassword(PasswordEncoder.hashPassword(password));
+        user.setPassword(PasswordEncoder.hashPassword(userEdit.getPassword()));
         userRepository.save(user);
         return new SuccessMessage("Password edited",HttpStatus.OK.value(),LocalDateTime.now());
     }
 
-    public SuccessMessage editEmail(HttpServletRequest request,HttpSession session) throws WrongCredentialsException, EmailTakenException {
+    private void emailEditFieldsCheck(EditEmailDTO user) throws MissingValuableFieldsException {
+        if(user.getEmail() == null || user.getPassword() == null){
+            throw new MissingValuableFieldsException();
+        }
+    }
+
+    public SuccessMessage editEmail(EditEmailDTO userEdit, HttpSession session) throws BaseException {
         ShowUserDto userSession = (ShowUserDto) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
-        String newEmail = request.getParameter("new_email");
-        String password = request.getParameter("password");
-        if(!BCrypt.checkpw(password,user.getPassword())){
+        emailEditFieldsCheck(userEdit);
+        if(!BCrypt.checkpw(userEdit.getPassword(),user.getPassword())){
             throw new WrongCredentialsException();
         }
-        checkIfEmailFree(newEmail);
-        user.setEmail(newEmail);
+        checkIfEmailFree(userEdit.getEmail());
+        user.setEmail(userEdit.getEmail());
         userRepository.save(user);
         return new SuccessMessage("Email edited",HttpStatus.OK.value(),LocalDateTime.now());
     }
 
-    public SuccessMessage editPersonalInfo(HttpServletRequest request,HttpSession session) throws UsernameTakenException, MissingValuableFieldsException {
+    public SuccessMessage editPersonalInfo(EditPersonalInfoDTO userEdit,HttpSession session) throws BaseException {
         ShowUserDto userSession = (ShowUserDto) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
-        String username = request.getParameter("username");
-        String fullName = request.getParameter("full_name");
-        String date = request.getParameter("birth_date");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        LocalDate birthDate = date == null?null:LocalDate.parse(date,formatter);
-        String phoneNumber = request.getParameter("phone_number");
-        checkIfUsernameFree(username);
-        user.setUsername(username);
-        user.setName(fullName);
-        user.setBirthDate(birthDate);
-        user.setPhoneNumber(phoneNumber);
+        checkIfUsernameFree(userEdit.getUsername());
+        user.setUsername(userEdit.getUsername());
+        user.setName(userEdit.getFullName());
+        user.setBirthDate(userEdit.getBirthDate());
+        user.setPhoneNumber(userEdit.getPhoneNumber());
         if(user.getName() == null){
             throw new MissingValuableFieldsException();
         }
