@@ -25,16 +25,6 @@ public class Product {
     private double price;
     private int quantity;
     private String imageUrl;
-//    private HashSet<Stat> stats = new HashSet<>();
-//    private HashSet<Review> reviews = new HashSet<>();
-
-//    public void addToStats(Stat stat) {
-//        stats.add(stat);
-//    }
-//
-//    public void addToReviews(Review review) {
-//        reviews.add(review);
-//    }
 
     @Override
     public boolean equals(Object o) {

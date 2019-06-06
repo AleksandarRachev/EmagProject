@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import finalproject.emag.model.dto.*;
 import finalproject.emag.model.pojo.Product;
-import finalproject.emag.model.pojo.Stat;
 import finalproject.emag.model.pojo.User;
 import finalproject.emag.util.exception.EmptyCartException;
 import finalproject.emag.util.exception.InvalidQuantityException;

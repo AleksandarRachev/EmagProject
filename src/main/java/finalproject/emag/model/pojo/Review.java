@@ -18,17 +18,4 @@ public class Review {
     @Column(nullable = false)
     private int grade;
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Review review = (Review) o;
-//        return userId == review.userId &&
-//                productId == review.productId;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(userId, productId);
-//    }
 }

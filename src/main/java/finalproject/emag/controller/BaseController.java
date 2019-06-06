@@ -48,7 +48,7 @@ public abstract class BaseController {
         return new ErrorMsg(e.getMessage(),HttpStatus.BAD_REQUEST.value(),LocalDateTime.now());
     }
 
-    protected void validateLogin(HttpSession session) throws NotLoggedException{
+    void validateLogin(HttpSession session) throws NotLoggedException{
         if(session.getAttribute("user") == null){
             throw new NotLoggedException();
         }

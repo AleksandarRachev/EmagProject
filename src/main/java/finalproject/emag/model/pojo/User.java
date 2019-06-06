@@ -1,11 +1,9 @@
 package finalproject.emag.model.pojo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashSet;
 
 @Data
 @Entity
@@ -28,6 +26,5 @@ public class User {
     @Column(nullable = false)
     private boolean admin;
     private String imageUrl;
-//    private HashSet<Order> orders;
 
 }
