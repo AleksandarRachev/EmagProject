@@ -8,7 +8,6 @@ import finalproject.emag.util.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -45,24 +44,22 @@ public class ProductController extends BaseController {
         validateLoginAdmin(session);
         return productService.deleteProduct(productId);
     }
-//
-//    @GetMapping(value = ("/products/filter"))
-//    public ArrayList<GlobalViewProductDto> getAllProductsFiltered(
-//            @RequestParam(value = "order", required = false, defaultValue = "ASC") String order,
-//            @RequestParam(value = "from", required = false, defaultValue = MIN_PRICE) Double min,
-//            @RequestParam(value = "to", required = false, defaultValue = MAX_PRICE) Double max
-//    ) throws Exception {
-//        return dao.getAllProductsFiltered(order, min, max);
-//    }
-//
-//    @GetMapping(value = ("/products/subcategory/{id}/filter"))
-//    public ArrayList<GlobalViewProductDto> getAllProductsBySubcategoryFiltered(
-//            @PathVariable(value = "id") long subcatId,
-//            @RequestParam(value = "order", required = false, defaultValue = "ASC") String order,
-//            @RequestParam(value = "from", required = false, defaultValue = MIN_PRICE) Double min,
-//            @RequestParam(value = "to", required = false, defaultValue = MAX_PRICE) Double max) throws Exception {
-//        return dao.getAllProductsBySubcategoryFiltered(subcatId, order, min, max);
-//    }
+    @GetMapping(value = ("/filter"))
+    public List<Product> getAllProductsFiltered(
+            @RequestParam(value = "order",required = false,defaultValue = "ASC") String order,
+            @RequestParam(value = "from",required = false) Double min,
+            @RequestParam(value = "to",required = false) Double max){
+        return productService.getProductsFiltered(min,max,order);
+    }
+
+    @GetMapping(value = ("/subcategory/{id}/filter"))
+    public List<Product> getAllProductsBySubcategoryFiltered(
+            @PathVariable(value = "id") long categoryId,
+            @RequestParam(value = "order", required = false, defaultValue = "ASC") String order,
+            @RequestParam(value = "from", required = false) Double min,
+            @RequestParam(value = "to", required = false) Double max) {
+        return productService.getProductsByCategoryFiltered(min,max,categoryId,order);
+    }
 //
 //    @GetMapping(value = ("/products/search/{name}"))
 //    public ArrayList<GlobalViewProductDto> searchProducts(@PathVariable("name") String name) throws Exception {

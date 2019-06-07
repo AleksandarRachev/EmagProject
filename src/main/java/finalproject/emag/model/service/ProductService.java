@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +20,8 @@ public class ProductService {
 
     private static final int MIN_NUMBER_OF_PRODUCTS = 0;
     private static final int MAX_NUMBER_OF_PRODUCTS = 9999;
-    private static final String MIN_PRICE = "0";
-    private static final String MAX_PRICE = "99999";
+    private static final double MIN_PRICE = 0.0;
+    private static final double MAX_PRICE = 9999999.9;
     private static final String CART = "cart";
     private static final String USER = "user";
 
@@ -87,6 +86,35 @@ public class ProductService {
         Product product = getProduct(productId);
         productRepository.delete(product);
         return new SuccessMessage("Product deleted",HttpStatus.OK.value(),LocalDateTime.now());
+    }
+
+    public List<Product> getProductsFiltered(Double min,Double max,String order){
+        if(min == null){
+            min = MIN_PRICE;
+        }
+        if(max == null){
+            max = MAX_PRICE;
+        }
+        if(order.equals("ASC")){
+            return productRepository.findAllByPriceBetweenOrderByPriceAsc(min,max);
+        }
+        else{
+            return productRepository.findAllByPriceBetweenOrderByPriceDesc(min,max);
+        }
+    }
+
+    public List<Product> getProductsByCategoryFiltered(Double min, Double max, Long categoryId, String order){
+        if(min == null){
+            min = 0.0;
+        }
+        if(max == null){
+            max = 999999.9;
+        }
+        if(order.equals("ASC")){
+            return productRepository.findAllByCategoryByPriceBetweenOrderByPriceAsc(min,max,categoryId);
+        } else {
+            return productRepository.findAllByCategoryByPriceBetweenOrderByPriceDesc(min,max,categoryId);
+        }
     }
 
 
