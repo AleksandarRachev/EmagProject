@@ -22,4 +22,5 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     List<Product> findAllByCategoryByPriceBetweenOrderByPriceDesc(@Param("min")Double min, @Param("max")Double max,@Param("categoryId")Long categoryId);
     @Query(value = "SELECT * FROM products WHERE (price > :min AND price < :max) AND category_id = :categoryId ORDER BY price ASC", nativeQuery = true)
     List<Product> findAllByCategoryByPriceBetweenOrderByPriceAsc(@Param("min")Double min, @Param("max")Double max,@Param("categoryId")Long categoryId);
+    List<Product> findByNameContaining(String name);
 }

@@ -60,25 +60,19 @@ public class ProductController extends BaseController {
             @RequestParam(value = "to", required = false) Double max) {
         return productService.getProductsByCategoryFiltered(min,max,categoryId,order);
     }
-//
-//    @GetMapping(value = ("/products/search/{name}"))
-//    public ArrayList<GlobalViewProductDto> searchProducts(@PathVariable("name") String name) throws Exception {
-//        return dao.searchProducts(name);
-//    }
-//
-//    @PutMapping(value = ("/products/{id}/quantity/{quantity}"))
-//    public String changeProductQuantity(
-//            @PathVariable("id") long productId,
-//            @PathVariable("quantity") int quantity, HttpServletRequest request) throws Exception {
-//        validateLoginAdmin(request.getSession());
-//        if (quantity >= MIN_NUMBER_OF_PRODUCTS && quantity <= MAX_NUMBER_OF_PRODUCTS) {
-//            dao.changeQuantity(productId, quantity);
-//        }
-//        else {
-//            throw new InvalidQuantityException();
-//        }
-//        return "Product with id - " + productId + " now has quantity - " + quantity + ".";
-//    }
+
+    @GetMapping(value = ("/search/{name}"))
+    public List<Product> searchProducts(@PathVariable("name") String name) {
+        return productService.getProductsByName(name);
+    }
+
+    @PutMapping(value = ("/{id}/quantity/{quantity}"))
+    public SuccessMessage changeProductQuantity(
+            @PathVariable("id") long productId,
+            @PathVariable("quantity") int quantity, HttpSession session) throws BaseException {
+        validateLoginAdmin(session);
+        return productService.changeProductQuantity(productId,quantity);
+    }
 //
 //    @PostMapping(value = ("/products/{id}/add"))
 //    public Product addToCart(@PathVariable("id") long productId, HttpServletRequest request) throws Exception {

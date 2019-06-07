@@ -117,5 +117,20 @@ public class ProductService {
         }
     }
 
+    public List<Product> getProductsByName(String name){
+        return productRepository.findByNameContaining(name);
+    }
+
+    public SuccessMessage changeProductQuantity(long productId,int quantity) throws InvalidQuantityException, ProductNotFoundException {
+        if (quantity >= MIN_NUMBER_OF_PRODUCTS && quantity <= MAX_NUMBER_OF_PRODUCTS) {
+            Product product = getProduct(productId);
+            product.setQuantity(quantity);
+            productRepository.save(product);
+        }
+        else {
+            throw new InvalidQuantityException();
+        }
+        return new SuccessMessage("Quantity changed",HttpStatus.OK.value(),LocalDateTime.now());
+    }
 
 }
