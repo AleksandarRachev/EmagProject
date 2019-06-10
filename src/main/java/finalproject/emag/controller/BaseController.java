@@ -1,13 +1,10 @@
 package finalproject.emag.controller;
 
-import finalproject.emag.model.dto.ShowUserDto;
+import finalproject.emag.model.dto.ShowUserDTO;
 import finalproject.emag.util.ErrorMsg;
-import finalproject.emag.model.pojo.User;
-import finalproject.emag.util.exception.AlreadyLoggedException;
 import finalproject.emag.util.exception.BaseException;
 import finalproject.emag.util.exception.NotAdminException;
 import finalproject.emag.util.exception.NotLoggedException;
-import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -60,7 +57,7 @@ public abstract class BaseController {
             throw new NotLoggedException();
         }
         else{
-            ShowUserDto logged = (ShowUserDto) (session.getAttribute("user"));
+            ShowUserDTO logged = (ShowUserDTO) (session.getAttribute("user"));
             if(!logged.isAdmin()){
                 throw new NotAdminException();
             }

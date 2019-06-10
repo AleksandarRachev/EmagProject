@@ -75,7 +75,6 @@
 //        }
 //    }
 //
-//
 //    private void addReviewsToProduct(Product p, long id) throws SQLException{
 //        try(Connection c = jdbcTemplate.getDataSource().getConnection();) {
 //            String sql = "SELECT user_id, title, comment, grade FROM reviews WHERE product_id = ?";
@@ -204,17 +203,6 @@
 //            ps.setLong(2, e.getKey().getId());
 //            ps.execute();
 //            ps.close();
-//        }
-//    }
-//
-//    public void changeQuantity(long id, int quantity) throws Exception {
-//        checkIfProductExists(id);
-//        try(Connection c = jdbcTemplate.getDataSource().getConnection();) {
-//            String sql = "UPDATE products SET quantity= ? WHERE id= ?";
-//            PreparedStatement ps = c.prepareStatement(sql);
-//            ps.setInt(1, quantity);
-//            ps.setLong(2, id);
-//            ps.execute();
 //        }
 //    }
 //

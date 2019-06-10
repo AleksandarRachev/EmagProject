@@ -11,11 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Component
@@ -38,7 +35,7 @@ public class UserService {
         user.setPhoneNumber(registerUser.getPhoneNumber());
         user.setBirthDate(registerUser.getBirthDate());
         userRepository.save(user);
-        ShowUserDto userSession = new ShowUserDto(user.getId(),user.getEmail(),user.getName(),user.getUsername(),
+        ShowUserDTO userSession = new ShowUserDTO(user.getId(),user.getEmail(),user.getName(),user.getUsername(),
                 user.getPhoneNumber(),user.getBirthDate(),user.isSubscribed(),user.isAdmin(),user.getImageUrl());
         session.setAttribute(USER,userSession);
         session.setMaxInactiveInterval((60*60));
@@ -70,7 +67,7 @@ public class UserService {
         }
     }
 
-    public ShowUserDto login(LoginUserDTO loginUser, HttpSession session) throws BaseException {
+    public ShowUserDTO login(LoginUserDTO loginUser, HttpSession session) throws BaseException {
         if(loginUser.getEmail() == null || loginUser.getPassword() == null){
             throw new MissingValuableFieldsException();
         }
@@ -79,7 +76,7 @@ public class UserService {
         if(users.size() < 1 || !BCrypt.checkpw(loginUser.getPassword(),getUser.getPassword())){
             throw new WrongCredentialsException();
         }
-        ShowUserDto user = new ShowUserDto(getUser.getId(),getUser.getEmail(),getUser.getName(),getUser.getUsername(),
+        ShowUserDTO user = new ShowUserDTO(getUser.getId(),getUser.getEmail(),getUser.getName(),getUser.getUsername(),
                 getUser.getPhoneNumber(),getUser.getBirthDate(),getUser.isSubscribed(),getUser.isAdmin(),getUser.getImageUrl());
         session.setAttribute(USER,user);
         session.setMaxInactiveInterval((60*60));
@@ -87,7 +84,7 @@ public class UserService {
     }
 
     public SuccessMessage subscribe(HttpSession session) throws AlreadySubscribedException {
-        ShowUserDto userSession = (ShowUserDto) session.getAttribute(USER);
+        ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findByEmail(userSession.getEmail());
         if(user.isSubscribed()){
             throw new AlreadySubscribedException();
@@ -99,7 +96,7 @@ public class UserService {
     }
 
     public SuccessMessage unsubscribe(HttpSession session) throws NotSubscribedException {
-        ShowUserDto userSession = (ShowUserDto) session.getAttribute(USER);
+        ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findByEmail(userSession.getEmail());
         if(!user.isSubscribed()){
             throw new NotSubscribedException();
@@ -117,7 +114,7 @@ public class UserService {
     }
 
     public SuccessMessage editPassword(EditPassDTO userEdit, HttpSession session) throws BaseException {
-        ShowUserDto userSession = (ShowUserDto) session.getAttribute(USER);
+        ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
         passEditFieldsCheck(userEdit);
         if(!BCrypt.checkpw(userEdit.getCurrentPass(),user.getPassword())){
@@ -138,7 +135,7 @@ public class UserService {
     }
 
     public SuccessMessage editEmail(EditEmailDTO userEdit, HttpSession session) throws BaseException {
-        ShowUserDto userSession = (ShowUserDto) session.getAttribute(USER);
+        ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
         emailEditFieldsCheck(userEdit);
         if(!BCrypt.checkpw(userEdit.getPassword(),user.getPassword())){
@@ -151,7 +148,7 @@ public class UserService {
     }
 
     public SuccessMessage editPersonalInfo(EditPersonalInfoDTO userEdit,HttpSession session) throws BaseException {
-        ShowUserDto userSession = (ShowUserDto) session.getAttribute(USER);
+        ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
         checkIfUsernameFree(userEdit.getUsername());
         user.setUsername(userEdit.getUsername());

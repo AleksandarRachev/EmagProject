@@ -1,7 +1,9 @@
 package finalproject.emag.controller;
 
 import finalproject.emag.model.dto.ProductAddDTO;
+import finalproject.emag.model.dto.PromotionProductDTO;
 import finalproject.emag.model.pojo.Product;
+import finalproject.emag.model.pojo.Promotion;
 import finalproject.emag.model.service.ProductService;
 import finalproject.emag.util.SuccessMessage;
 import finalproject.emag.util.exception.*;
@@ -73,7 +75,21 @@ public class ProductController extends BaseController {
         validateLoginAdmin(session);
         return productService.changeProductQuantity(productId,quantity);
     }
-//
+
+    @PostMapping(value = "/promotions/{id}")
+    public SuccessMessage addPromotion(@PathVariable("id")Long productId, @RequestBody PromotionProductDTO promotion,
+                                       HttpSession session) throws BaseException {
+        validateLoginAdmin(session);
+        return productService.addPromotion(productId,promotion);
+    }
+
+    @DeleteMapping(value = "/promotions/{id}")
+    public SuccessMessage deletePromotion(@PathVariable("id")Long productId,HttpSession session) throws BaseException {
+        validateLoginAdmin(session);
+        return productService.deletePromotion(productId);
+    }
+
+
 //    @PostMapping(value = ("/products/{id}/add"))
 //    public Product addToCart(@PathVariable("id") long productId, HttpServletRequest request) throws Exception {
 //        validateLogin(request.getSession());
@@ -125,34 +141,5 @@ public class ProductController extends BaseController {
 //        else {
 //            throw new EmptyCartException();
 //        }
-//    }
-//
-//    @PostMapping(value = "/products/promotions/{id}")
-//    public String addPromotion(@PathVariable("id") long productId,
-//                               @RequestBody String input,HttpServletRequest request) throws Exception {
-//        validateLoginAdmin(request.getSession());
-//        JsonNode jsonNode = this.objectMapper.readTree(input);
-//        if(!jsonNode.has("start_date")|| !jsonNode.has("end_date")||
-//                !jsonNode.has("old_price")|| !jsonNode.has("new_price")){
-//            throw new MissingValuableFieldsException();
-//        }
-//        else{
-//            LocalDate startDate = GetDate.getDate(jsonNode.get("start_date").textValue());
-//            LocalDate endDate = GetDate.getDate(jsonNode.get("end_date").textValue());
-//            double oldPrice = jsonNode.get("old_price").asDouble();
-//            double newPrice = jsonNode.get("new_price").asDouble();
-//            PromotionProductDto product = new PromotionProductDto(productId,startDate,endDate,oldPrice,newPrice);
-//            dao.addPromotion(product);
-//            return "Promotion added";
-//        }
-//
-//    }
-//
-//    @DeleteMapping(value = "/products/promotions/{id}")
-//    public String removePromotion(@PathVariable("id") long productId, HttpServletRequest request) throws Exception {
-//        validateLoginAdmin(request.getSession());
-//        RemovePromotionDto product = new RemovePromotionDto(productId);
-//        dao.removePromotion(product);
-//        return "Promotion removed";
 //    }
 }

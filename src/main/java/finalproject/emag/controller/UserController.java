@@ -7,7 +7,7 @@ import finalproject.emag.util.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 
@@ -24,7 +24,7 @@ public class UserController extends BaseController {
     }
 
     @PostMapping(value = "/login")
-    public ShowUserDto login(@RequestBody LoginUserDTO user, HttpSession session) throws BaseException {
+    public ShowUserDTO login(@RequestBody LoginUserDTO user, HttpSession session) throws BaseException {
         return userService.login(user,session);
     }
 

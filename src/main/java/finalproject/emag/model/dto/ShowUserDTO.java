@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
-public class ShowUserDto {
+public class ShowUserDTO {
 
     private long id;
     private String email;
