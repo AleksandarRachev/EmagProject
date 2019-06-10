@@ -3,7 +3,6 @@ package finalproject.emag.controller;
 import finalproject.emag.model.dto.ProductAddDTO;
 import finalproject.emag.model.dto.PromotionProductDTO;
 import finalproject.emag.model.pojo.Product;
-import finalproject.emag.model.pojo.Promotion;
 import finalproject.emag.model.service.ProductService;
 import finalproject.emag.util.SuccessMessage;
 import finalproject.emag.util.exception.*;
@@ -18,7 +17,7 @@ import java.util.List;
 public class ProductController extends BaseController {
 
     @Autowired
-    private ProductService productService;
+    protected ProductService productService;
 
     @PostMapping
     public SuccessMessage addProduct(@RequestBody ProductAddDTO product, HttpSession session) throws BaseException {
@@ -76,18 +75,6 @@ public class ProductController extends BaseController {
         return productService.changeProductQuantity(productId,quantity);
     }
 
-    @PostMapping(value = "/promotions/{id}")
-    public SuccessMessage addPromotion(@PathVariable("id")Long productId, @RequestBody PromotionProductDTO promotion,
-                                       HttpSession session) throws BaseException {
-        validateLoginAdmin(session);
-        return productService.addPromotion(productId,promotion);
-    }
-
-    @DeleteMapping(value = "/promotions/{id}")
-    public SuccessMessage deletePromotion(@PathVariable("id")Long productId,HttpSession session) throws BaseException {
-        validateLoginAdmin(session);
-        return productService.deletePromotion(productId);
-    }
 
 
 //    @PostMapping(value = ("/products/{id}/add"))

@@ -2,18 +2,27 @@ package finalproject.emag.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import finalproject.emag.model.dto.ReviewAddDTO;
 import finalproject.emag.model.pojo.User;
+import finalproject.emag.model.service.ReviewService;
+import finalproject.emag.util.SuccessMessage;
 import finalproject.emag.util.exception.MissingValuableFieldsException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping(value = "/products",produces = "application/json")
+@RequestMapping(value = "/products/reviews",produces = "application/json")
 public class ReviewController extends BaseController{
 
     private static final String USER = "user";
+
+    @Autowired
+    private ReviewService reviewService;
 
 //    @Autowired
 //    private ReviewDao dao;
@@ -30,12 +39,12 @@ public class ReviewController extends BaseController{
 //                jsonNode.get("comment").textValue(),jsonNode.get("grade").intValue());
 //    }
 //
-//    @PostMapping(value = "/{id}")
-//    public String addReview(@RequestBody String input, @PathVariable("id")long productId, HttpServletRequest request) throws Exception {
-//        ReviewDto review = getReview(input,productId,request);
-//        this.dao.addReview(review);
-//        return "Review added";
-//    }
+    @PostMapping(value = "/{id}")
+    public SuccessMessage addReview(@RequestBody ReviewAddDTO review, @PathVariable("id")long productId,
+                                    HttpSession session) throws Exception {
+        validateLogin(session);
+        return reviewService.addReview(review,productId,session);
+    }
 //
 //    @DeleteMapping(value = "/{id}")
 //    public String deleteReview(@PathVariable("id")long productId,HttpServletRequest request) throws Exception {
