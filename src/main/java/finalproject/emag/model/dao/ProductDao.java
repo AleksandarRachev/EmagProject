@@ -61,57 +61,6 @@
 //        }
 //    }
 //
-//    public ArrayList<GlobalViewProductDto> searchProducts(String name) throws Exception {
-//        try (Connection c = jdbcTemplate.getDataSource().getConnection();) {
-//            String sql = "SELECT id, product_name, price, quantity FROM products " +
-//                    "WHERE product_name LIKE '%" + name + "%';";
-//            PreparedStatement ps = c.prepareStatement(sql);
-//            ResultSet rs = ps.executeQuery();
-//            ArrayList<GlobalViewProductDto> products = products(rs);
-//            if (products.size() == 0) {
-//                throw new WrongSearchWordException();
-//            }
-//            return products;
-//        }
-//    }
-//
-//    private void addReviewsToProduct(Product p, long id) throws SQLException{
-//        try(Connection c = jdbcTemplate.getDataSource().getConnection();) {
-//            String sql = "SELECT user_id, title, comment, grade FROM reviews WHERE product_id = ?";
-//            PreparedStatement ps = c.prepareStatement(sql);
-//            ps.setLong(1, id);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                Review review = new Review();
-////                review.setUserId(rs.getLong(1));
-////                review.setProductId(id);
-//                review.setTitle(rs.getString(2));
-//                review.setComment(rs.getString(3));
-//                review.setGrade(rs.getInt(4));
-////                p.addToReviews(review);
-//            }
-//        }
-//    }
-//
-//
-//    public CartProductDto getProductForCart(long productId) throws Exception{
-//        checkIfProductExists(productId);
-//        checkProductQuantity(productId, 1);
-//        try(Connection c = jdbcTemplate.getDataSource().getConnection();) {
-//            String sql = "SELECT product_name, price, quantity FROM products WHERE id=?";
-//            PreparedStatement ps = c.prepareStatement(sql);
-//            ps.setLong(1, productId);
-//            ResultSet rs = ps.executeQuery();
-//            CartProductDto p = new CartProductDto();
-//            while (rs.next()) {
-//                p.setId(productId);
-//                p.setName(rs.getString(1));
-//                p.setPrice(rs.getDouble(2));
-//            }
-//            return p;
-//        }
-//    }
-//
 //    private void checkProductQuantity(long id, int products) throws Exception {
 //        try (Connection c = jdbcTemplate.getDataSource().getConnection();) {
 //            String sql = "SELECT quantity, product_name FROM products WHERE id = ?";
@@ -126,20 +75,6 @@
 //            }
 //            throw new ProductOutOfStockException("The product " + name + " is out of stock right now.");
 //        }
-//    }
-//
-//    public ArrayList<CartViewProductDto> viewCart(HashMap<CartProductDto, Integer> userCart) {
-//        HashMap<CartProductDto, Integer> products = userCart;
-//        ArrayList<CartViewProductDto> cart = new ArrayList<>();
-//        for (Map.Entry<CartProductDto, Integer> e : products.entrySet()) {
-//            CartViewProductDto p = new CartViewProductDto();
-//            p.setId(e.getKey().getId());
-//            p.setName(e.getKey().getName());
-//            p.setQuantity(e.getValue());
-//            p.setPrice(e.getKey().getPrice() * e.getValue());
-//            cart.add(p);
-//        }
-//        return cart;
 //    }
 //
 //    public void makeOrder(User user, HashMap<CartProductDto, Integer> userCart) throws Exception{

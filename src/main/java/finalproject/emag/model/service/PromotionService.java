@@ -41,6 +41,7 @@ public class PromotionService extends ProductService{
         promotionRepository.save(promotion);
         product.setPrice(promotionValues.getNewPrice());
         productRepository.save(product);
+        //TODO add promotion notify
         return new SuccessMessage("Promotion added",HttpStatus.OK.value(),LocalDateTime.now());
     }
 
