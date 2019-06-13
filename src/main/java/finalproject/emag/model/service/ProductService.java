@@ -3,10 +3,12 @@ package finalproject.emag.model.service;
 import finalproject.emag.model.dto.CartProductDTO;
 import finalproject.emag.model.dto.CartViewProductDTO;
 import finalproject.emag.model.dto.ProductAddDTO;
-import finalproject.emag.model.pojo.Category;
-import finalproject.emag.model.pojo.Product;
+import finalproject.emag.model.dto.ShowUserDTO;
+import finalproject.emag.model.pojo.*;
 import finalproject.emag.repositories.CategoryRepository;
+import finalproject.emag.repositories.OrderRepository;
 import finalproject.emag.repositories.ProductRepository;
+import finalproject.emag.repositories.UserRepository;
 import finalproject.emag.util.SuccessMessage;
 import finalproject.emag.util.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,12 @@ public class ProductService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public SuccessMessage addProduct(ProductAddDTO productAdd) throws BaseException {
         fieldsCheck(productAdd);
@@ -122,7 +130,7 @@ public class ProductService {
         return productRepository.findByNameContaining(name);
     }
 
-    public SuccessMessage changeProductQuantity(long productId, int quantity) throws InvalidQuantityException, ProductNotFoundException {
+    public SuccessMessage changeProductQuantity(long productId, int quantity) throws BaseException {
         if (quantity >= MIN_NUMBER_OF_PRODUCTS && quantity <= MAX_NUMBER_OF_PRODUCTS) {
             Product product = getProduct(productId);
             product.setQuantity(quantity);
@@ -133,32 +141,24 @@ public class ProductService {
         return new SuccessMessage("Quantity changed", HttpStatus.OK.value(), LocalDateTime.now());
     }
 
-    private double getMaxPrice() {
-        return productRepository.getMaxPriceForProduct();
-    }
-
-    private Product getProductForCart(long productId) throws BaseException {
-        Optional<Product> product = productRepository.findById(productId);
-        if (product.isPresent()) {
-            if (product.get().getQuantity() > 0) {
-                product.get().setQuantity(product.get().getQuantity() - 1);
-                productRepository.save(product.get());
-                return product.get();
-            } else {
-                throw new ProductOutOfStockException();
-            }
+    private void checkValidQuantity(HashMap<CartProductDTO, Integer> cart, CartProductDTO productShow)
+            throws ProductNotFoundException, OverProductQuantityException {
+        Product product = getProduct(productShow.getId());
+        int quantityInCart = cart.get(productShow);
+        if (product.getQuantity() <= quantityInCart) {
+            throw new OverProductQuantityException();
         }
-        throw new ProductNotFoundException();
     }
 
     public SuccessMessage addProductToCart(long productId, HttpSession session) throws BaseException {
         HashMap<CartProductDTO, Integer> cart;
-        Product productOG = getProductForCart(productId);
+        Product productOG = getProduct(productId);
         CartProductDTO product = new CartProductDTO(productOG.getId(), productOG.getCategory()
                 , productOG.getName(), productOG.getPrice());
         if (session.getAttribute(ProductService.CART) != null) {
             cart = (HashMap<CartProductDTO, Integer>) session.getAttribute(CART);
             if (cart.containsKey(product)) {
+                checkValidQuantity(cart, product);
                 int quantity = cart.get(product);
                 cart.put(product, quantity + 1);
             } else {
@@ -172,19 +172,49 @@ public class ProductService {
         return new SuccessMessage("Product added to cart", HttpStatus.OK.value(), LocalDateTime.now());
     }
 
-    public List<CartViewProductDTO> viewCart(HttpSession session) throws EmptyCartException {
-        List<CartViewProductDTO> cart = new ArrayList<>();
-        HashMap<CartProductDTO, Integer> cartSession;
-        if (session.getAttribute(CART) != null) {
-            cartSession = (HashMap<CartProductDTO, Integer>) session.getAttribute(CART);
-            for (Map.Entry<CartProductDTO, Integer> entry : cartSession.entrySet()) {
-                CartViewProductDTO product = new CartViewProductDTO(entry.getKey().getId(), entry.getKey().getCategory()
-                        , entry.getKey().getName(), entry.getKey().getPrice(), entry.getValue());
-                cart.add(product);
-            }
-            return cart;
+    private HashMap<CartProductDTO, Integer> getCart(HttpSession session) throws EmptyCartException {
+        HashMap<CartProductDTO, Integer> cart = (HashMap<CartProductDTO, Integer>) session.getAttribute(CART);
+        if (cart == null) {
+            throw new EmptyCartException();
         }
-        throw new EmptyCartException();
+        return cart;
     }
 
+    public List<CartViewProductDTO> viewCart(HttpSession session) throws EmptyCartException {
+        List<CartViewProductDTO> cart = new ArrayList<>();
+        HashMap<CartProductDTO, Integer> cartSession = getCart(session);
+        for (Map.Entry<CartProductDTO, Integer> entry : cartSession.entrySet()) {
+            CartViewProductDTO product = new CartViewProductDTO(entry.getKey().getId(), entry.getKey().getCategory()
+                    , entry.getKey().getName(), entry.getKey().getPrice(), entry.getValue());
+            cart.add(product);
+        }
+        return cart;
+    }
+
+    public SuccessMessage makeOrder(HttpSession session) throws EmptyCartException, ProductNotFoundException {
+        HashMap<CartProductDTO, Integer> cart = getCart(session);
+        for (Map.Entry<CartProductDTO, Integer> product : cart.entrySet()) {
+            Product productToUpdate = getProduct(product.getKey().getId());
+            productToUpdate.setQuantity(productToUpdate.getQuantity() - product.getValue());
+            ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
+            User user = userRepository.findById(userSession.getId()).get();
+            insertOrder(productToUpdate, user, product.getValue());
+            productRepository.save(productToUpdate);
+        }
+        return new SuccessMessage("Order made", HttpStatus.OK.value(), LocalDateTime.now());
+    }
+
+    private void insertOrder(Product product, User user, int quantity) {
+        OrderedId id = new OrderedId();
+        id.setUser(user);
+        id.setProduct(product);
+        Order order = new Order();
+        order.setId(id);
+        order.setQuantity(quantity);
+        orderRepository.save(order);
+    }
+
+    private double getMaxPrice() {
+        return productRepository.getMaxPriceForProduct();
+    }
 }

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping(value = "/images")
-public class ImageController extends BaseController{
+public class ImageController extends BaseController {
 
     @Autowired
     private ImageService imageService;
@@ -19,7 +19,7 @@ public class ImageController extends BaseController{
     @PostMapping(value = "/users")
     public SuccessMessage uploadUserImage(@RequestPart(value = "image") MultipartFile image, HttpSession session) throws Exception {
         validateLogin(session);
-        return imageService.userImageUpload(image,session);
+        return imageService.userImageUpload(image, session);
     }
 
     @GetMapping(value = "/users/{id}", produces = MediaType.IMAGE_PNG_VALUE)
@@ -31,11 +31,11 @@ public class ImageController extends BaseController{
     public SuccessMessage uploadProductImage(@RequestPart(value = "image") MultipartFile image,
                                              @PathVariable("id") long productId, HttpSession session) throws Exception {
         validateLoginAdmin(session);
-        return imageService.productImageUpload(image,productId);
+        return imageService.productImageUpload(image, productId);
     }
 
     @GetMapping(value = "/products/{id}", produces = MediaType.IMAGE_PNG_VALUE)
-    public byte[] getProductImage(@PathVariable("id")Long productId) throws Exception {
+    public byte[] getProductImage(@PathVariable("id") Long productId) throws Exception {
         return imageService.getProductImage(productId);
     }
 }

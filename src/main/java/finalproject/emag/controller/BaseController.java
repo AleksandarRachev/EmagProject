@@ -21,44 +21,43 @@ public abstract class BaseController {
 
     @ExceptionHandler({NotLoggedException.class, NotAdminException.class})
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
-    public ErrorMsg handleNotLogged(Exception e){
+    public ErrorMsg handleNotLogged(Exception e) {
 //        log.error("exception: "+e);
         return new ErrorMsg(e.getMessage(), HttpStatus.UNAUTHORIZED.value(), LocalDateTime.now());
     }
 
     @ExceptionHandler({BaseException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ErrorMsg handleMyErrors(Exception e){
+    public ErrorMsg handleMyErrors(Exception e) {
 //        log.error("exception: "+e);
         return new ErrorMsg(e.getMessage(), HttpStatus.BAD_REQUEST.value(), LocalDateTime.now());
     }
 
     @ExceptionHandler({Exception.class})
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorMsg handleOtherErrors(Exception e){
+    public ErrorMsg handleOtherErrors(Exception e) {
 //        log.error("exception: "+e);
         return new ErrorMsg(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), LocalDateTime.now());
     }
 
     @ExceptionHandler({ParseException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ErrorMsg dateParser(Exception e){
-        return new ErrorMsg(e.getMessage(),HttpStatus.BAD_REQUEST.value(),LocalDateTime.now());
+    public ErrorMsg dateParser(Exception e) {
+        return new ErrorMsg(e.getMessage(), HttpStatus.BAD_REQUEST.value(), LocalDateTime.now());
     }
 
-    void validateLogin(HttpSession session) throws NotLoggedException{
-        if(session.getAttribute("user") == null){
+    void validateLogin(HttpSession session) throws NotLoggedException {
+        if (session.getAttribute("user") == null) {
             throw new NotLoggedException();
         }
     }
 
-    protected void validateLoginAdmin(HttpSession session) throws NotAdminException, NotLoggedException{
-        if(session.getAttribute("user") == null){
+    protected void validateLoginAdmin(HttpSession session) throws NotAdminException, NotLoggedException {
+        if (session.getAttribute("user") == null) {
             throw new NotLoggedException();
-        }
-        else{
+        } else {
             ShowUserDTO logged = (ShowUserDTO) (session.getAttribute("user"));
-            if(!logged.isAdmin()){
+            if (!logged.isAdmin()) {
                 throw new NotAdminException();
             }
         }

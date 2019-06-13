@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/products",produces = "application/json")
+@RequestMapping(value = "/products", produces = "application/json")
 public class ProductController extends BaseController {
 
     @Autowired
@@ -27,12 +27,12 @@ public class ProductController extends BaseController {
     }
 
     @GetMapping()
-    public List<Product> getAllProducts(){
+    public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
 
     @GetMapping(value = ("/category/{id}"))
-    public List<Product> getAllProductsByCategory(@PathVariable("id") long categoryId){
+    public List<Product> getAllProductsByCategory(@PathVariable("id") long categoryId) {
         return productService.getProductsByCategory(categoryId);
     }
 
@@ -42,16 +42,17 @@ public class ProductController extends BaseController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public SuccessMessage deleteProduct(@PathVariable("id") long productId,HttpSession session) throws BaseException{
+    public SuccessMessage deleteProduct(@PathVariable("id") long productId, HttpSession session) throws BaseException {
         validateLoginAdmin(session);
         return productService.deleteProduct(productId);
     }
+
     @GetMapping(value = ("/filter"))
     public List<Product> getAllProductsFiltered(
-            @RequestParam(value = "order",required = false,defaultValue = "ASC") String order,
-            @RequestParam(value = "from",required = false) Double min,
-            @RequestParam(value = "to",required = false) Double max){
-        return productService.getProductsFiltered(min,max,order);
+            @RequestParam(value = "order", required = false, defaultValue = "ASC") String order,
+            @RequestParam(value = "from", required = false) Double min,
+            @RequestParam(value = "to", required = false) Double max) {
+        return productService.getProductsFiltered(min, max, order);
     }
 
     @GetMapping(value = ("/subcategory/{id}/filter"))
@@ -60,7 +61,7 @@ public class ProductController extends BaseController {
             @RequestParam(value = "order", required = false, defaultValue = "ASC") String order,
             @RequestParam(value = "from", required = false) Double min,
             @RequestParam(value = "to", required = false) Double max) {
-        return productService.getProductsByCategoryFiltered(min,max,categoryId,order);
+        return productService.getProductsByCategoryFiltered(min, max, categoryId, order);
     }
 
     @GetMapping(value = ("/search/{name}"))
@@ -70,37 +71,27 @@ public class ProductController extends BaseController {
 
     @PutMapping(value = ("/{id}/quantity/{quantity}"))
     public SuccessMessage changeProductQuantity(
-            @PathVariable("id") long productId,
-            @PathVariable("quantity") int quantity, HttpSession session) throws BaseException {
+            @PathVariable("id") long productId, @PathVariable("quantity") int quantity,
+            HttpSession session) throws BaseException {
         validateLoginAdmin(session);
-        return productService.changeProductQuantity(productId,quantity);
+        return productService.changeProductQuantity(productId, quantity);
     }
 
     @PostMapping(value = ("/{id}/add"))
     public SuccessMessage addToCart(@PathVariable("id") long productId, HttpSession session) throws Exception {
         validateLogin(session);
-        return productService.addProductToCart(productId,session);
+        return productService.addProductToCart(productId, session);
     }
 
     @GetMapping(value = ("/view/cart"))
-    public List<CartViewProductDTO> viewCart(HttpSession session) throws Exception{
+    public List<CartViewProductDTO> viewCart(HttpSession session) throws BaseException {
         validateLogin(session);
         return productService.viewCart(session);
     }
-//
-//    @PostMapping(value = ("/view/cart/order"))
-//    public String makeOrder(HttpServletRequest request) throws Exception {
-//        validateLogin(request.getSession());
-//        if (request.getSession().getAttribute(CART) != null) {
-//            User user = (User) request.getSession().getAttribute(USER);
-//            HashMap<CartProductDto, Integer> cart =
-//                    (HashMap<CartProductDto, Integer>) request.getSession().getAttribute(CART);
-//            dao.makeOrder(user, cart);
-//            request.getSession().setAttribute(CART, null);
-//            return "Your order was successful.";
-//        }
-//        else {
-//            throw new EmptyCartException();
-//        }
-//    }
+
+    @PostMapping(value = ("/order"))
+    public SuccessMessage makeOrder(HttpSession session) throws BaseException {
+        validateLogin(session);
+        return productService.makeOrder(session);
+    }
 }

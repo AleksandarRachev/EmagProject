@@ -17,14 +17,14 @@ public class PromotionsController extends BaseController {
     private PromotionService promotionService;
 
     @PostMapping(value = "/{id}")
-    public SuccessMessage addPromotion(@PathVariable("id")Long productId, @RequestBody PromotionProductDTO promotion,
+    public SuccessMessage addPromotion(@PathVariable("id") Long productId, @RequestBody PromotionProductDTO promotion,
                                        HttpSession session) throws BaseException {
         validateLoginAdmin(session);
-        return promotionService.addPromotion(productId,promotion);
+        return promotionService.addPromotion(productId, promotion);
     }
 
     @DeleteMapping(value = "/{id}")
-    public SuccessMessage deletePromotion(@PathVariable("id")Long productId,HttpSession session) throws BaseException {
+    public SuccessMessage deletePromotion(@PathVariable("id") Long productId, HttpSession session) throws BaseException {
         validateLoginAdmin(session);
         return promotionService.deletePromotion(productId);
     }

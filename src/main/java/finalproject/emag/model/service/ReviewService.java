@@ -16,9 +16,10 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Component
-public class ReviewService extends ProductService{
+public class ReviewService extends ProductService {
 
     private static final String USER = "user";
 
@@ -29,17 +30,17 @@ public class ReviewService extends ProductService{
     private UserRepository userRepository;
 
     private void addReviewFieldsCheck(ReviewDTO review) throws BaseException {
-        if(review.getTitle() == null || review.getComment() == null || review.getGrade() == null){
+        if (review.getTitle() == null || review.getComment() == null || review.getGrade() == null) {
             throw new MissingValuableFieldsException();
         }
-        if(review.getGrade() < 0 || review.getGrade() > 6){
+        if (review.getGrade() < 0 || review.getGrade() > 6) {
             throw new InvalidGradeEception();
         }
     }
 
     private void checkIfExists(ReviewId id) throws ReviewExistsException {
-        Review review = reviewRepository.findById(id);
-        if(review != null){
+        Optional<Review> review = reviewRepository.findById(id);
+        if (!review.isPresent()) {
             throw new ReviewExistsException();
         }
     }
@@ -63,15 +64,15 @@ public class ReviewService extends ProductService{
     }
 
     private Review getReview(ReviewId id) throws ReviewMissingException {
-        Review review = reviewRepository.findById(id);
-        if(review == null){
-            throw new ReviewMissingException();
+        Optional<Review> review = reviewRepository.findById(id);
+        if (review.isPresent()) {
+            return review.get();
         }
-        return review;
+        throw new ReviewMissingException();
     }
 
-    public SuccessMessage deleteReview(long productId,HttpSession session) throws BaseException{
-        ShowUserDTO userSession = (ShowUserDTO)session.getAttribute(USER);
+    public SuccessMessage deleteReview(long productId, HttpSession session) throws BaseException {
+        ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
         Product product = getProduct(productId);
         ReviewId id = new ReviewId();
@@ -79,16 +80,16 @@ public class ReviewService extends ProductService{
         id.setProduct(product);
         Review review = getReview(id);
         reviewRepository.delete(review);
-        return new SuccessMessage("Review deleted",HttpStatus.OK.value(),LocalDateTime.now());
+        return new SuccessMessage("Review deleted", HttpStatus.OK.value(), LocalDateTime.now());
     }
 
     private void fieldsCheck(Review review) throws MissingValuableFieldsException {
-        if(review.getTitle() == null || review.getComment() == null || review.getGrade() == null){
+        if (review.getTitle() == null || review.getComment() == null || review.getGrade() == null) {
             throw new MissingValuableFieldsException();
         }
     }
 
-    public SuccessMessage editReview(ReviewDTO reviewEdit,long productId,HttpSession session) throws BaseException{
+    public SuccessMessage editReview(ReviewDTO reviewEdit, long productId, HttpSession session) throws BaseException {
         ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
         Product product = getProduct(productId);
@@ -101,7 +102,7 @@ public class ReviewService extends ProductService{
         review.setGrade(reviewEdit.getGrade() == null ? review.getGrade() : reviewEdit.getGrade());
         fieldsCheck(review);
         reviewRepository.save(review);
-        return new SuccessMessage("Review edited",HttpStatus.OK.value(),LocalDateTime.now());
+        return new SuccessMessage("Review edited", HttpStatus.OK.value(), LocalDateTime.now());
     }
 
 }

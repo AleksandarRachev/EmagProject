@@ -23,7 +23,7 @@ public class BasicInserts {
     private ProductRepository productRepository;
 
     @PostConstruct
-    public void insert(){
+    public void insert() {
         User user = new User();
         user.setEmail("gosho@abv.bg");
         user.setPassword(PasswordEncoder.hashPassword("123"));

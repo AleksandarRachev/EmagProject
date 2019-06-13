@@ -1,4 +1,5 @@
 package finalproject.emag.util.exception;
+
 public class InvalidQuantityException extends BaseException {
 
     public InvalidQuantityException() {

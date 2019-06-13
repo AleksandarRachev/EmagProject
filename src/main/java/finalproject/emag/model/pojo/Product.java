@@ -21,7 +21,7 @@ public class Product {
     @OneToOne
     @NotNull
     private Category category;
-    @Column(name = "product_name",nullable = false)
+    @Column(name = "product_name", nullable = false)
     private String name;
     private double price;
     private int quantity;

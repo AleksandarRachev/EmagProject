@@ -1,11 +1,14 @@
 package finalproject.emag.model.pojo;
 
+import lombok.Data;
+
 import javax.persistence.Embeddable;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
+@Data
 public class OrderedId implements Serializable {
 
     @OneToOne

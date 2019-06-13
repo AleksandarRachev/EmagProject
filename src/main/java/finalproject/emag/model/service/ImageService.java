@@ -35,7 +35,7 @@ public class ImageService {
 
     private User getUser(long userId) throws InvalidUserException {
         Optional<User> user = userRepository.findById(userId);
-        if(user.isPresent()){
+        if (user.isPresent()) {
             return user.get();
         }
         throw new InvalidUserException();
@@ -43,7 +43,7 @@ public class ImageService {
 
     private Product getProduct(long productId) throws ProductNotFoundException {
         Optional<Product> product = productRepository.findById(productId);
-        if(product.isPresent()){
+        if (product.isPresent()) {
             return product.get();
         }
         throw new ProductNotFoundException();
@@ -53,7 +53,7 @@ public class ImageService {
         ShowUserDTO userSession = (ShowUserDTO) session.getAttribute("user");
         User user = userRepository.findById(userSession.getId()).get();
         String name = user.getId() + System.currentTimeMillis() + ".png";
-        File newImage = new File(IMAGE_PATH+name);
+        File newImage = new File(IMAGE_PATH + name);
         file.transferTo(newImage);
         user.setImageUrl(name);
         userRepository.save(user);
@@ -70,19 +70,19 @@ public class ImageService {
         return fis.readAllBytes();
     }
 
-    public SuccessMessage productImageUpload(MultipartFile file,long productId) throws ProductNotFoundException, IOException {
+    public SuccessMessage productImageUpload(MultipartFile file, long productId) throws ProductNotFoundException, IOException {
         Product product = getProduct(productId);
-        String name = product.getId()+System.currentTimeMillis() + ".png";
-        File newImage = new File(IMAGE_PATH+name);
+        String name = product.getId() + System.currentTimeMillis() + ".png";
+        File newImage = new File(IMAGE_PATH + name);
         file.transferTo(newImage);
         product.setImageUrl(name);
         productRepository.save(product);
-        return new SuccessMessage("Image uploaded",HttpStatus.OK.value(),LocalDateTime.now());
+        return new SuccessMessage("Image uploaded", HttpStatus.OK.value(), LocalDateTime.now());
     }
 
     public byte[] getProductImage(long productId) throws Exception {
         Product product = getProduct(productId);
-        if(product.getImageUrl() == null){
+        if (product.getImageUrl() == null) {
             throw new ImageMissingException();
         }
         File image = new File(IMAGE_PATH + product.getImageUrl());
