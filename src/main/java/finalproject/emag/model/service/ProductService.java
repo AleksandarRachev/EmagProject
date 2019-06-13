@@ -1,20 +1,16 @@
 package finalproject.emag.model.service;
 
 import finalproject.emag.model.dto.ProductAddDTO;
-import finalproject.emag.model.dto.PromotionProductDTO;
 import finalproject.emag.model.pojo.Category;
 import finalproject.emag.model.pojo.Product;
-import finalproject.emag.model.pojo.Promotion;
 import finalproject.emag.repositories.CategoryRepository;
 import finalproject.emag.repositories.ProductRepository;
-import finalproject.emag.repositories.PromotionRepository;
 import finalproject.emag.util.SuccessMessage;
 import finalproject.emag.util.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;

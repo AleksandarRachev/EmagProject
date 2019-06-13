@@ -1,18 +1,7 @@
 package finalproject.emag.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import finalproject.emag.model.dao.ImageDao;
-import finalproject.emag.model.pojo.Product;
-import finalproject.emag.model.pojo.User;
-import finalproject.emag.util.exception.ImageMissingException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
-import java.io.*;
-import java.util.Base64;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/images")

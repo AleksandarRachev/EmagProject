@@ -1,11 +1,11 @@
 package finalproject.emag.controller;
 
 import finalproject.emag.model.dto.ProductAddDTO;
-import finalproject.emag.model.dto.PromotionProductDTO;
 import finalproject.emag.model.pojo.Product;
 import finalproject.emag.model.service.ProductService;
 import finalproject.emag.util.SuccessMessage;
-import finalproject.emag.util.exception.*;
+import finalproject.emag.util.exception.BaseException;
+import finalproject.emag.util.exception.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

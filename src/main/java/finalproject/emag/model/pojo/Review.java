@@ -2,7 +2,10 @@ package finalproject.emag.model.pojo;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Data
 @Entity
@@ -16,6 +19,6 @@ public class Review {
     @Column(nullable = false)
     private String comment;
     @Column(nullable = false)
-    private int grade;
+    private Integer grade;
 
 }

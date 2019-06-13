@@ -3,7 +3,7 @@ package finalproject.emag.model.dto;
 import lombok.Data;
 
 @Data
-public class ReviewAddDTO {
+public class ReviewDTO {
 
     private String title;
     private String comment;

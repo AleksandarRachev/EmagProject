@@ -1,6 +1,6 @@
 package finalproject.emag.model.pojo;
 
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
