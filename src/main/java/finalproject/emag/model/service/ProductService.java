@@ -120,9 +120,9 @@ public class ProductService {
             max = 999999.9;
         }
         if (order.equals("ASC")) {
-            return productRepository.findAllByCategoryByPriceBetweenOrderByPriceAsc(min, max, categoryId);
+            return productRepository.findAllByCategoryIdAndPriceBetweenOrderByPriceAsc(categoryId, min, max);
         } else {
-            return productRepository.findAllByCategoryByPriceBetweenOrderByPriceDesc(min, max, categoryId);
+            return productRepository.findAllByCategoryIdAndPriceBetweenOrderByPriceDesc(categoryId, min, max);
         }
     }
 

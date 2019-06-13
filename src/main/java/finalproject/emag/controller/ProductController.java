@@ -4,7 +4,6 @@ import finalproject.emag.model.dto.CartViewProductDTO;
 import finalproject.emag.model.dto.ProductAddDTO;
 import finalproject.emag.model.pojo.Product;
 import finalproject.emag.model.service.ProductService;
-import finalproject.emag.repositories.ProductRepository;
 import finalproject.emag.util.SuccessMessage;
 import finalproject.emag.util.exception.BaseException;
 import finalproject.emag.util.exception.ProductNotFoundException;
