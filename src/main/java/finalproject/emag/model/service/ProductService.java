@@ -213,8 +213,4 @@ public class ProductService {
         order.setQuantity(quantity);
         orderRepository.save(order);
     }
-
-    private double getMaxPrice() {
-        return productRepository.getMaxPriceForProduct();
-    }
 }

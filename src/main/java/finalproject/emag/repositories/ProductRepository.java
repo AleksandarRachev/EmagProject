@@ -27,9 +27,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findByNameContaining(String name);
 
-    @Query(value = "SELECT MAX(price) AS maxPrice FROM products", nativeQuery = true)
-    double getMaxPriceForProduct();
+    Product findFirstByOrderByPriceDesc();
 
-    @Query(value = "SELECT quantity FROM products WHERE id = :id", nativeQuery = true)
-    int getQuantityForProduct(@Param("id") long productId);
+    Product findFirstByCategoryIdOrderByPriceDesc(Long categoryId);
+
+    Product findFirstByOrderByPriceAsc();
+
+    Product findFirstByCategoryIdOrderByPriceAsc(Long categoryId);
 }
