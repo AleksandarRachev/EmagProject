@@ -70,7 +70,8 @@ public class ImageService {
         return fis.readAllBytes();
     }
 
-    public SuccessMessage productImageUpload(MultipartFile file, long productId) throws ProductNotFoundException, IOException {
+    public SuccessMessage productImageUpload(MultipartFile file, long productId)
+            throws ProductNotFoundException, IOException {
         Product product = getProduct(productId);
         String name = product.getId() + System.currentTimeMillis() + ".png";
         File newImage = new File(IMAGE_PATH + name);

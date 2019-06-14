@@ -42,7 +42,8 @@ public class UserService {
         return new SuccessMessage("Register successful", HttpStatus.OK.value(), LocalDateTime.now());
     }
 
-    private void registerValidation(String email, String password, String password2, String fullName, String username) throws BaseException {
+    private void registerValidation(String email, String password, String password2, String fullName, String username)
+            throws BaseException {
         if (email == null || password == null || password2 == null || fullName == null) {
             throw new MissingValuableFieldsException();
         }
@@ -76,8 +77,9 @@ public class UserService {
         if (users.size() < 1 || !BCrypt.checkpw(loginUser.getPassword(), getUser.getPassword())) {
             throw new WrongCredentialsException();
         }
-        ShowUserDTO user = new ShowUserDTO(getUser.getId(), getUser.getEmail(), getUser.getName(), getUser.getUsername(),
-                getUser.getPhoneNumber(), getUser.getBirthDate(), getUser.isSubscribed(), getUser.isAdmin(), getUser.getImageUrl());
+        ShowUserDTO user = new ShowUserDTO(getUser.getId(), getUser.getEmail(), getUser.getName(),
+                getUser.getUsername(), getUser.getPhoneNumber(), getUser.getBirthDate(),
+                getUser.isSubscribed(), getUser.isAdmin(), getUser.getImageUrl());
         session.setAttribute(USER, user);
         session.setMaxInactiveInterval((60 * 60));
         return user;

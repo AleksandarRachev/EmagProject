@@ -17,7 +17,8 @@ public class ImageController extends BaseController {
     private ImageService imageService;
 
     @PostMapping(value = "/users")
-    public SuccessMessage uploadUserImage(@RequestPart(value = "image") MultipartFile image, HttpSession session) throws Exception {
+    public SuccessMessage uploadUserImage(@RequestPart(value = "image") MultipartFile image,
+                                          HttpSession session) throws Exception {
         validateLogin(session);
         return imageService.userImageUpload(image, session);
     }

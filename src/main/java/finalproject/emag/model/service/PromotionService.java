@@ -55,8 +55,9 @@ public class PromotionService extends ProductService {
         promotionRepository.save(promotion);
         product.setPrice(promotionValues.getNewPrice());
         productRepository.save(product);
-        notifyForPromotion("Emag: Checkout our new prices!", promotion.getProduct().getName() + " is on promotion for " +
-                promotion.getNewPrice() + "lv. from " + promotion.getOldPrice() + "lv.");
+        notifyForPromotion("Emag: We have new price on: " + product.getName(),
+                promotion.getProduct().getName() + " is on promotion for " +
+                        promotion.getNewPrice() + "lv. from " + promotion.getOldPrice() + "lv.");
         return new SuccessMessage("Promotion added", HttpStatus.OK.value(), LocalDateTime.now());
     }
 

@@ -61,7 +61,8 @@ public class UserController extends BaseController {
     }
 
     @PutMapping(value = "/edit-personal-info")
-    public SuccessMessage editPersonalInfo(@RequestBody EditPersonalInfoDTO user, HttpSession session) throws BaseException {
+    public SuccessMessage editPersonalInfo(@RequestBody EditPersonalInfoDTO user, HttpSession session)
+            throws BaseException {
         validateLogin(session);
         return userService.editPersonalInfo(user, session);
     }
