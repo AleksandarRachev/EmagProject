@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: finalproject.emag.EmagApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.516 s - in finalproject.emag.EmagApplicationTests
