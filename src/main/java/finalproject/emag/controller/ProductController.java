@@ -1,6 +1,7 @@
 package finalproject.emag.controller;
 
 import finalproject.emag.model.dto.CartViewProductDTO;
+import finalproject.emag.model.dto.FilterParamsDTO;
 import finalproject.emag.model.dto.ProductAddDTO;
 import finalproject.emag.model.pojo.Product;
 import finalproject.emag.model.service.ProductService;
@@ -48,20 +49,14 @@ public class ProductController extends BaseController {
     }
 
     @GetMapping(value = ("/filter"))
-    public List<Product> getAllProductsFiltered(
-            @RequestParam(value = "order", required = false, defaultValue = "ASC") String order,
-            @RequestParam(value = "from", required = false) Double min,
-            @RequestParam(value = "to", required = false) Double max) {
-        return productService.getProductsFiltered(min, max, order);
+    public List<Product> getAllProductsFiltered(@RequestBody FilterParamsDTO filter) {
+        return productService.getProductsFiltered(filter);
     }
 
-    @GetMapping(value = ("/subcategory/{id}/filter"))
-    public List<Product> getAllProductsBySubcategoryFiltered(
-            @PathVariable(value = "id") long categoryId,
-            @RequestParam(value = "order", required = false, defaultValue = "ASC") String order,
-            @RequestParam(value = "from", required = false) Double min,
-            @RequestParam(value = "to", required = false) Double max) {
-        return productService.getProductsByCategoryFiltered(min, max, categoryId, order);
+    @GetMapping(value = ("/category/{id}/filter"))
+    public List<Product> getAllProductsBySubcategoryFiltered(@PathVariable(value = "id") long categoryId,
+                                                             @RequestBody FilterParamsDTO filter) {
+        return productService.getProductsByCategoryFiltered(filter, categoryId);
     }
 
     @GetMapping(value = ("/search/{name}"))

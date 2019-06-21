@@ -1,9 +1,6 @@
 package finalproject.emag.model.service;
 
-import finalproject.emag.model.dto.CartProductDTO;
-import finalproject.emag.model.dto.CartViewProductDTO;
-import finalproject.emag.model.dto.ProductAddDTO;
-import finalproject.emag.model.dto.ShowUserDTO;
+import finalproject.emag.model.dto.*;
 import finalproject.emag.model.pojo.*;
 import finalproject.emag.repositories.CategoryRepository;
 import finalproject.emag.repositories.OrderRepository;
@@ -98,31 +95,31 @@ public class ProductService {
         return new SuccessMessage("Product deleted", HttpStatus.OK.value(), LocalDateTime.now());
     }
 
-    public List<Product> getProductsFiltered(Double min, Double max, String order) {
-        if (min == null) {
-            min = MIN_PRICE;
+    public List<Product> getProductsFiltered(FilterParamsDTO filter) {
+        if (filter.getFrom() == null) {
+            filter.setFrom(MIN_PRICE);
         }
-        if (max == null) {
-            max = MAX_PRICE;
+        if (filter.getTo() == null) {
+            filter.setTo(MAX_PRICE);
         }
-        if (order.equals("ASC")) {
-            return productRepository.findAllByPriceBetweenOrderByPriceAsc(min, max);
+        if (filter.getOrder().equals("ASC")) {
+            return productRepository.findAllByPriceBetweenOrderByPriceAsc(filter.getFrom(), filter.getTo());
         } else {
-            return productRepository.findAllByPriceBetweenOrderByPriceDesc(min, max);
+            return productRepository.findAllByPriceBetweenOrderByPriceDesc(filter.getFrom(), filter.getTo());
         }
     }
 
-    public List<Product> getProductsByCategoryFiltered(Double min, Double max, Long categoryId, String order) {
-        if (min == null) {
-            min = 0.0;
+    public List<Product> getProductsByCategoryFiltered(FilterParamsDTO filter, Long categoryId) {
+        if (filter.getFrom() == null) {
+            filter.setFrom(MIN_PRICE);
         }
-        if (max == null) {
-            max = 999999.9;
+        if (filter.getTo() == null) {
+            filter.setTo(MAX_PRICE);
         }
-        if (order.equals("ASC")) {
-            return productRepository.findAllByCategoryIdAndPriceBetweenOrderByPriceAsc(categoryId, min, max);
+        if (filter.getOrder().equals("ASC")) {
+            return productRepository.findAllByCategoryIdAndPriceBetweenOrderByPriceAsc(categoryId, filter.getFrom(), filter.getTo());
         } else {
-            return productRepository.findAllByCategoryIdAndPriceBetweenOrderByPriceDesc(categoryId, min, max);
+            return productRepository.findAllByCategoryIdAndPriceBetweenOrderByPriceDesc(categoryId, filter.getFrom(), filter.getTo());
         }
     }
 
