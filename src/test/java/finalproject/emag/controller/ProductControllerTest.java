@@ -206,6 +206,7 @@ public class ProductControllerTest {
         mvc.perform(put("/products/{id}/quantity/{quantity}", 1, -1)
                 .sessionAttr("user", getUserForSessionById(2))
                 .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.msg").value("You can't change the quantity to this value!"));
     }
@@ -214,6 +215,7 @@ public class ProductControllerTest {
     public void changeQuantityTestNotLogged() throws Exception {
         mvc.perform(put("/products/{id}/quantity/{quantity}", 1, 50)
                 .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.msg").value("You are not logged."));
     }
@@ -223,6 +225,7 @@ public class ProductControllerTest {
         mvc.perform(put("/products/{id}/quantity/{quantity}", 1, 50)
                 .sessionAttr("user", getUserForSessionById(1))
                 .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.msg").value("You are not admin."));
     }
@@ -232,6 +235,7 @@ public class ProductControllerTest {
         mvc.perform(put("/products/{id}/quantity/{quantity}", 10, 50)
                 .sessionAttr("user", getUserForSessionById(2))
                 .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.msg").value("Product not found"));
     }
@@ -239,14 +243,18 @@ public class ProductControllerTest {
     @Test
     public void deleteProductSuccess() throws Exception {
         mvc.perform(delete("/products/{id}", 1)
-                .sessionAttr("user", getUserForSessionById(2)))
+                .sessionAttr("user", getUserForSessionById(2))
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.msg").value("Product deleted"));
     }
 
     @Test
     public void deleteProductNotLogged() throws Exception {
-        mvc.perform(delete("/products/{id}", 1))
+        mvc.perform(delete("/products/{id}", 1)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.msg").value("You are not logged."));
     }
@@ -254,7 +262,9 @@ public class ProductControllerTest {
     @Test
     public void deleteProductNotAdmin() throws Exception {
         mvc.perform(delete("/products/{id}", 1)
-                .sessionAttr("user", getUserForSessionById(1)))
+                .sessionAttr("user", getUserForSessionById(1))
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.msg").value("You are not admin."));
     }
@@ -264,6 +274,7 @@ public class ProductControllerTest {
         mvc.perform(post("/products/{id}/add", 1)
                 .sessionAttr("user", getUserForSessionById(1))
                 .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.msg").value("Product added to cart"));
     }
@@ -272,6 +283,7 @@ public class ProductControllerTest {
     public void putItemInCartNotLogged() throws Exception {
         mvc.perform(post("/products/{id}/add", 1)
                 .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.msg").value("You are not logged."));
     }
@@ -281,6 +293,7 @@ public class ProductControllerTest {
         mvc.perform(post("/products/{id}/add", 10)
                 .sessionAttr("user", getUserForSessionById(1))
                 .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.msg").value("Product not found"));
     }
