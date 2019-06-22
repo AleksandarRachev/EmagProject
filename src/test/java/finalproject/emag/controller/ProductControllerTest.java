@@ -2,10 +2,13 @@ package finalproject.emag.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import finalproject.emag.model.dto.CartProductDTO;
 import finalproject.emag.model.dto.FilterParamsDTO;
 import finalproject.emag.model.dto.ProductAddDTO;
 import finalproject.emag.model.dto.ShowUserDTO;
+import finalproject.emag.model.pojo.Product;
 import finalproject.emag.model.pojo.User;
+import finalproject.emag.repositories.ProductRepository;
 import finalproject.emag.repositories.UserRepository;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -17,9 +20,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 
-import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -35,6 +37,9 @@ public class ProductControllerTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     private ShowUserDTO getUserForSessionById(long id) {
         User admin = userRepository.findById(id).get();
@@ -137,7 +142,7 @@ public class ProductControllerTest {
 
     @Test
     public void getAllProductsFilteredDesc() throws Exception {
-        FilterParamsDTO filter = new FilterParamsDTO(1000.0,2000.0,"DESC");
+        FilterParamsDTO filter = new FilterParamsDTO(1000.0, 2000.0, "DESC");
         String filterJson = mapToJson(filter);
         mvc.perform(get("/products/filter")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -145,13 +150,13 @@ public class ProductControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$",Matchers.hasSize(3)))
+                .andExpect(jsonPath("$", Matchers.hasSize(3)))
                 .andExpect(jsonPath("$.[0].name").value("Asus PC"));
     }
 
     @Test
     public void getAllProductsFilteredAsc() throws Exception {
-        FilterParamsDTO filter = new FilterParamsDTO(1000.0,2000.0,"ASC");
+        FilterParamsDTO filter = new FilterParamsDTO(1000.0, 2000.0, "ASC");
         String filterJson = mapToJson(filter);
         mvc.perform(get("/products/filter")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -159,73 +164,73 @@ public class ProductControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$",Matchers.hasSize(2)))
+                .andExpect(jsonPath("$", Matchers.hasSize(2)))
                 .andExpect(jsonPath("$.[0].name").value("Samsung S10"));
     }
 
     @Test
     public void getAllProductsByCategoryFiltered() throws Exception {
-        FilterParamsDTO filter = new FilterParamsDTO(1000.0,2000.0,"ASC");
+        FilterParamsDTO filter = new FilterParamsDTO(1000.0, 2000.0, "ASC");
         String filterJson = mapToJson(filter);
-        mvc.perform(get("/products/category/{id}/filter",4)
+        mvc.perform(get("/products/category/{id}/filter", 4)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(filterJson)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$",Matchers.hasSize(1)))
+                .andExpect(jsonPath("$", Matchers.hasSize(1)))
                 .andExpect(jsonPath("$.[0].name").value("Whirlpool"));
     }
 
     @Test
     public void getAllProductsByName() throws Exception {
-        mvc.perform(get("/products/search/{name}","Asus")
+        mvc.perform(get("/products/search/{name}", "Asus")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$",Matchers.hasSize(1)))
+                .andExpect(jsonPath("$", Matchers.hasSize(1)))
                 .andExpect(jsonPath("$.[0].price").value(2000.0));
     }
 
     @Test
-    public void changeQuantityTestSuccess() throws Exception{
-        mvc.perform(put("/products/{id}/quantity/{quantity}",1,50)
-                .sessionAttr("user",getUserForSessionById(2))
+    public void changeQuantityTestSuccess() throws Exception {
+        mvc.perform(put("/products/{id}/quantity/{quantity}", 1, 50)
+                .sessionAttr("user", getUserForSessionById(2))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.msg").value("Quantity changed"));
     }
 
     @Test
-    public void changeQuantityTestInvalidQuality() throws Exception{
-        mvc.perform(put("/products/{id}/quantity/{quantity}",1,-1)
-                .sessionAttr("user",getUserForSessionById(2))
+    public void changeQuantityTestInvalidQuality() throws Exception {
+        mvc.perform(put("/products/{id}/quantity/{quantity}", 1, -1)
+                .sessionAttr("user", getUserForSessionById(2))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.msg").value("You can't change the quantity to this value!"));
     }
 
     @Test
-    public void changeQuantityTestNotLogged() throws Exception{
-        mvc.perform(put("/products/{id}/quantity/{quantity}",1,50)
+    public void changeQuantityTestNotLogged() throws Exception {
+        mvc.perform(put("/products/{id}/quantity/{quantity}", 1, 50)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.msg").value("You are not logged."));
     }
 
     @Test
-    public void changeQuantityTestNotAdmin() throws Exception{
-        mvc.perform(put("/products/{id}/quantity/{quantity}",1,50)
-                .sessionAttr("user",getUserForSessionById(1))
+    public void changeQuantityTestNotAdmin() throws Exception {
+        mvc.perform(put("/products/{id}/quantity/{quantity}", 1, 50)
+                .sessionAttr("user", getUserForSessionById(1))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.msg").value("You are not admin."));
     }
 
     @Test
-    public void changeQuantityTestMissingProduct() throws Exception{
-        mvc.perform(put("/products/{id}/quantity/{quantity}",10,50)
-                .sessionAttr("user",getUserForSessionById(2))
+    public void changeQuantityTestMissingProduct() throws Exception {
+        mvc.perform(put("/products/{id}/quantity/{quantity}", 10, 50)
+                .sessionAttr("user", getUserForSessionById(2))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.msg").value("Product not found"));
@@ -252,5 +257,95 @@ public class ProductControllerTest {
                 .sessionAttr("user", getUserForSessionById(1)))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.msg").value("You are not admin."));
+    }
+
+    @Test
+    public void putItemInCartSuccess() throws Exception {
+        mvc.perform(post("/products/{id}/add", 1)
+                .sessionAttr("user", getUserForSessionById(1))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.msg").value("Product added to cart"));
+    }
+
+    @Test
+    public void putItemInCartNotLogged() throws Exception {
+        mvc.perform(post("/products/{id}/add", 1)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("$.msg").value("You are not logged."));
+    }
+
+    @Test
+    public void putItemInCartProductMissing() throws Exception {
+        mvc.perform(post("/products/{id}/add", 10)
+                .sessionAttr("user", getUserForSessionById(1))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.msg").value("Product not found"));
+    }
+
+    @Test
+    public void viewCartSuccess() throws Exception {
+        Product productOG = productRepository.findById(4L).get();
+        CartProductDTO product = new CartProductDTO(productOG.getId(), productOG.getCategory()
+                , productOG.getName(), productOG.getPrice());
+        HashMap<CartProductDTO, Integer> cart = new HashMap<>();
+        cart.put(product, 1);
+        mvc.perform(get("/products/view/cart").accept(MediaType.APPLICATION_JSON)
+                .sessionAttr("user", getUserForSessionById(1))
+                .sessionAttr("cart", cart))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", Matchers.hasSize(1)));
+    }
+
+    @Test
+    public void viewCartEmpty() throws Exception {
+        mvc.perform(get("/products/view/cart").accept(MediaType.APPLICATION_JSON)
+                .sessionAttr("user", getUserForSessionById(1)))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.msg").value("Your cart is empty."));
+    }
+
+    @Test
+    public void viewCartNotLogged() throws Exception {
+        mvc.perform(get("/products/view/cart").accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("$.msg").value("You are not logged."));
+    }
+
+    @Test
+    public void makeOrderSuccess() throws Exception {
+        Product productOG = productRepository.findById(4L).get();
+        CartProductDTO product = new CartProductDTO(productOG.getId(), productOG.getCategory()
+                , productOG.getName(), productOG.getPrice());
+        HashMap<CartProductDTO, Integer> cart = new HashMap<>();
+        cart.put(product, 1);
+        mvc.perform(post("/products/order").accept(MediaType.APPLICATION_JSON)
+                .sessionAttr("user", getUserForSessionById(1))
+                .sessionAttr("cart", cart))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.msg").value("Order made"));
+    }
+
+    @Test
+    public void makeOrderNotLogged() throws Exception {
+        mvc.perform(post("/products/order").accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("$.msg").value("You are not logged."));
+    }
+
+    @Test
+    public void makeOrderCartEmpty() throws Exception {
+        mvc.perform(post("/products/order").accept(MediaType.APPLICATION_JSON)
+                .sessionAttr("user", getUserForSessionById(1)))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.msg").value("Your cart is empty."));
     }
 }
