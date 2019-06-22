@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1efaea4f-a07d-4703-9b06-f47201472d3d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/finalproject/emag/model/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/finalproject/emag/model/service/ReviewService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/finalproject/emag/controller/ProductControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/finalproject/emag/controller/ProductControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/finalproject/emag/controller/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/finalproject/emag/controller/UserControllerTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,10 +19,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/finalproject/emag/controller/UserController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/finalproject/emag/controller/ReviewController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="64" column="12" selection-start-line="64" selection-start-column="12" selection-end-line="64" selection-end-column="12" />
+            <state relative-caret-position="396">
+              <caret line="36" column="68" selection-start-line="36" selection-start-column="68" selection-end-line="36" selection-end-column="68" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -29,10 +31,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/finalproject/emag/model/service/UserService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/finalproject/emag/model/service/ReviewService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1168">
-              <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
+            <state relative-caret-position="-692">
+              <caret line="42" column="12" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,10 +43,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/finalproject/emag/controller/UserControllerTest.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/finalproject/emag/controller/ReviewControllerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="430" column="46" selection-start-line="430" selection-start-column="46" selection-end-line="430" selection-end-column="46" />
+            <state relative-caret-position="598">
+              <caret line="170" column="51" selection-start-line="170" selection-start-column="51" selection-end-line="170" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -79,8 +81,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/finalproject/emag/repositories/CategoryRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/finalproject/emag/util/exception/ProductNotFoundException.java" />
         <option value="$PROJECT_DIR$/src/main/java/finalproject/emag/model/dto/RegisterUserDto.java" />
         <option value="$PROJECT_DIR$/src/main/java/finalproject/emag/util/BasicInserts.java" />
         <option value="$PROJECT_DIR$/src/main/java/finalproject/emag/model/dto/LoginUserDTO.java" />
@@ -111,7 +111,6 @@
         <option value="$PROJECT_DIR$/src/main/java/finalproject/emag/model/pojo/OrderedId.java" />
         <option value="$PROJECT_DIR$/src/main/java/finalproject/emag/repositories/OrderRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/finalproject/emag/repositories/ReviewRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/finalproject/emag/model/service/ReviewService.java" />
         <option value="$PROJECT_DIR$/src/main/java/finalproject/emag/repositories/ProductRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/finalproject/emag/model/dao/ProductDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/finalproject/emag/model/dto/NotifyUserDTO.java" />
@@ -128,8 +127,11 @@
         <option value="$PROJECT_DIR$/src/main/java/finalproject/emag/model/dto/FilterParamsDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/finalproject/emag/model/service/ProductService.java" />
         <option value="$PROJECT_DIR$/src/main/java/finalproject/emag/controller/ProductController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/finalproject/emag/model/service/ReviewService.java" />
         <option value="$PROJECT_DIR$/src/test/java/finalproject/emag/controller/ProductControllerTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/finalproject/emag/controller/UserControllerTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/finalproject/emag/controller/AbstractTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/finalproject/emag/controller/ReviewControllerTest.java" />
       </list>
     </option>
   </component>
@@ -336,8 +338,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.UserControllerTest">
-    <configuration name="UserControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.finalproject.emag.controller in emag">
+    <configuration name="ReviewControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="emag" />
       <extension name="coverage">
         <pattern>
@@ -346,13 +348,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="finalproject.emag.controller" />
-      <option name="MAIN_CLASS_NAME" value="finalproject.emag.controller.UserControllerTest" />
+      <option name="MAIN_CLASS_NAME" value="finalproject.emag.controller.ReviewControllerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserControllerTest.editEmailSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReviewControllerTest.addReviewExists" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="emag" />
       <extension name="coverage">
         <pattern>
@@ -361,14 +363,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="finalproject.emag.controller" />
-      <option name="MAIN_CLASS_NAME" value="finalproject.emag.controller.UserControllerTest" />
-      <option name="METHOD_NAME" value="editEmailSuccess" />
+      <option name="MAIN_CLASS_NAME" value="finalproject.emag.controller.ReviewControllerTest" />
+      <option name="METHOD_NAME" value="addReviewExists" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserControllerTest.editEmailTaken" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReviewControllerTest.deleteReviewSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="emag" />
       <extension name="coverage">
         <pattern>
@@ -377,14 +379,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="finalproject.emag.controller" />
-      <option name="MAIN_CLASS_NAME" value="finalproject.emag.controller.UserControllerTest" />
-      <option name="METHOD_NAME" value="editEmailTaken" />
+      <option name="MAIN_CLASS_NAME" value="finalproject.emag.controller.ReviewControllerTest" />
+      <option name="METHOD_NAME" value="deleteReviewSuccess" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserControllerTest.editPersonalInfoSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReviewControllerTest.editReviewSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="emag" />
       <extension name="coverage">
         <pattern>
@@ -393,14 +395,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="finalproject.emag.controller" />
-      <option name="MAIN_CLASS_NAME" value="finalproject.emag.controller.UserControllerTest" />
-      <option name="METHOD_NAME" value="editPersonalInfoSuccess" />
+      <option name="MAIN_CLASS_NAME" value="finalproject.emag.controller.ReviewControllerTest" />
+      <option name="METHOD_NAME" value="editReviewSuccess" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserControllerTest.loginSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="finalproject.emag.controller in emag" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="emag" />
       <extension name="coverage">
         <pattern>
@@ -409,9 +411,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="finalproject.emag.controller" />
-      <option name="MAIN_CLASS_NAME" value="finalproject.emag.controller.UserControllerTest" />
-      <option name="METHOD_NAME" value="loginSuccess" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -425,11 +425,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.UserControllerTest" />
-        <item itemvalue="JUnit.UserControllerTest.editPersonalInfoSuccess" />
-        <item itemvalue="JUnit.UserControllerTest.editEmailTaken" />
-        <item itemvalue="JUnit.UserControllerTest.editEmailSuccess" />
-        <item itemvalue="JUnit.UserControllerTest.loginSuccess" />
+        <item itemvalue="JUnit.finalproject.emag.controller in emag" />
+        <item itemvalue="JUnit.ReviewControllerTest.editReviewSuccess" />
+        <item itemvalue="JUnit.ReviewControllerTest.deleteReviewSuccess" />
+        <item itemvalue="JUnit.ReviewControllerTest" />
+        <item itemvalue="JUnit.ReviewControllerTest.addReviewExists" />
       </list>
     </recent_temporary>
   </component>
@@ -460,35 +460,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="UserControllerTest_editEmailSuccess - 2019.06.22 at 17h 20m 01s.xml">
-      <configuration name="UserControllerTest.editEmailSuccess" configurationId="JUnit" />
+    <history-entry file="ReviewControllerTest_addReviewExists - 2019.06.22 at 18h 30m 42s.xml">
+      <configuration name="ReviewControllerTest.addReviewExists" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserControllerTest_editEmailSuccess - 2019.06.22 at 17h 23m 17s.xml">
-      <configuration name="UserControllerTest.editEmailSuccess" configurationId="JUnit" />
+    <history-entry file="finalproject_emag_controller_in_emag - 2019.06.22 at 18h 38m 40s.xml">
+      <configuration name="finalproject.emag.controller in emag" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserControllerTest - 2019.06.22 at 17h 24m 05s.xml">
-      <configuration name="UserControllerTest" configurationId="JUnit" />
+    <history-entry file="ReviewControllerTest - 2019.06.22 at 18h 43m 33s.xml">
+      <configuration name="ReviewControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserControllerTest_editEmailTaken - 2019.06.22 at 17h 26m 03s.xml">
-      <configuration name="UserControllerTest.editEmailTaken" configurationId="JUnit" />
+    <history-entry file="ReviewControllerTest - 2019.06.22 at 18h 44m 29s.xml">
+      <configuration name="ReviewControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserControllerTest - 2019.06.22 at 17h 27m 24s.xml">
-      <configuration name="UserControllerTest" configurationId="JUnit" />
+    <history-entry file="finalproject_emag_controller_in_emag - 2019.06.22 at 18h 45m 24s.xml">
+      <configuration name="finalproject.emag.controller in emag" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserControllerTest_editPersonalInfoSuccess - 2019.06.22 at 17h 30m 28s.xml">
-      <configuration name="UserControllerTest.editPersonalInfoSuccess" configurationId="JUnit" />
+    <history-entry file="finalproject_emag_controller_in_emag - 2019.06.22 at 18h 47m 42s.xml">
+      <configuration name="finalproject.emag.controller in emag" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserControllerTest_editPersonalInfoSuccess - 2019.06.22 at 17h 31m 29s.xml">
-      <configuration name="UserControllerTest.editPersonalInfoSuccess" configurationId="JUnit" />
+    <history-entry file="ReviewControllerTest - 2019.06.22 at 18h 48m 21s.xml">
+      <configuration name="ReviewControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserControllerTest - 2019.06.22 at 17h 32m 26s.xml">
-      <configuration name="UserControllerTest" configurationId="JUnit" />
+    <history-entry file="ReviewControllerTest_deleteReviewSuccess - 2019.06.22 at 18h 52m 03s.xml">
+      <configuration name="ReviewControllerTest.deleteReviewSuccess" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserControllerTest - 2019.06.22 at 17h 35m 43s.xml">
-      <configuration name="UserControllerTest" configurationId="JUnit" />
+    <history-entry file="finalproject_emag_controller_in_emag - 2019.06.22 at 18h 54m 15s.xml">
+      <configuration name="finalproject.emag.controller in emag" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UserControllerTest - 2019.06.22 at 17h 38m 52s.xml">
-      <configuration name="UserControllerTest" configurationId="JUnit" />
+    <history-entry file="finalproject_emag_controller_in_emag - 2019.06.22 at 18h 55m 56s.xml">
+      <configuration name="finalproject.emag.controller in emag" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
@@ -538,28 +538,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/finalproject/emag/util/exception/InvalidUserException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="27" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
-          <folding>
-            <element signature="e#149#150#0" expanded="true" />
-            <element signature="e#179#180#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/finalproject/emag/model/dao/ImageDao.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/finalproject/emag/model/pojo/Promotion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="30" lean-forward="true" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/finalproject/emag/util/exception/ProductOutOfStockException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -704,16 +682,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/finalproject/emag/model/service/ReviewService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-171">
-          <caret line="68" column="31" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/finalproject/emag/util/ErrorMsg.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -819,16 +787,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/finalproject/emag/controller/ReviewController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="36" column="68" selection-start-line="36" selection-start-column="68" selection-end-line="36" selection-end-column="68" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/finalproject/emag/controller/PromotionsController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -896,16 +854,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/finalproject/emag/controller/ProductControllerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4782">
-          <caret line="295" column="31" selection-start-line="295" selection-start-column="31" selection-end-line="295" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/finalproject/emag/util/exception/PasswordsNotMatchingException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -940,10 +888,67 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/finalproject/emag/controller/ProductControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="32" column="56" selection-start-line="32" selection-start-column="56" selection-end-line="32" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/finalproject/emag/controller/UserControllerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="430" column="46" selection-start-line="430" selection-start-column="46" selection-end-line="430" selection-end-column="46" />
+        <state relative-caret-position="68">
+          <caret line="27" column="54" selection-start-line="27" selection-start-column="54" selection-end-line="27" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/finalproject/emag/controller/AbstractTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/finalproject/emag/util/exception/ReviewMissingException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/finalproject/emag/controller/ReviewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="36" column="68" selection-start-line="36" selection-start-column="68" selection-end-line="36" selection-end-column="68" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/finalproject/emag/model/service/ReviewService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-692">
+          <caret line="42" column="12" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/finalproject/emag/controller/ReviewControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="170" column="51" selection-start-line="170" selection-start-column="51" selection-end-line="170" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

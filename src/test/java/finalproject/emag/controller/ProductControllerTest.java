@@ -1,24 +1,16 @@
 package finalproject.emag.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import finalproject.emag.model.dto.CartProductDTO;
 import finalproject.emag.model.dto.FilterParamsDTO;
 import finalproject.emag.model.dto.ProductAddDTO;
-import finalproject.emag.model.dto.ShowUserDTO;
 import finalproject.emag.model.pojo.Product;
-import finalproject.emag.model.pojo.User;
-import finalproject.emag.repositories.ProductRepository;
-import finalproject.emag.repositories.UserRepository;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.HashMap;
 
@@ -30,28 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ProductControllerTest {
-
-    @Autowired
-    private MockMvc mvc;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private ProductRepository productRepository;
-
-    private ShowUserDTO getUserForSessionById(long id) {
-        User admin = userRepository.findById(id).get();
-        return new ShowUserDTO(admin.getId(), admin.getEmail(), admin.getName(),
-                admin.getUsername(), admin.getPhoneNumber(), admin.getBirthDate(),
-                admin.isSubscribed(), admin.isAdmin(), admin.getImageUrl());
-    }
-
-    private String mapToJson(Object obj) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(obj);
-    }
+public class ProductControllerTest extends AbstractTest {
 
     @Test
     public void getProductById() throws Exception {

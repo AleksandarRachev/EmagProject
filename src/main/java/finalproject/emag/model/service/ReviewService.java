@@ -40,7 +40,7 @@ public class ReviewService extends ProductService {
 
     private void checkIfExists(ReviewId id) throws ReviewExistsException {
         Optional<Review> review = reviewRepository.findById(id);
-        if (!review.isPresent()) {
+        if (review.isPresent()) {
             throw new ReviewExistsException();
         }
     }

@@ -1,20 +1,15 @@
 package finalproject.emag.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import finalproject.emag.model.dto.*;
 import finalproject.emag.model.pojo.User;
-import finalproject.emag.repositories.UserRepository;
 import finalproject.emag.util.PasswordEncoder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -25,30 +20,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserControllerTest {
-
-    @Autowired
-    private MockMvc mvc;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    private String mapToJson(Object obj) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(obj);
-    }
-
-    private ShowUserDTO getUserForSessionById(long id,boolean subscribed) {
-        User admin = userRepository.findById(id).get();
-        admin.setSubscribed(subscribed);
-        userRepository.save(admin);
-        return new ShowUserDTO(admin.getId(), admin.getEmail(), admin.getName(),
-                admin.getUsername(), admin.getPhoneNumber(), admin.getBirthDate(),
-                admin.isSubscribed(), admin.isAdmin(), admin.getImageUrl());
-    }
+public class UserControllerTest extends AbstractTest {
 
     @Before
-    public void addTestUsers(){
+    public void addTestUsers() {
         User registerUser = new User();
         registerUser.setEmail("test@abv.bg");
         registerUser.setPassword(PasswordEncoder.hashPassword("123"));
@@ -63,8 +38,9 @@ public class UserControllerTest {
         registerUser1.setSubscribed(true);
         userRepository.save(registerUser1);
     }
+
     @Test
-    public void registerSuccess() throws Exception{
+    public void registerSuccess() throws Exception {
         RegisterUserDTO registerUser = new RegisterUserDTO();
         registerUser.setEmail("misho@abv.bg");
         registerUser.setPassword("123");
@@ -82,7 +58,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void registerMissingFields() throws Exception{
+    public void registerMissingFields() throws Exception {
         RegisterUserDTO registerUser = new RegisterUserDTO();
         registerUser.setEmail("misho@abv.bg");
         registerUser.setPassword("123");
@@ -98,7 +74,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void registerPasswordsNotMatching() throws Exception{
+    public void registerPasswordsNotMatching() throws Exception {
         RegisterUserDTO registerUser = new RegisterUserDTO();
         registerUser.setEmail("misho@abv.bg");
         registerUser.setPassword("123");
@@ -116,7 +92,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void registerEmailTaken() throws Exception{
+    public void registerEmailTaken() throws Exception {
         User user = userRepository.findById(1L).get();
         RegisterUserDTO registerUser = new RegisterUserDTO();
         registerUser.setEmail(user.getEmail());
@@ -135,7 +111,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void registerUsernameTaken() throws Exception{
+    public void registerUsernameTaken() throws Exception {
         User user = userRepository.findById(1L).get();
         RegisterUserDTO registerUser = new RegisterUserDTO();
         registerUser.setEmail("pesho@abv.bg");
@@ -155,7 +131,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void loginSuccess() throws Exception{
+    public void loginSuccess() throws Exception {
         User user = userRepository.findById(2L).get();
         LoginUserDTO loginUser = new LoginUserDTO();
         loginUser.setEmail(user.getEmail());
@@ -172,7 +148,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void loginWrongCredentials() throws Exception{
+    public void loginWrongCredentials() throws Exception {
         LoginUserDTO loginUser = new LoginUserDTO();
         loginUser.setEmail("gencho@abv.bg");
         loginUser.setPassword("123");
@@ -187,7 +163,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void loginMissingFields() throws Exception{
+    public void loginMissingFields() throws Exception {
         LoginUserDTO loginUser = new LoginUserDTO();
         loginUser.setEmail("gencho@abv.bg");
         String jsonUser = mapToJson(loginUser);
@@ -201,7 +177,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void logoutNotLogged() throws Exception{
+    public void logoutNotLogged() throws Exception {
         mvc.perform(post("/users/logout")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -210,37 +186,37 @@ public class UserControllerTest {
     }
 
     @Test
-    public void logoutSuccess() throws Exception{
+    public void logoutSuccess() throws Exception {
         mvc.perform(post("/users/logout")
                 .accept(MediaType.APPLICATION_JSON)
-                .sessionAttr("user",getUserForSessionById(1,false)))
+                .sessionAttr("user", getUserForSessionByIdAndSubscribed(1, false)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.msg").value("You logged out"));
     }
 
     @Test
-    public void subscribeSuccess() throws Exception{
+    public void subscribeSuccess() throws Exception {
         mvc.perform(put("/users/subscribe")
                 .accept(MediaType.APPLICATION_JSON)
-                .sessionAttr("user",getUserForSessionById(1,false)))
+                .sessionAttr("user", getUserForSessionByIdAndSubscribed(1, false)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.msg").value("You subscribed"));
     }
 
     @Test
-    public void subscribeAlreadySubscribed() throws Exception{
+    public void subscribeAlreadySubscribed() throws Exception {
         mvc.perform(put("/users/subscribe")
                 .accept(MediaType.APPLICATION_JSON)
-                .sessionAttr("user",getUserForSessionById(1,true)))
+                .sessionAttr("user", getUserForSessionByIdAndSubscribed(1, true)))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.msg").value("You are already subscribed"));
     }
 
     @Test
-    public void subscribeNotLogged() throws Exception{
+    public void subscribeNotLogged() throws Exception {
         mvc.perform(put("/users/subscribe")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -249,27 +225,27 @@ public class UserControllerTest {
     }
 
     @Test
-    public void unsubscribeSuccess() throws Exception{
+    public void unsubscribeSuccess() throws Exception {
         mvc.perform(put("/users/unsubscribe")
                 .accept(MediaType.APPLICATION_JSON)
-                .sessionAttr("user",getUserForSessionById(1,true)))
+                .sessionAttr("user", getUserForSessionByIdAndSubscribed(1, true)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.msg").value("You unsubscribed"));
     }
 
     @Test
-    public void unsubscribeAlreadySubscribed() throws Exception{
+    public void unsubscribeAlreadySubscribed() throws Exception {
         mvc.perform(put("/users/unsubscribe")
                 .accept(MediaType.APPLICATION_JSON)
-                .sessionAttr("user",getUserForSessionById(1,false)))
+                .sessionAttr("user", getUserForSessionByIdAndSubscribed(1, false)))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.msg").value("You are not subscribed"));
     }
 
     @Test
-    public void unsubscribeNotLogged() throws Exception{
+    public void unsubscribeNotLogged() throws Exception {
         mvc.perform(put("/users/unsubscribe")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -278,14 +254,14 @@ public class UserControllerTest {
     }
 
     @Test
-    public void editPassSuccess() throws Exception{
+    public void editPassSuccess() throws Exception {
         EditPassDTO editPass = new EditPassDTO();
         editPass.setCurrentPass("123");
         editPass.setPassword("1234");
         editPass.setPassword2("1234");
         String editJson = mapToJson(editPass);
         mvc.perform(put("/users/edit-pass")
-                .sessionAttr("user",getUserForSessionById(1,false))
+                .sessionAttr("user", getUserForSessionByIdAndSubscribed(1, false))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(editJson)
                 .accept(MediaType.APPLICATION_JSON))
@@ -295,14 +271,14 @@ public class UserControllerTest {
     }
 
     @Test
-    public void editPassWrongCredentials() throws Exception{
+    public void editPassWrongCredentials() throws Exception {
         EditPassDTO editPass = new EditPassDTO();
         editPass.setCurrentPass("1234");
         editPass.setPassword("1234");
         editPass.setPassword2("1234");
         String editJson = mapToJson(editPass);
         mvc.perform(put("/users/edit-pass")
-                .sessionAttr("user",getUserForSessionById(1,false))
+                .sessionAttr("user", getUserForSessionByIdAndSubscribed(1, false))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(editJson)
                 .accept(MediaType.APPLICATION_JSON))
@@ -312,7 +288,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void editPassNotLogged() throws Exception{
+    public void editPassNotLogged() throws Exception {
         EditPassDTO editPass = new EditPassDTO();
         editPass.setCurrentPass("123");
         editPass.setPassword("1234");
@@ -328,14 +304,14 @@ public class UserControllerTest {
     }
 
     @Test
-    public void editPassPasswordsNotMatch() throws Exception{
+    public void editPassPasswordsNotMatch() throws Exception {
         EditPassDTO editPass = new EditPassDTO();
         editPass.setCurrentPass("123");
         editPass.setPassword("1234");
         editPass.setPassword2("123");
         String editJson = mapToJson(editPass);
         mvc.perform(put("/users/edit-pass")
-                .sessionAttr("user",getUserForSessionById(1,false))
+                .sessionAttr("user", getUserForSessionByIdAndSubscribed(1, false))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(editJson)
                 .accept(MediaType.APPLICATION_JSON))
@@ -345,13 +321,13 @@ public class UserControllerTest {
     }
 
     @Test
-    public void editEmailSuccess() throws Exception{
+    public void editEmailSuccess() throws Exception {
         EditEmailDTO editEmail = new EditEmailDTO();
         editEmail.setEmail("testing@abv.bg");
         editEmail.setPassword("123");
         String editJson = mapToJson(editEmail);
         mvc.perform(put("/users/edit-email")
-                .sessionAttr("user",getUserForSessionById(3,false))
+                .sessionAttr("user", getUserForSessionByIdAndSubscribed(3, false))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(editJson)
                 .accept(MediaType.APPLICATION_JSON))
@@ -361,14 +337,14 @@ public class UserControllerTest {
     }
 
     @Test
-    public void editEmailTaken() throws Exception{
+    public void editEmailTaken() throws Exception {
         User user = userRepository.findById(1L).get();
         EditEmailDTO editEmail = new EditEmailDTO();
         editEmail.setEmail(user.getEmail());
         editEmail.setPassword("123");
         String editJson = mapToJson(editEmail);
         mvc.perform(put("/users/edit-email")
-                .sessionAttr("user",getUserForSessionById(3,false))
+                .sessionAttr("user", getUserForSessionByIdAndSubscribed(3, false))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(editJson)
                 .accept(MediaType.APPLICATION_JSON))
@@ -378,7 +354,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void editEmailNotLogged() throws Exception{
+    public void editEmailNotLogged() throws Exception {
         EditEmailDTO editEmail = new EditEmailDTO();
         editEmail.setEmail("testing@abv.bg");
         editEmail.setPassword("123");
@@ -393,14 +369,14 @@ public class UserControllerTest {
     }
 
     @Test
-    public void editPersonalInfoSuccess() throws Exception{
+    public void editPersonalInfoSuccess() throws Exception {
         EditPersonalInfoDTO editInfo = new EditPersonalInfoDTO();
         editInfo.setUsername("testingUsername");
         editInfo.setPhoneNumber("045654");
         editInfo.setFullName("Test");
         String editJson = mapToJson(editInfo);
         mvc.perform(put("/users/edit-personal-info")
-                .sessionAttr("user",getUserForSessionById(4,false))
+                .sessionAttr("user", getUserForSessionByIdAndSubscribed(4, false))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(editJson)
                 .accept(MediaType.APPLICATION_JSON))
@@ -410,7 +386,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void editPersonalInfoNotLogged() throws Exception{
+    public void editPersonalInfoNotLogged() throws Exception {
         EditPersonalInfoDTO editInfo = new EditPersonalInfoDTO();
         editInfo.setUsername("testingUsername1");
         editInfo.setPhoneNumber("045654");
@@ -426,13 +402,13 @@ public class UserControllerTest {
     }
 
     @Test
-    public void editPersonalInfoMissingFields() throws Exception{
+    public void editPersonalInfoMissingFields() throws Exception {
         EditPersonalInfoDTO editInfo = new EditPersonalInfoDTO();
         editInfo.setUsername("testingUsername2");
         editInfo.setPhoneNumber("045654");
         String editJson = mapToJson(editInfo);
         mvc.perform(put("/users/edit-personal-info")
-                .sessionAttr("user",getUserForSessionById(4,false))
+                .sessionAttr("user", getUserForSessionByIdAndSubscribed(4, false))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(editJson)
                 .accept(MediaType.APPLICATION_JSON))
@@ -442,14 +418,14 @@ public class UserControllerTest {
     }
 
     @Test
-    public void editPersonalInfoUsernameTaken() throws Exception{
+    public void editPersonalInfoUsernameTaken() throws Exception {
         EditPersonalInfoDTO editInfo = new EditPersonalInfoDTO();
         editInfo.setUsername("admin");
         editInfo.setPhoneNumber("045654");
         editInfo.setFullName("Test");
         String editJson = mapToJson(editInfo);
         mvc.perform(put("/users/edit-personal-info")
-                .sessionAttr("user",getUserForSessionById(4,false))
+                .sessionAttr("user", getUserForSessionByIdAndSubscribed(4, false))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(editJson)
                 .accept(MediaType.APPLICATION_JSON))
