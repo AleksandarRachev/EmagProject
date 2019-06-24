@@ -107,8 +107,7 @@ public class ProductControllerTest extends AbstractTest {
                 .content(productJson)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.msg").value("Missing valuable fields"));
+                .andExpect(status().isBadRequest());
     }
 
     @Test

@@ -1,5 +1,6 @@
 package finalproject.emag.util;
 
+import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -22,7 +23,7 @@ public class MailUtil {
                 return new PasswordAuthentication("testingemag19@gmail.com", "emag1234");
             }
         });
-        Message msg = new MimeMessage(session);
+        javax.mail.Message msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress(from, false));
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
         msg.setSubject(subject);

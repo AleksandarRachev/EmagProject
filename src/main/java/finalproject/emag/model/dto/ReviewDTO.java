@@ -2,8 +2,8 @@ package finalproject.emag.model.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Data
 public class ReviewDTO {
@@ -13,7 +13,7 @@ public class ReviewDTO {
     @NotNull(message = "Missing valuable fields")
     private String comment;
     @NotNull
-    @Size(max = 6)
+    @Max(6)
     private Integer grade;
 
 }

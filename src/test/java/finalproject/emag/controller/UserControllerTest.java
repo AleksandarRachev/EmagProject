@@ -149,8 +149,7 @@ public class UserControllerTest extends AbstractTest {
                 .content(jsonUser)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.msg").value("Missing valuable fields"));
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -258,8 +257,7 @@ public class UserControllerTest extends AbstractTest {
                 .content(editJson)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.msg").value("Wrong credentials"));
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -275,22 +273,6 @@ public class UserControllerTest extends AbstractTest {
                 .andDo(print())
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.msg").value("You are not logged."));
-    }
-
-    @Test
-    public void editPassPasswordsNotMatch() throws Exception {
-        EditPassDTO editPass = new EditPassDTO();
-        editPass.setCurrentPass("123");
-        editPass.setPassword("1234");
-        String editJson = mapToJson(editPass);
-        mvc.perform(put("/users/edit-pass")
-                .sessionAttr("user", getUserForSessionByIdAndSubscribed(1, false))
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(editJson)
-                .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.msg").value("Passwords does not match"));
     }
 
     @Test
@@ -386,8 +368,7 @@ public class UserControllerTest extends AbstractTest {
                 .content(editJson)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.msg").value("Missing valuable fields"));
+                .andExpect(status().isBadRequest());
     }
 
     @Test

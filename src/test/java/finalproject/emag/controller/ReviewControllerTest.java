@@ -69,8 +69,7 @@ public class ReviewControllerTest extends AbstractTest {
                 .content(reviewJson)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.msg").value("You already have review on this product"));
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -85,8 +84,7 @@ public class ReviewControllerTest extends AbstractTest {
                 .content(reviewJson)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(status().isUnauthorized())
-                .andExpect(jsonPath("$.msg").value("You are not logged."));
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
@@ -100,8 +98,7 @@ public class ReviewControllerTest extends AbstractTest {
                 .content(reviewJson)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.msg").value("Missing valuable fields"));
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -157,8 +154,7 @@ public class ReviewControllerTest extends AbstractTest {
                 .content(reviewJson)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.msg").value("Review missing"));
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -173,7 +169,6 @@ public class ReviewControllerTest extends AbstractTest {
                 .content(reviewJson)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(status().isUnauthorized())
-                .andExpect(jsonPath("$.msg").value("You are not logged."));
+                .andExpect(status().isUnauthorized());
     }
 }
