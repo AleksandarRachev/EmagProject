@@ -39,7 +39,6 @@ public class ProductService {
     private UserRepository userRepository;
 
     public ResponseEntity addProduct(ProductAddDTO productAdd) throws BaseException {
-        fieldsCheck(productAdd);
         Category category = getCategory(productAdd.getCategoryId());
         checkIfProductExists(productAdd.getName());
         Product product = new Product();
@@ -57,13 +56,6 @@ public class ProductService {
             throw new InvalidCategoryException();
         }
         return category.get();
-    }
-
-    private void fieldsCheck(ProductAddDTO product) throws MissingValuableFieldsException {
-        if (product.getPrice() == null || product.getCategoryId() == null ||
-                product.getQuantity() == null || product.getName() == null) {
-            throw new MissingValuableFieldsException();
-        }
     }
 
     private void checkIfProductExists(String name) throws ProductExistsException {
@@ -96,12 +88,6 @@ public class ProductService {
     }
 
     public List<Product> getProductsFiltered(FilterParamsDTO filter) {
-        if (filter.getFrom() == null) {
-            filter.setFrom(MIN_PRICE);
-        }
-        if (filter.getTo() == null) {
-            filter.setTo(MAX_PRICE);
-        }
         if (filter.getOrder().equals("ASC")) {
             return productRepository.findAllByPriceBetweenOrderByPriceAsc(filter.getFrom(), filter.getTo());
         } else {
@@ -110,12 +96,6 @@ public class ProductService {
     }
 
     public List<Product> getProductsByCategoryFiltered(FilterParamsDTO filter, Long categoryId) {
-        if (filter.getFrom() == null) {
-            filter.setFrom(MIN_PRICE);
-        }
-        if (filter.getTo() == null) {
-            filter.setTo(MAX_PRICE);
-        }
         if (filter.getOrder().equals("ASC")) {
             return productRepository.findAllByCategoryIdAndPriceBetweenOrderByPriceAsc(categoryId, filter.getFrom(), filter.getTo());
         } else {

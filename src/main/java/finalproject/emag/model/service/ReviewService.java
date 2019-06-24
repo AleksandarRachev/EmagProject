@@ -9,7 +9,9 @@ import finalproject.emag.model.pojo.User;
 import finalproject.emag.repository.ReviewRepository;
 import finalproject.emag.repository.UserRepository;
 import finalproject.emag.util.Message;
-import finalproject.emag.util.exception.*;
+import finalproject.emag.util.exception.BaseException;
+import finalproject.emag.util.exception.ReviewExistsException;
+import finalproject.emag.util.exception.ReviewMissingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,15 +31,6 @@ public class ReviewService extends ProductService {
     @Autowired
     private UserRepository userRepository;
 
-    private void addReviewFieldsCheck(ReviewDTO review) throws BaseException {
-        if (review.getTitle() == null || review.getComment() == null || review.getGrade() == null) {
-            throw new MissingValuableFieldsException();
-        }
-        if (review.getGrade() < 0 || review.getGrade() > 6) {
-            throw new InvalidGradeEception();
-        }
-    }
-
     private void checkIfExists(ReviewId id) throws ReviewExistsException {
         Optional<Review> review = reviewRepository.findById(id);
         if (review.isPresent()) {
@@ -46,7 +39,6 @@ public class ReviewService extends ProductService {
     }
 
     public ResponseEntity addReview(ReviewDTO reviewView, long productId, HttpSession session) throws BaseException {
-        addReviewFieldsCheck(reviewView);
         Product product = getProduct(productId);
         ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
@@ -83,12 +75,6 @@ public class ReviewService extends ProductService {
         return new ResponseEntity(new Message("Review deleted"), HttpStatus.OK);
     }
 
-    private void fieldsCheck(Review review) throws MissingValuableFieldsException {
-        if (review.getTitle() == null || review.getComment() == null || review.getGrade() == null) {
-            throw new MissingValuableFieldsException();
-        }
-    }
-
     public ResponseEntity editReview(ReviewDTO reviewEdit, long productId, HttpSession session) throws BaseException {
         ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
@@ -100,7 +86,6 @@ public class ReviewService extends ProductService {
         review.setTitle(reviewEdit.getTitle() == null ? review.getTitle() : reviewEdit.getTitle());
         review.setComment(reviewEdit.getComment() == null ? review.getComment() : reviewEdit.getComment());
         review.setGrade(reviewEdit.getGrade() == null ? review.getGrade() : reviewEdit.getGrade());
-        fieldsCheck(review);
         reviewRepository.save(review);
         return new ResponseEntity(new Message("Review edited"), HttpStatus.OK);
     }

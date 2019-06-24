@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/products/promotions")
@@ -17,7 +18,7 @@ public class PromotionsController extends BaseController {
     private PromotionService promotionService;
 
     @PostMapping(value = "/{id}")
-    public ResponseEntity addPromotion(@PathVariable("id") Long productId, @RequestBody PromotionProductDTO promotion,
+    public ResponseEntity addPromotion(@PathVariable("id") Long productId, @RequestBody @Valid PromotionProductDTO promotion,
                                        HttpSession session) throws BaseException {
         validateLoginAdmin(session);
         return promotionService.addPromotion(productId, promotion);

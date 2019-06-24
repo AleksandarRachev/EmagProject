@@ -44,7 +44,6 @@ public class UserControllerTest extends AbstractTest {
         RegisterUserDTO registerUser = new RegisterUserDTO();
         registerUser.setEmail("misho@abv.bg");
         registerUser.setPassword("123");
-        registerUser.setPassword2("123");
         registerUser.setFullName("Mihail Mihailov");
         registerUser.setSubscribed(false);
         String jsonUser = mapToJson(registerUser);
@@ -62,33 +61,13 @@ public class UserControllerTest extends AbstractTest {
         RegisterUserDTO registerUser = new RegisterUserDTO();
         registerUser.setEmail("misho@abv.bg");
         registerUser.setPassword("123");
-        registerUser.setPassword2("123");
         String jsonUser = mapToJson(registerUser);
         mvc.perform(post("/users/register")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonUser)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.msg").value("Missing valuable fields"));
-    }
-
-    @Test
-    public void registerPasswordsNotMatching() throws Exception {
-        RegisterUserDTO registerUser = new RegisterUserDTO();
-        registerUser.setEmail("misho@abv.bg");
-        registerUser.setPassword("123");
-        registerUser.setPassword2("1234");
-        registerUser.setFullName("Mihail Mihailov");
-        registerUser.setSubscribed(false);
-        String jsonUser = mapToJson(registerUser);
-        mvc.perform(post("/users/register")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonUser)
-                .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.msg").value("Passwords does not match"));
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -97,7 +76,6 @@ public class UserControllerTest extends AbstractTest {
         RegisterUserDTO registerUser = new RegisterUserDTO();
         registerUser.setEmail(user.getEmail());
         registerUser.setPassword("123");
-        registerUser.setPassword2("123");
         registerUser.setFullName("Mihail Mihailov");
         registerUser.setSubscribed(false);
         String jsonUser = mapToJson(registerUser);
@@ -116,7 +94,6 @@ public class UserControllerTest extends AbstractTest {
         RegisterUserDTO registerUser = new RegisterUserDTO();
         registerUser.setEmail("pesho@abv.bg");
         registerUser.setPassword("123");
-        registerUser.setPassword2("123");
         registerUser.setFullName("Mihail Mihailov");
         registerUser.setSubscribed(false);
         registerUser.setUsername(user.getUsername());
@@ -258,7 +235,6 @@ public class UserControllerTest extends AbstractTest {
         EditPassDTO editPass = new EditPassDTO();
         editPass.setCurrentPass("123");
         editPass.setPassword("1234");
-        editPass.setPassword2("1234");
         String editJson = mapToJson(editPass);
         mvc.perform(put("/users/edit-pass")
                 .sessionAttr("user", getUserForSessionByIdAndSubscribed(1, false))
@@ -275,7 +251,6 @@ public class UserControllerTest extends AbstractTest {
         EditPassDTO editPass = new EditPassDTO();
         editPass.setCurrentPass("1234");
         editPass.setPassword("1234");
-        editPass.setPassword2("1234");
         String editJson = mapToJson(editPass);
         mvc.perform(put("/users/edit-pass")
                 .sessionAttr("user", getUserForSessionByIdAndSubscribed(1, false))
@@ -292,7 +267,6 @@ public class UserControllerTest extends AbstractTest {
         EditPassDTO editPass = new EditPassDTO();
         editPass.setCurrentPass("123");
         editPass.setPassword("1234");
-        editPass.setPassword2("1234");
         String editJson = mapToJson(editPass);
         mvc.perform(put("/users/edit-pass")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -308,7 +282,6 @@ public class UserControllerTest extends AbstractTest {
         EditPassDTO editPass = new EditPassDTO();
         editPass.setCurrentPass("123");
         editPass.setPassword("1234");
-        editPass.setPassword2("123");
         String editJson = mapToJson(editPass);
         mvc.perform(put("/users/edit-pass")
                 .sessionAttr("user", getUserForSessionByIdAndSubscribed(1, false))

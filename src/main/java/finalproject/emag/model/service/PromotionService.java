@@ -9,7 +9,10 @@ import finalproject.emag.repository.PromotionRepository;
 import finalproject.emag.repository.UserRepository;
 import finalproject.emag.util.MailUtil;
 import finalproject.emag.util.Message;
-import finalproject.emag.util.exception.*;
+import finalproject.emag.util.exception.BaseException;
+import finalproject.emag.util.exception.InvalidDatesException;
+import finalproject.emag.util.exception.InvalidPromotionException;
+import finalproject.emag.util.exception.MissingPromotionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,9 +34,6 @@ public class PromotionService extends ProductService {
     private UserRepository userRepository;
 
     private void promotionValidationFieldsCheck(Product product, PromotionProductDTO promotion) throws BaseException {
-        if (promotion.getNewPrice() == null || promotion.getEndDate() == null || promotion.getStartDate() == null) {
-            throw new MissingValuableFieldsException();
-        }
         if (product.getPrice() < promotion.getNewPrice()) {
             throw new InvalidPromotionException();
         }

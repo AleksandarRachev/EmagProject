@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.text.ParseException;
-import java.time.LocalDateTime;
 
 @RestController
 public abstract class BaseController {
@@ -34,26 +32,13 @@ public abstract class BaseController {
         return new ResponseEntity(new Message(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({Exception.class})
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity handleOtherErrors(Exception e) {
-//        log.error("exception: "+e);
-        return new ResponseEntity(new Message(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    @ExceptionHandler({ParseException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ResponseEntity dateParser(Exception e) {
-        return new ResponseEntity(new Message(e.getMessage()), HttpStatus.BAD_REQUEST);
-    }
-
     void validateLogin(HttpSession session) throws NotLoggedException {
         if (session.getAttribute("user") == null) {
             throw new NotLoggedException();
         }
     }
 
-    protected void validateLoginAdmin(HttpSession session) throws NotAdminException, NotLoggedException {
+    void validateLoginAdmin(HttpSession session) throws NotAdminException, NotLoggedException {
         if (session.getAttribute("user") == null) {
             throw new NotLoggedException();
         } else {

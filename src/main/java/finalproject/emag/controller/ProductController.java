@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,7 +23,7 @@ public class ProductController extends BaseController {
     protected ProductService productService;
 
     @PostMapping
-    public ResponseEntity addProduct(@RequestBody ProductAddDTO product, HttpSession session) throws BaseException {
+    public ResponseEntity addProduct(@RequestBody @Valid ProductAddDTO product, HttpSession session) throws BaseException {
         validateLoginAdmin(session);
         return productService.addProduct(product);
     }
@@ -49,13 +50,13 @@ public class ProductController extends BaseController {
     }
 
     @GetMapping(value = ("/filter"))
-    public List<Product> getAllProductsFiltered(@RequestBody FilterParamsDTO filter) {
+    public List<Product> getAllProductsFiltered(@RequestBody @Valid FilterParamsDTO filter) {
         return productService.getProductsFiltered(filter);
     }
 
     @GetMapping(value = ("/category/{id}/filter"))
     public List<Product> getAllProductsBySubcategoryFiltered(@PathVariable(value = "id") long categoryId,
-                                                             @RequestBody FilterParamsDTO filter) {
+                                                             @RequestBody @Valid FilterParamsDTO filter) {
         return productService.getProductsByCategoryFiltered(filter, categoryId);
     }
 

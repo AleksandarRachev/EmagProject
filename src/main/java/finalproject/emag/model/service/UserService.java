@@ -25,8 +25,7 @@ public class UserService {
 
     public ResponseEntity register(RegisterUserDTO registerUser, HttpSession session) throws BaseException {
         User user = new User();
-        registerValidation(registerUser.getEmail(), registerUser.getPassword(), registerUser.getPassword2(),
-                registerUser.getFullName(), registerUser.getUsername());
+        registerValidation(registerUser.getEmail(), registerUser.getUsername());
         user.setEmail(registerUser.getEmail());
         user.setPassword(PasswordEncoder.hashPassword(registerUser.getPassword()));
         user.setName(registerUser.getFullName());
@@ -39,17 +38,11 @@ public class UserService {
                 user.getPhoneNumber(), user.getBirthDate(), user.isSubscribed(), user.isAdmin(), user.getImageUrl());
         session.setAttribute(USER, userSession);
         session.setMaxInactiveInterval((60 * 60));
-        return new ResponseEntity<>(new Message("Register successful"),HttpStatus.OK);
+        return new ResponseEntity<>(new Message("Register successful"), HttpStatus.OK);
     }
 
-    private void registerValidation(String email, String password, String password2, String fullName, String username)
+    private void registerValidation(String email, String username)
             throws BaseException {
-        if (email == null || password == null || password2 == null || fullName == null) {
-            throw new MissingValuableFieldsException();
-        }
-        if (!password.matches(password2)) {
-            throw new PasswordsNotMatchingException();
-        }
         checkIfEmailFree(email);
         checkIfUsernameFree(username);
     }
@@ -109,37 +102,20 @@ public class UserService {
         return new ResponseEntity(new Message("You unsubscribed"), HttpStatus.OK);
     }
 
-    private void passEditFieldsCheck(EditPassDTO user) throws MissingValuableFieldsException {
-        if (user.getCurrentPass() == null || user.getPassword() == null || user.getPassword2() == null) {
-            throw new MissingValuableFieldsException();
-        }
-    }
-
     public ResponseEntity editPassword(EditPassDTO userEdit, HttpSession session) throws BaseException {
         ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
-        passEditFieldsCheck(userEdit);
         if (!BCrypt.checkpw(userEdit.getCurrentPass(), user.getPassword())) {
             throw new WrongCredentialsException();
-        }
-        if (!userEdit.getPassword().matches(userEdit.getPassword2())) {
-            throw new PasswordsNotMatchingException();
         }
         user.setPassword(PasswordEncoder.hashPassword(userEdit.getPassword()));
         userRepository.save(user);
         return new ResponseEntity(new Message("Password edited"), HttpStatus.OK);
     }
 
-    private void emailEditFieldsCheck(EditEmailDTO user) throws MissingValuableFieldsException {
-        if (user.getEmail() == null || user.getPassword() == null) {
-            throw new MissingValuableFieldsException();
-        }
-    }
-
     public ResponseEntity editEmail(EditEmailDTO userEdit, HttpSession session) throws BaseException {
         ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
-        emailEditFieldsCheck(userEdit);
         if (!BCrypt.checkpw(userEdit.getPassword(), user.getPassword())) {
             throw new WrongCredentialsException();
         }
@@ -157,9 +133,6 @@ public class UserService {
         user.setName(userEdit.getFullName());
         user.setBirthDate(userEdit.getBirthDate());
         user.setPhoneNumber(userEdit.getPhoneNumber());
-        if (user.getName() == null) {
-            throw new MissingValuableFieldsException();
-        }
         userRepository.save(user);
         return new ResponseEntity(new Message("Personal info edited"), HttpStatus.OK);
     }

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/products/reviews", produces = "application/json")
@@ -18,7 +19,7 @@ public class ReviewController extends BaseController {
     private ReviewService reviewService;
 
     @PostMapping(value = "/{id}")
-    public ResponseEntity addReview(@RequestBody ReviewDTO review, @PathVariable("id") long productId,
+    public ResponseEntity addReview(@RequestBody @Valid ReviewDTO review, @PathVariable("id") long productId,
                                     HttpSession session) throws BaseException {
         validateLogin(session);
         return reviewService.addReview(review, productId, session);
@@ -31,7 +32,7 @@ public class ReviewController extends BaseController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity editReview(@RequestBody ReviewDTO editReview, @PathVariable("id") long productId,
+    public ResponseEntity editReview(@RequestBody @Valid ReviewDTO editReview, @PathVariable("id") long productId,
                                      HttpSession session) throws Exception {
         validateLogin(session);
         return reviewService.editReview(editReview, productId, session);
