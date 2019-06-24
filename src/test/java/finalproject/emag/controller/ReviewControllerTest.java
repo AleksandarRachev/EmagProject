@@ -3,7 +3,7 @@ package finalproject.emag.controller;
 import finalproject.emag.model.dto.ReviewDTO;
 import finalproject.emag.model.pojo.Review;
 import finalproject.emag.model.pojo.ReviewId;
-import finalproject.emag.repositories.ReviewRepository;
+import finalproject.emag.repository.ReviewRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

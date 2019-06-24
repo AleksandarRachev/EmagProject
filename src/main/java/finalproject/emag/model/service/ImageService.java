@@ -3,15 +3,16 @@ package finalproject.emag.model.service;
 import finalproject.emag.model.dto.ShowUserDTO;
 import finalproject.emag.model.pojo.Product;
 import finalproject.emag.model.pojo.User;
-import finalproject.emag.repositories.ProductRepository;
-import finalproject.emag.repositories.UserRepository;
-import finalproject.emag.util.SuccessMessage;
+import finalproject.emag.repository.ProductRepository;
+import finalproject.emag.repository.UserRepository;
+import finalproject.emag.util.Message;
 import finalproject.emag.util.exception.BaseException;
 import finalproject.emag.util.exception.ImageMissingException;
 import finalproject.emag.util.exception.InvalidUserException;
 import finalproject.emag.util.exception.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,7 +20,6 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Component
@@ -49,7 +49,7 @@ public class ImageService {
         throw new ProductNotFoundException();
     }
 
-    public SuccessMessage userImageUpload(MultipartFile file, HttpSession session) throws IOException {
+    public ResponseEntity userImageUpload(MultipartFile file, HttpSession session) throws IOException {
         ShowUserDTO userSession = (ShowUserDTO) session.getAttribute("user");
         User user = userRepository.findById(userSession.getId()).get();
         String name = user.getId() + System.currentTimeMillis() + ".png";
@@ -57,7 +57,7 @@ public class ImageService {
         file.transferTo(newImage);
         user.setImageUrl(name);
         userRepository.save(user);
-        return new SuccessMessage("Image uploaded", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("Image uploaded"), HttpStatus.OK);
     }
 
     public byte[] getUserImage(long userId) throws BaseException, IOException {
@@ -70,7 +70,7 @@ public class ImageService {
         return fis.readAllBytes();
     }
 
-    public SuccessMessage productImageUpload(MultipartFile file, long productId)
+    public ResponseEntity productImageUpload(MultipartFile file, long productId)
             throws ProductNotFoundException, IOException {
         Product product = getProduct(productId);
         String name = product.getId() + System.currentTimeMillis() + ".png";
@@ -78,7 +78,7 @@ public class ImageService {
         file.transferTo(newImage);
         product.setImageUrl(name);
         productRepository.save(product);
-        return new SuccessMessage("Image uploaded", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("Image uploaded"), HttpStatus.OK);
     }
 
     public byte[] getProductImage(long productId) throws Exception {

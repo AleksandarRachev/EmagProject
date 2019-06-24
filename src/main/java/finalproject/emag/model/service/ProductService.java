@@ -2,18 +2,18 @@ package finalproject.emag.model.service;
 
 import finalproject.emag.model.dto.*;
 import finalproject.emag.model.pojo.*;
-import finalproject.emag.repositories.CategoryRepository;
-import finalproject.emag.repositories.OrderRepository;
-import finalproject.emag.repositories.ProductRepository;
-import finalproject.emag.repositories.UserRepository;
-import finalproject.emag.util.SuccessMessage;
+import finalproject.emag.repository.CategoryRepository;
+import finalproject.emag.repository.OrderRepository;
+import finalproject.emag.repository.ProductRepository;
+import finalproject.emag.repository.UserRepository;
+import finalproject.emag.util.Message;
 import finalproject.emag.util.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Component
@@ -38,7 +38,7 @@ public class ProductService {
     @Autowired
     private UserRepository userRepository;
 
-    public SuccessMessage addProduct(ProductAddDTO productAdd) throws BaseException {
+    public ResponseEntity addProduct(ProductAddDTO productAdd) throws BaseException {
         fieldsCheck(productAdd);
         Category category = getCategory(productAdd.getCategoryId());
         checkIfProductExists(productAdd.getName());
@@ -48,7 +48,7 @@ public class ProductService {
         product.setQuantity(productAdd.getQuantity());
         product.setCategory(category);
         productRepository.save(product);
-        return new SuccessMessage("Product added", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("Product added"), HttpStatus.OK);
     }
 
     private Category getCategory(long categoryId) throws InvalidCategoryException {
@@ -89,10 +89,10 @@ public class ProductService {
         return product.get();
     }
 
-    public SuccessMessage deleteProduct(long productId) throws ProductNotFoundException {
+    public ResponseEntity deleteProduct(long productId) throws ProductNotFoundException {
         Product product = getProduct(productId);
         productRepository.delete(product);
-        return new SuccessMessage("Product deleted", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("Product deleted"), HttpStatus.OK);
     }
 
     public List<Product> getProductsFiltered(FilterParamsDTO filter) {
@@ -127,7 +127,7 @@ public class ProductService {
         return productRepository.findByNameContaining(name);
     }
 
-    public SuccessMessage changeProductQuantity(long productId, int quantity) throws BaseException {
+    public ResponseEntity changeProductQuantity(long productId, int quantity) throws BaseException {
         if (quantity >= MIN_NUMBER_OF_PRODUCTS && quantity <= MAX_NUMBER_OF_PRODUCTS) {
             Product product = getProduct(productId);
             product.setQuantity(quantity);
@@ -135,7 +135,7 @@ public class ProductService {
         } else {
             throw new InvalidQuantityException();
         }
-        return new SuccessMessage("Quantity changed", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("Quantity changed"), HttpStatus.OK);
     }
 
     private void checkValidQuantity(HashMap<CartProductDTO, Integer> cart, CartProductDTO productShow)
@@ -147,7 +147,7 @@ public class ProductService {
         }
     }
 
-    public SuccessMessage addProductToCart(long productId, HttpSession session) throws BaseException {
+    public ResponseEntity addProductToCart(long productId, HttpSession session) throws BaseException {
         HashMap<CartProductDTO, Integer> cart;
         Product productOG = getProduct(productId);
         CartProductDTO product = new CartProductDTO(productOG.getId(), productOG.getCategory()
@@ -166,7 +166,7 @@ public class ProductService {
             cart = (HashMap<CartProductDTO, Integer>) session.getAttribute(CART);
             cart.put(product, 1);
         }
-        return new SuccessMessage("Product added to cart", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("Product added to cart"), HttpStatus.OK);
     }
 
     private HashMap<CartProductDTO, Integer> getCart(HttpSession session) throws EmptyCartException {
@@ -188,7 +188,7 @@ public class ProductService {
         return cart;
     }
 
-    public SuccessMessage makeOrder(HttpSession session) throws EmptyCartException, ProductNotFoundException {
+    public ResponseEntity makeOrder(HttpSession session) throws EmptyCartException, ProductNotFoundException {
         HashMap<CartProductDTO, Integer> cart = getCart(session);
         for (Map.Entry<CartProductDTO, Integer> product : cart.entrySet()) {
             Product productToUpdate = getProduct(product.getKey().getId());
@@ -198,7 +198,7 @@ public class ProductService {
             insertOrder(productToUpdate, user, product.getValue());
             productRepository.save(productToUpdate);
         }
-        return new SuccessMessage("Order made", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("Order made"), HttpStatus.OK);
     }
 
     private void insertOrder(Product product, User user, int quantity) {

@@ -5,18 +5,18 @@ import finalproject.emag.model.dto.PromotionProductDTO;
 import finalproject.emag.model.pojo.Product;
 import finalproject.emag.model.pojo.Promotion;
 import finalproject.emag.model.pojo.User;
-import finalproject.emag.repositories.PromotionRepository;
-import finalproject.emag.repositories.UserRepository;
+import finalproject.emag.repository.PromotionRepository;
+import finalproject.emag.repository.UserRepository;
 import finalproject.emag.util.MailUtil;
-import finalproject.emag.util.SuccessMessage;
+import finalproject.emag.util.Message;
 import finalproject.emag.util.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class PromotionService extends ProductService {
     }
 
     @Transactional
-    public SuccessMessage addPromotion(long productId, PromotionProductDTO promotionValues) throws BaseException {
+    public ResponseEntity addPromotion(long productId, PromotionProductDTO promotionValues) throws BaseException {
         Product product = getProduct(productId);
         promotionValidationFieldsCheck(product, promotionValues);
         Promotion promotion = new Promotion();
@@ -58,7 +58,7 @@ public class PromotionService extends ProductService {
         notifyForPromotion("Emag: We have new price on: " + product.getName(),
                 promotion.getProduct().getName() + " is on promotion for " +
                         promotion.getNewPrice() + "lv. from " + promotion.getOldPrice() + "lv.");
-        return new SuccessMessage("Promotion added", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("Promotion added"), HttpStatus.OK);
     }
 
     private void notifyForPromotion(String title, String message) {
@@ -87,13 +87,13 @@ public class PromotionService extends ProductService {
     }
 
     @Transactional
-    public SuccessMessage deletePromotion(long productId) throws BaseException {
+    public ResponseEntity deletePromotion(long productId) throws BaseException {
         Promotion promotion = getPromotion(productId);
         Product product = getProduct(productId);
         product.setPrice(promotion.getOldPrice());
         productRepository.save(product);
         promotionRepository.delete(promotion);
-        return new SuccessMessage("Promotion deleted", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("Promotion deleted"), HttpStatus.OK);
     }
 
 }

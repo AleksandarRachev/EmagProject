@@ -2,17 +2,17 @@ package finalproject.emag.model.service;
 
 import finalproject.emag.model.dto.*;
 import finalproject.emag.model.pojo.User;
-import finalproject.emag.repositories.UserRepository;
+import finalproject.emag.repository.UserRepository;
+import finalproject.emag.util.Message;
 import finalproject.emag.util.PasswordEncoder;
-import finalproject.emag.util.SuccessMessage;
 import finalproject.emag.util.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -23,7 +23,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public SuccessMessage register(RegisterUserDTO registerUser, HttpSession session) throws BaseException {
+    public ResponseEntity register(RegisterUserDTO registerUser, HttpSession session) throws BaseException {
         User user = new User();
         registerValidation(registerUser.getEmail(), registerUser.getPassword(), registerUser.getPassword2(),
                 registerUser.getFullName(), registerUser.getUsername());
@@ -39,7 +39,7 @@ public class UserService {
                 user.getPhoneNumber(), user.getBirthDate(), user.isSubscribed(), user.isAdmin(), user.getImageUrl());
         session.setAttribute(USER, userSession);
         session.setMaxInactiveInterval((60 * 60));
-        return new SuccessMessage("Register successful", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity<>(new Message("Register successful"),HttpStatus.OK);
     }
 
     private void registerValidation(String email, String password, String password2, String fullName, String username)
@@ -85,7 +85,7 @@ public class UserService {
         return user;
     }
 
-    public SuccessMessage subscribe(HttpSession session) throws AlreadySubscribedException {
+    public ResponseEntity subscribe(HttpSession session) throws AlreadySubscribedException {
         ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findByEmail(userSession.getEmail());
         if (user.isSubscribed()) {
@@ -94,10 +94,10 @@ public class UserService {
         userSession.setSubscribed(true);
         user.setSubscribed(true);
         userRepository.save(user);
-        return new SuccessMessage("You subscribed", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("You subscribed"), HttpStatus.OK);
     }
 
-    public SuccessMessage unsubscribe(HttpSession session) throws NotSubscribedException {
+    public ResponseEntity unsubscribe(HttpSession session) throws NotSubscribedException {
         ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findByEmail(userSession.getEmail());
         if (!user.isSubscribed()) {
@@ -106,7 +106,7 @@ public class UserService {
         userSession.setSubscribed(false);
         user.setSubscribed(false);
         userRepository.save(user);
-        return new SuccessMessage("You unsubscribed", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("You unsubscribed"), HttpStatus.OK);
     }
 
     private void passEditFieldsCheck(EditPassDTO user) throws MissingValuableFieldsException {
@@ -115,7 +115,7 @@ public class UserService {
         }
     }
 
-    public SuccessMessage editPassword(EditPassDTO userEdit, HttpSession session) throws BaseException {
+    public ResponseEntity editPassword(EditPassDTO userEdit, HttpSession session) throws BaseException {
         ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
         passEditFieldsCheck(userEdit);
@@ -127,7 +127,7 @@ public class UserService {
         }
         user.setPassword(PasswordEncoder.hashPassword(userEdit.getPassword()));
         userRepository.save(user);
-        return new SuccessMessage("Password edited", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("Password edited"), HttpStatus.OK);
     }
 
     private void emailEditFieldsCheck(EditEmailDTO user) throws MissingValuableFieldsException {
@@ -136,7 +136,7 @@ public class UserService {
         }
     }
 
-    public SuccessMessage editEmail(EditEmailDTO userEdit, HttpSession session) throws BaseException {
+    public ResponseEntity editEmail(EditEmailDTO userEdit, HttpSession session) throws BaseException {
         ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
         emailEditFieldsCheck(userEdit);
@@ -146,10 +146,10 @@ public class UserService {
         checkIfEmailFree(userEdit.getEmail());
         user.setEmail(userEdit.getEmail());
         userRepository.save(user);
-        return new SuccessMessage("Email edited", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("Email edited"), HttpStatus.OK);
     }
 
-    public SuccessMessage editPersonalInfo(EditPersonalInfoDTO userEdit, HttpSession session) throws BaseException {
+    public ResponseEntity editPersonalInfo(EditPersonalInfoDTO userEdit, HttpSession session) throws BaseException {
         ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
         checkIfUsernameFree(userEdit.getUsername());
@@ -161,6 +161,6 @@ public class UserService {
             throw new MissingValuableFieldsException();
         }
         userRepository.save(user);
-        return new SuccessMessage("Personal info edited", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("Personal info edited"), HttpStatus.OK);
     }
 }

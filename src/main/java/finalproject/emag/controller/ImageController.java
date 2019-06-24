@@ -1,9 +1,9 @@
 package finalproject.emag.controller;
 
 import finalproject.emag.model.service.ImageService;
-import finalproject.emag.util.SuccessMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,7 +17,7 @@ public class ImageController extends BaseController {
     private ImageService imageService;
 
     @PostMapping(value = "/users")
-    public SuccessMessage uploadUserImage(@RequestPart(value = "image") MultipartFile image,
+    public ResponseEntity uploadUserImage(@RequestPart(value = "image") MultipartFile image,
                                           HttpSession session) throws Exception {
         validateLogin(session);
         return imageService.userImageUpload(image, session);
@@ -29,7 +29,7 @@ public class ImageController extends BaseController {
     }
 
     @PostMapping(value = "/products/{id}")
-    public SuccessMessage uploadProductImage(@RequestPart(value = "image") MultipartFile image,
+    public ResponseEntity uploadProductImage(@RequestPart(value = "image") MultipartFile image,
                                              @PathVariable("id") long productId, HttpSession session) throws Exception {
         validateLoginAdmin(session);
         return imageService.productImageUpload(image, productId);

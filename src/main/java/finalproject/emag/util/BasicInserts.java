@@ -3,9 +3,9 @@ package finalproject.emag.util;
 import finalproject.emag.model.pojo.Category;
 import finalproject.emag.model.pojo.Product;
 import finalproject.emag.model.pojo.User;
-import finalproject.emag.repositories.CategoryRepository;
-import finalproject.emag.repositories.ProductRepository;
-import finalproject.emag.repositories.UserRepository;
+import finalproject.emag.repository.CategoryRepository;
+import finalproject.emag.repository.ProductRepository;
+import finalproject.emag.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

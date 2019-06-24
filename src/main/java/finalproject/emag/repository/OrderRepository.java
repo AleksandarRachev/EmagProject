@@ -1,4 +1,4 @@
-package finalproject.emag.repositories;
+package finalproject.emag.repository;
 
 import finalproject.emag.model.pojo.Order;
 import finalproject.emag.model.pojo.OrderedId;

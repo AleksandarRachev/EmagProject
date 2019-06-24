@@ -5,10 +5,10 @@ import finalproject.emag.model.dto.FilterParamsDTO;
 import finalproject.emag.model.dto.ProductAddDTO;
 import finalproject.emag.model.pojo.Product;
 import finalproject.emag.model.service.ProductService;
-import finalproject.emag.util.SuccessMessage;
 import finalproject.emag.util.exception.BaseException;
 import finalproject.emag.util.exception.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -22,7 +22,7 @@ public class ProductController extends BaseController {
     protected ProductService productService;
 
     @PostMapping
-    public SuccessMessage addProduct(@RequestBody ProductAddDTO product, HttpSession session) throws BaseException {
+    public ResponseEntity addProduct(@RequestBody ProductAddDTO product, HttpSession session) throws BaseException {
         validateLoginAdmin(session);
         return productService.addProduct(product);
     }
@@ -43,7 +43,7 @@ public class ProductController extends BaseController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public SuccessMessage deleteProduct(@PathVariable("id") long productId, HttpSession session) throws BaseException {
+    public ResponseEntity deleteProduct(@PathVariable("id") long productId, HttpSession session) throws BaseException {
         validateLoginAdmin(session);
         return productService.deleteProduct(productId);
     }
@@ -65,7 +65,7 @@ public class ProductController extends BaseController {
     }
 
     @PutMapping(value = ("/{id}/quantity/{quantity}"))
-    public SuccessMessage changeProductQuantity(
+    public ResponseEntity changeProductQuantity(
             @PathVariable("id") long productId, @PathVariable("quantity") int quantity,
             HttpSession session) throws BaseException {
         validateLoginAdmin(session);
@@ -73,7 +73,7 @@ public class ProductController extends BaseController {
     }
 
     @PostMapping(value = ("/{id}/add"))
-    public SuccessMessage addToCart(@PathVariable("id") long productId, HttpSession session) throws Exception {
+    public ResponseEntity addToCart(@PathVariable("id") long productId, HttpSession session) throws Exception {
         validateLogin(session);
         return productService.addProductToCart(productId, session);
     }
@@ -85,7 +85,7 @@ public class ProductController extends BaseController {
     }
 
     @PostMapping(value = ("/order"))
-    public SuccessMessage makeOrder(HttpSession session) throws BaseException {
+    public ResponseEntity makeOrder(HttpSession session) throws BaseException {
         validateLogin(session);
         return productService.makeOrder(session);
     }

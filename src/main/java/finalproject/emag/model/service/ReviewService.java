@@ -6,16 +6,16 @@ import finalproject.emag.model.pojo.Product;
 import finalproject.emag.model.pojo.Review;
 import finalproject.emag.model.pojo.ReviewId;
 import finalproject.emag.model.pojo.User;
-import finalproject.emag.repositories.ReviewRepository;
-import finalproject.emag.repositories.UserRepository;
-import finalproject.emag.util.SuccessMessage;
+import finalproject.emag.repository.ReviewRepository;
+import finalproject.emag.repository.UserRepository;
+import finalproject.emag.util.Message;
 import finalproject.emag.util.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Component
@@ -45,10 +45,10 @@ public class ReviewService extends ProductService {
         }
     }
 
-    public SuccessMessage addReview(ReviewDTO reviewView, long productId, HttpSession session) throws BaseException {
+    public ResponseEntity addReview(ReviewDTO reviewView, long productId, HttpSession session) throws BaseException {
         addReviewFieldsCheck(reviewView);
         Product product = getProduct(productId);
-        ShowUserDTO userSession = (ShowUserDTO) session.getAttribute("user");
+        ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
         Review review = new Review();
         ReviewId id = new ReviewId();
@@ -60,7 +60,7 @@ public class ReviewService extends ProductService {
         review.setComment(reviewView.getComment());
         review.setGrade(reviewView.getGrade());
         reviewRepository.save(review);
-        return new SuccessMessage("Review added", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("Review added"), HttpStatus.OK);
     }
 
     private Review getReview(ReviewId id) throws ReviewMissingException {
@@ -71,7 +71,7 @@ public class ReviewService extends ProductService {
         throw new ReviewMissingException();
     }
 
-    public SuccessMessage deleteReview(long productId, HttpSession session) throws BaseException {
+    public ResponseEntity deleteReview(long productId, HttpSession session) throws BaseException {
         ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
         Product product = getProduct(productId);
@@ -80,7 +80,7 @@ public class ReviewService extends ProductService {
         id.setProduct(product);
         Review review = getReview(id);
         reviewRepository.delete(review);
-        return new SuccessMessage("Review deleted", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("Review deleted"), HttpStatus.OK);
     }
 
     private void fieldsCheck(Review review) throws MissingValuableFieldsException {
@@ -89,7 +89,7 @@ public class ReviewService extends ProductService {
         }
     }
 
-    public SuccessMessage editReview(ReviewDTO reviewEdit, long productId, HttpSession session) throws BaseException {
+    public ResponseEntity editReview(ReviewDTO reviewEdit, long productId, HttpSession session) throws BaseException {
         ShowUserDTO userSession = (ShowUserDTO) session.getAttribute(USER);
         User user = userRepository.findById(userSession.getId()).get();
         Product product = getProduct(productId);
@@ -102,7 +102,7 @@ public class ReviewService extends ProductService {
         review.setGrade(reviewEdit.getGrade() == null ? review.getGrade() : reviewEdit.getGrade());
         fieldsCheck(review);
         reviewRepository.save(review);
-        return new SuccessMessage("Review edited", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("Review edited"), HttpStatus.OK);
     }
 
 }

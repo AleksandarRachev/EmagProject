@@ -1,11 +1,12 @@
 package finalproject.emag.controller;
 
 import finalproject.emag.model.dto.ShowUserDTO;
-import finalproject.emag.util.ErrorMsg;
+import finalproject.emag.util.Message;
 import finalproject.emag.util.exception.BaseException;
 import finalproject.emag.util.exception.NotAdminException;
 import finalproject.emag.util.exception.NotLoggedException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,29 +22,29 @@ public abstract class BaseController {
 
     @ExceptionHandler({NotLoggedException.class, NotAdminException.class})
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
-    public ErrorMsg handleNotLogged(Exception e) {
+    public ResponseEntity handleNotLogged(Exception e) {
 //        log.error("exception: "+e);
-        return new ErrorMsg(e.getMessage(), HttpStatus.UNAUTHORIZED.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message(e.getMessage()), HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler({BaseException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ErrorMsg handleMyErrors(Exception e) {
+    public ResponseEntity handleMyErrors(Exception e) {
 //        log.error("exception: "+e);
-        return new ErrorMsg(e.getMessage(), HttpStatus.BAD_REQUEST.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({Exception.class})
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorMsg handleOtherErrors(Exception e) {
+    public ResponseEntity handleOtherErrors(Exception e) {
 //        log.error("exception: "+e);
-        return new ErrorMsg(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler({ParseException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ErrorMsg dateParser(Exception e) {
-        return new ErrorMsg(e.getMessage(), HttpStatus.BAD_REQUEST.value(), LocalDateTime.now());
+    public ResponseEntity dateParser(Exception e) {
+        return new ResponseEntity(new Message(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     void validateLogin(HttpSession session) throws NotLoggedException {

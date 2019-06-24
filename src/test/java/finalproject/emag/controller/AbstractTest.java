@@ -4,8 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import finalproject.emag.model.dto.ShowUserDTO;
 import finalproject.emag.model.pojo.User;
-import finalproject.emag.repositories.ProductRepository;
-import finalproject.emag.repositories.UserRepository;
+import finalproject.emag.repository.ProductRepository;
+import finalproject.emag.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 

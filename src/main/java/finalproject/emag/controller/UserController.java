@@ -2,15 +2,15 @@ package finalproject.emag.controller;
 
 import finalproject.emag.model.dto.*;
 import finalproject.emag.model.service.UserService;
-import finalproject.emag.util.SuccessMessage;
+import finalproject.emag.util.Message;
 import finalproject.emag.util.exception.BaseException;
 import finalproject.emag.util.exception.NotLoggedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping(value = "/users", produces = "application/json")
@@ -20,7 +20,7 @@ public class UserController extends BaseController {
     private UserService userService;
 
     @PostMapping(value = "/register")
-    public SuccessMessage register(@RequestBody RegisterUserDTO user, HttpSession session) throws BaseException {
+    public ResponseEntity register(@RequestBody RegisterUserDTO user, HttpSession session) throws BaseException {
         return userService.register(user, session);
     }
 
@@ -30,38 +30,38 @@ public class UserController extends BaseController {
     }
 
     @PostMapping(value = "/logout")
-    public SuccessMessage logout(HttpSession session) throws NotLoggedException {
+    public ResponseEntity logout(HttpSession session) throws NotLoggedException {
         validateLogin(session);
         session.invalidate();
-        return new SuccessMessage("You logged out", HttpStatus.OK.value(), LocalDateTime.now());
+        return new ResponseEntity(new Message("You logged out"), HttpStatus.OK);
     }
 
     @PutMapping(value = "/subscribe")
-    public SuccessMessage subscribe(HttpSession session) throws BaseException {
+    public ResponseEntity subscribe(HttpSession session) throws BaseException {
         validateLogin(session);
         return userService.subscribe(session);
     }
 
     @PutMapping(value = "/unsubscribe")
-    public SuccessMessage unsubscribe(HttpSession session) throws BaseException {
+    public ResponseEntity unsubscribe(HttpSession session) throws BaseException {
         validateLogin(session);
         return userService.unsubscribe(session);
     }
 
     @PutMapping(value = "/edit-pass")
-    public SuccessMessage editPassword(@RequestBody EditPassDTO user, HttpSession session) throws BaseException {
+    public ResponseEntity editPassword(@RequestBody EditPassDTO user, HttpSession session) throws BaseException {
         validateLogin(session);
         return userService.editPassword(user, session);
     }
 
     @PutMapping(value = "/edit-email")
-    public SuccessMessage editEmail(@RequestBody EditEmailDTO user, HttpSession session) throws BaseException {
+    public ResponseEntity editEmail(@RequestBody EditEmailDTO user, HttpSession session) throws BaseException {
         validateLogin(session);
         return userService.editEmail(user, session);
     }
 
     @PutMapping(value = "/edit-personal-info")
-    public SuccessMessage editPersonalInfo(@RequestBody EditPersonalInfoDTO user, HttpSession session)
+    public ResponseEntity editPersonalInfo(@RequestBody EditPersonalInfoDTO user, HttpSession session)
             throws BaseException {
         validateLogin(session);
         return userService.editPersonalInfo(user, session);
