@@ -103,23 +103,23 @@ public class ReviewControllerTest extends AbstractTest {
 
     @Test
     public void deleteReviewSuccess() throws Exception {
-        mvc.perform(delete("/products/reviews/{id}",3)
-                .sessionAttr("user",getUserForSessionById(1)))
+        mvc.perform(delete("/products/reviews/{id}", 3)
+                .sessionAttr("user", getUserForSessionById(1)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.msg").value("Review deleted"));
     }
 
     @Test
     public void deleteReviewMissing() throws Exception {
-        mvc.perform(delete("/products/reviews/{id}",2)
-                .sessionAttr("user",getUserForSessionById(1)))
+        mvc.perform(delete("/products/reviews/{id}", 2)
+                .sessionAttr("user", getUserForSessionById(1)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.msg").value("Review missing"));
     }
 
     @Test
     public void deleteReviewNotLogged() throws Exception {
-        mvc.perform(delete("/products/reviews/{id}",3))
+        mvc.perform(delete("/products/reviews/{id}", 3))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.msg").value("You are not logged."));
     }

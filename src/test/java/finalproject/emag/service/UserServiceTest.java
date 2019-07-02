@@ -44,7 +44,7 @@ public class UserServiceTest {
     private List<User> users;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         userShow = new User();
         userShow.setId(1);
         userShow.setEmail("test@abv.bg");
@@ -79,7 +79,7 @@ public class UserServiceTest {
 
         ResponseEntity response = new ResponseEntity(new Message("Register successful"), HttpStatus.OK);
 
-        assertEquals(userService.register(registerUser,session).getStatusCode(),response.getStatusCode());
+        assertEquals(userService.register(registerUser, session).getStatusCode(), response.getStatusCode());
     }
 
     @Test(expected = EmailTakenException.class)
@@ -89,7 +89,7 @@ public class UserServiceTest {
 
         when(userRepository.findAllByEmail(registerUser.getEmail())).thenReturn(users);
 
-        userService.register(registerUser,session);
+        userService.register(registerUser, session);
     }
 
     @Test(expected = UsernameTakenException.class)
@@ -99,7 +99,7 @@ public class UserServiceTest {
 
         when(userRepository.findAllByUsername(registerUser.getUsername())).thenReturn(users);
 
-        userService.register(registerUser,session);
+        userService.register(registerUser, session);
     }
 
     @Test
@@ -109,10 +109,10 @@ public class UserServiceTest {
         LoginUserDTO loginUser = new LoginUserDTO();
         loginUser.setEmail("test@abv.bg");
         loginUser.setPassword("123");
-        ShowUserDTO userDTO = userService.login(loginUser,session);
+        ShowUserDTO userDTO = userService.login(loginUser, session);
 
         assertNotNull(userDTO);
-        assertEquals(userDTO.getEmail(),userShow.getEmail());
+        assertEquals(userDTO.getEmail(), userShow.getEmail());
     }
 
     @Test(expected = WrongCredentialsException.class)
@@ -122,14 +122,14 @@ public class UserServiceTest {
         LoginUserDTO loginUser = new LoginUserDTO();
         loginUser.setEmail("test@abv.bg");
         loginUser.setPassword("1234");
-        userService.login(loginUser,session);
+        userService.login(loginUser, session);
     }
 
     @Test(expected = MissingValuableFieldsException.class)
     public void loginMissingFields() throws BaseException {
         LoginUserDTO loginUser = new LoginUserDTO();
         loginUser.setEmail("test@abv.bg");
-        userService.login(loginUser,session);
+        userService.login(loginUser, session);
     }
 
     @Test
@@ -172,8 +172,8 @@ public class UserServiceTest {
         editPass.setPassword("1234");
         when(session.getAttribute("user")).thenReturn(userSession);
         when(userRepository.findById(userSession.getId())).thenReturn(java.util.Optional.ofNullable(userShow));
-        userService.editPassword(editPass,session);
-        assertTrue(BCrypt.checkpw(editPass.getPassword(),userShow.getPassword()));
+        userService.editPassword(editPass, session);
+        assertTrue(BCrypt.checkpw(editPass.getPassword(), userShow.getPassword()));
     }
 
     @Test(expected = WrongCredentialsException.class)
@@ -183,7 +183,7 @@ public class UserServiceTest {
         editPass.setPassword("123");
         when(session.getAttribute("user")).thenReturn(userSession);
         when(userRepository.findById(userSession.getId())).thenReturn(java.util.Optional.ofNullable(userShow));
-        userService.editPassword(editPass,session);
+        userService.editPassword(editPass, session);
     }
 
     @Test
@@ -193,8 +193,8 @@ public class UserServiceTest {
         editEmail.setPassword("123");
         when(session.getAttribute("user")).thenReturn(userSession);
         when(userRepository.findById(userSession.getId())).thenReturn(java.util.Optional.ofNullable(userShow));
-        userService.editEmail(editEmail,session);
-        assertEquals(userShow.getEmail(),editEmail.getEmail());
+        userService.editEmail(editEmail, session);
+        assertEquals(userShow.getEmail(), editEmail.getEmail());
     }
 
     @Test(expected = WrongCredentialsException.class)
@@ -204,7 +204,7 @@ public class UserServiceTest {
         editEmail.setPassword("1234");
         when(session.getAttribute("user")).thenReturn(userSession);
         when(userRepository.findById(userSession.getId())).thenReturn(java.util.Optional.ofNullable(userShow));
-        userService.editEmail(editEmail,session);
+        userService.editEmail(editEmail, session);
     }
 
     @Test(expected = EmailTakenException.class)
@@ -215,7 +215,7 @@ public class UserServiceTest {
         when(session.getAttribute("user")).thenReturn(userSession);
         when(userRepository.findById(userSession.getId())).thenReturn(java.util.Optional.ofNullable(userShow));
         when(userRepository.findAllByEmail(editEmail.getEmail())).thenReturn(users);
-        userService.editEmail(editEmail,session);
+        userService.editEmail(editEmail, session);
     }
 
     @Test
@@ -224,8 +224,8 @@ public class UserServiceTest {
         editInfo.setUsername("test");
         when(session.getAttribute("user")).thenReturn(userSession);
         when(userRepository.findById(userSession.getId())).thenReturn(java.util.Optional.ofNullable(userShow));
-        userService.editPersonalInfo(editInfo,session);
-        assertEquals(editInfo.getUsername(),userShow.getUsername());
+        userService.editPersonalInfo(editInfo, session);
+        assertEquals(editInfo.getUsername(), userShow.getUsername());
     }
 
     @Test(expected = UsernameTakenException.class)
@@ -235,7 +235,7 @@ public class UserServiceTest {
         when(userRepository.findAllByUsername(editInfo.getUsername())).thenReturn(users);
         when(session.getAttribute("user")).thenReturn(userSession);
         when(userRepository.findById(userSession.getId())).thenReturn(java.util.Optional.ofNullable(userShow));
-        userService.editPersonalInfo(editInfo,session);
+        userService.editPersonalInfo(editInfo, session);
     }
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="finalproject.emag.EmagApplicationTests" time="1.552" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="finalproject.emag.controller.ReviewControllerTest" time="1.6" tests="10" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -58,5 +58,14 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="56.0"/>
   </properties>
-  <testcase name="contextLoads" classname="finalproject.emag.EmagApplicationTests" time="0"/>
+  <testcase name="addReviewMissingFields" classname="finalproject.emag.controller.ReviewControllerTest" time="0.178"/>
+  <testcase name="deleteReviewSuccess" classname="finalproject.emag.controller.ReviewControllerTest" time="0.114"/>
+  <testcase name="addReviewSuccess" classname="finalproject.emag.controller.ReviewControllerTest" time="0.223"/>
+  <testcase name="editReviewMissing" classname="finalproject.emag.controller.ReviewControllerTest" time="0.178"/>
+  <testcase name="addReviewNotLogged" classname="finalproject.emag.controller.ReviewControllerTest" time="0.102"/>
+  <testcase name="addReviewExists" classname="finalproject.emag.controller.ReviewControllerTest" time="0.182"/>
+  <testcase name="editReviewSuccess" classname="finalproject.emag.controller.ReviewControllerTest" time="0.188"/>
+  <testcase name="deleteReviewNotLogged" classname="finalproject.emag.controller.ReviewControllerTest" time="0.053"/>
+  <testcase name="editReviewNotLogged" classname="finalproject.emag.controller.ReviewControllerTest" time="0.099"/>
+  <testcase name="deleteReviewMissing" classname="finalproject.emag.controller.ReviewControllerTest" time="0.136"/>
 </testsuite>
