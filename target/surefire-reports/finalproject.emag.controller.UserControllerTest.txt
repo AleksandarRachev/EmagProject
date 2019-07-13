@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: finalproject.emag.controller.UserControllerTest
+-------------------------------------------------------------------------------
+Tests run: 25, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.235 s - in finalproject.emag.controller.UserControllerTest

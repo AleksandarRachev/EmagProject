@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: finalproject.emag.controller.ProductControllerTest
+-------------------------------------------------------------------------------
+Tests run: 27, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.888 s - in finalproject.emag.controller.ProductControllerTest

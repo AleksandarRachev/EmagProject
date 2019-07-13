@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: finalproject.emag.service.UserServiceTest
+-------------------------------------------------------------------------------
+Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.999 s - in finalproject.emag.service.UserServiceTest

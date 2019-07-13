@@ -1,0 +1,1151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="finalproject.emag.controller.PromotionControllerTest" time="2.132" tests="1" errors="0" skipped="0" failures="1">
+  <properties>
+    <property name="sun.desktop" value="windows"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.specification.version" value="12"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1251"/>
+    <property name="java.class.path" value="C:\Projects\Emag\EmagProject\target\test-classes;C:\Projects\Emag\EmagProject\target\classes;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\security\spring-security-core\3.2.3.RELEASE\spring-security-core-3.2.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-aop\5.1.5.RELEASE\spring-aop-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-beans\5.1.5.RELEASE\spring-beans-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-context\5.1.5.RELEASE\spring-context-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-core\5.1.5.RELEASE\spring-core-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-jcl\5.1.5.RELEASE\spring-jcl-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-expression\5.1.5.RELEASE\spring-expression-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-mail\2.1.3.RELEASE\spring-boot-starter-mail-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter\2.1.3.RELEASE\spring-boot-starter-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot\2.1.3.RELEASE\spring-boot-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\2.1.3.RELEASE\spring-boot-autoconfigure-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-logging\2.1.3.RELEASE\spring-boot-starter-logging-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\ch\qos\logback\logback-classic\1.2.3\logback-classic-1.2.3.jar;C:\Users\Aleksandar_Rachev\.m2\repository\ch\qos\logback\logback-core\1.2.3\logback-core-1.2.3.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.11.2\log4j-to-slf4j-2.11.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\apache\logging\log4j\log4j-api\2.11.2\log4j-api-2.11.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\slf4j\jul-to-slf4j\1.7.25\jul-to-slf4j-1.7.25.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\annotation\javax.annotation-api\1.3.2\javax.annotation-api-1.3.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\yaml\snakeyaml\1.23\snakeyaml-1.23.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-context-support\5.1.5.RELEASE\spring-context-support-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\sun\mail\javax.mail\1.6.2\javax.mail-1.6.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-web\2.1.3.RELEASE\spring-boot-starter-web-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-json\2.1.3.RELEASE\spring-boot-starter-json-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.9.8\jackson-databind-2.9.8.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.9.0\jackson-annotations-2.9.0.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.9.8\jackson-core-2.9.8.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.9.8\jackson-datatype-jdk8-2.9.8.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.9.8\jackson-datatype-jsr310-2.9.8.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.9.8\jackson-module-parameter-names-2.9.8.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\2.1.3.RELEASE\spring-boot-starter-tomcat-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\9.0.16\tomcat-embed-core-9.0.16.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\9.0.16\tomcat-embed-el-9.0.16.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\9.0.16\tomcat-embed-websocket-9.0.16.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\hibernate\validator\hibernate-validator\6.0.14.Final\hibernate-validator-6.0.14.Final.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\validation\validation-api\2.0.1.Final\validation-api-2.0.1.Final.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\jboss\logging\jboss-logging\3.3.2.Final\jboss-logging-3.3.2.Final.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\fasterxml\classmate\1.4.0\classmate-1.4.0.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-web\5.1.5.RELEASE\spring-web-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-webmvc\5.1.5.RELEASE\spring-webmvc-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\2.1.5.RELEASE\spring-boot-starter-data-jpa-2.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-aop\2.1.3.RELEASE\spring-boot-starter-aop-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\aspectj\aspectjweaver\1.9.2\aspectjweaver-1.9.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\transaction\javax.transaction-api\1.3\javax.transaction-api-1.3.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\xml\bind\jaxb-api\2.3.1\jaxb-api-2.3.1.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\activation\javax.activation-api\1.2.0\javax.activation-api-1.2.0.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\hibernate\hibernate-core\5.3.7.Final\hibernate-core-5.3.7.Final.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\javassist\javassist\3.23.1-GA\javassist-3.23.1-GA.jar;C:\Users\Aleksandar_Rachev\.m2\repository\net\bytebuddy\byte-buddy\1.9.10\byte-buddy-1.9.10.jar;C:\Users\Aleksandar_Rachev\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\jboss\jandex\2.0.5.Final\jandex-2.0.5.Final.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\dom4j\dom4j\2.1.1\dom4j-2.1.1.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\hibernate\common\hibernate-commons-annotations\5.0.4.Final\hibernate-commons-annotations-5.0.4.Final.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-aspects\5.1.5.RELEASE\spring-aspects-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\mail\mail\1.4.6\mail-1.4.6.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\activation\activation\1.1\activation-1.1.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\mail\javax.mail-api\1.5.5\javax.mail-api-1.5.5.jar;C:\Users\Aleksandar_Rachev\.m2\repository\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.15.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\projectlombok\lombok\1.18.6\lombok-1.18.6.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-test\2.1.3.RELEASE\spring-boot-starter-test-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-test\2.1.3.RELEASE\spring-boot-test-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\2.1.3.RELEASE\spring-boot-test-autoconfigure-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\jayway\jsonpath\json-path\2.4.0\json-path-2.4.0.jar;C:\Users\Aleksandar_Rachev\.m2\repository\net\minidev\json-smart\2.3\json-smart-2.3.jar;C:\Users\Aleksandar_Rachev\.m2\repository\net\minidev\accessors-smart\1.2\accessors-smart-1.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\ow2\asm\asm\5.0.4\asm-5.0.4.jar;C:\Users\Aleksandar_Rachev\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\assertj\assertj-core\3.11.1\assertj-core-3.11.1.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\mockito\mockito-core\2.23.4\mockito-core-2.23.4.jar;C:\Users\Aleksandar_Rachev\.m2\repository\net\bytebuddy\byte-buddy-agent\1.9.10\byte-buddy-agent-1.9.10.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\objenesis\objenesis\2.6\objenesis-2.6.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\hamcrest\hamcrest-library\1.3\hamcrest-library-1.3.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\skyscreamer\jsonassert\1.5.0\jsonassert-1.5.0.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-test\5.1.5.RELEASE\spring-test-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\xmlunit\xmlunit-core\2.6.2\xmlunit-core-2.6.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\2.1.3.RELEASE\spring-boot-starter-jdbc-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\zaxxer\HikariCP\3.2.0\HikariCP-3.2.0.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-jdbc\5.1.5.RELEASE\spring-jdbc-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\persistence\javax.persistence-api\2.2\javax.persistence-api-2.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\data\spring-data-jpa\2.1.5.RELEASE\spring-data-jpa-2.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\data\spring-data-commons\2.1.5.RELEASE\spring-data-commons-2.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-orm\5.1.5.RELEASE\spring-orm-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-tx\5.1.5.RELEASE\spring-tx-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\aspectj\aspectjrt\1.9.2\aspectjrt-1.9.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Europe/Sofia"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="12"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\JDK\openjdk-12_windows-x64_bin\jdk-12\bin"/>
+    <property name="sun.java.command" value="C:\Users\ALEKSA~1\AppData\Local\Temp\surefire6896915549531689868\surefirebooter10275821721353757644.jar C:\Users\Aleksandar_Rachev\AppData\Local\Temp\surefire6896915549531689868 2019-07-02T16-32-08_611-jvmRun1 surefire2537607301538535596tmp surefire_03471505246786624465tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Projects\Emag\EmagProject\target\test-classes;C:\Projects\Emag\EmagProject\target\classes;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\security\spring-security-core\3.2.3.RELEASE\spring-security-core-3.2.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-aop\5.1.5.RELEASE\spring-aop-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-beans\5.1.5.RELEASE\spring-beans-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-context\5.1.5.RELEASE\spring-context-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-core\5.1.5.RELEASE\spring-core-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-jcl\5.1.5.RELEASE\spring-jcl-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-expression\5.1.5.RELEASE\spring-expression-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-mail\2.1.3.RELEASE\spring-boot-starter-mail-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter\2.1.3.RELEASE\spring-boot-starter-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot\2.1.3.RELEASE\spring-boot-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\2.1.3.RELEASE\spring-boot-autoconfigure-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-logging\2.1.3.RELEASE\spring-boot-starter-logging-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\ch\qos\logback\logback-classic\1.2.3\logback-classic-1.2.3.jar;C:\Users\Aleksandar_Rachev\.m2\repository\ch\qos\logback\logback-core\1.2.3\logback-core-1.2.3.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.11.2\log4j-to-slf4j-2.11.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\apache\logging\log4j\log4j-api\2.11.2\log4j-api-2.11.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\slf4j\jul-to-slf4j\1.7.25\jul-to-slf4j-1.7.25.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\annotation\javax.annotation-api\1.3.2\javax.annotation-api-1.3.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\yaml\snakeyaml\1.23\snakeyaml-1.23.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-context-support\5.1.5.RELEASE\spring-context-support-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\sun\mail\javax.mail\1.6.2\javax.mail-1.6.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-web\2.1.3.RELEASE\spring-boot-starter-web-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-json\2.1.3.RELEASE\spring-boot-starter-json-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.9.8\jackson-databind-2.9.8.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.9.0\jackson-annotations-2.9.0.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.9.8\jackson-core-2.9.8.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.9.8\jackson-datatype-jdk8-2.9.8.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.9.8\jackson-datatype-jsr310-2.9.8.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.9.8\jackson-module-parameter-names-2.9.8.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\2.1.3.RELEASE\spring-boot-starter-tomcat-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\9.0.16\tomcat-embed-core-9.0.16.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\9.0.16\tomcat-embed-el-9.0.16.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\9.0.16\tomcat-embed-websocket-9.0.16.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\hibernate\validator\hibernate-validator\6.0.14.Final\hibernate-validator-6.0.14.Final.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\validation\validation-api\2.0.1.Final\validation-api-2.0.1.Final.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\jboss\logging\jboss-logging\3.3.2.Final\jboss-logging-3.3.2.Final.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\fasterxml\classmate\1.4.0\classmate-1.4.0.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-web\5.1.5.RELEASE\spring-web-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-webmvc\5.1.5.RELEASE\spring-webmvc-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\2.1.5.RELEASE\spring-boot-starter-data-jpa-2.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-aop\2.1.3.RELEASE\spring-boot-starter-aop-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\aspectj\aspectjweaver\1.9.2\aspectjweaver-1.9.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\transaction\javax.transaction-api\1.3\javax.transaction-api-1.3.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\xml\bind\jaxb-api\2.3.1\jaxb-api-2.3.1.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\activation\javax.activation-api\1.2.0\javax.activation-api-1.2.0.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\hibernate\hibernate-core\5.3.7.Final\hibernate-core-5.3.7.Final.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\javassist\javassist\3.23.1-GA\javassist-3.23.1-GA.jar;C:\Users\Aleksandar_Rachev\.m2\repository\net\bytebuddy\byte-buddy\1.9.10\byte-buddy-1.9.10.jar;C:\Users\Aleksandar_Rachev\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\jboss\jandex\2.0.5.Final\jandex-2.0.5.Final.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\dom4j\dom4j\2.1.1\dom4j-2.1.1.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\hibernate\common\hibernate-commons-annotations\5.0.4.Final\hibernate-commons-annotations-5.0.4.Final.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-aspects\5.1.5.RELEASE\spring-aspects-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\mail\mail\1.4.6\mail-1.4.6.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\activation\activation\1.1\activation-1.1.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\mail\javax.mail-api\1.5.5\javax.mail-api-1.5.5.jar;C:\Users\Aleksandar_Rachev\.m2\repository\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.15.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\projectlombok\lombok\1.18.6\lombok-1.18.6.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-test\2.1.3.RELEASE\spring-boot-starter-test-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-test\2.1.3.RELEASE\spring-boot-test-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\2.1.3.RELEASE\spring-boot-test-autoconfigure-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\jayway\jsonpath\json-path\2.4.0\json-path-2.4.0.jar;C:\Users\Aleksandar_Rachev\.m2\repository\net\minidev\json-smart\2.3\json-smart-2.3.jar;C:\Users\Aleksandar_Rachev\.m2\repository\net\minidev\accessors-smart\1.2\accessors-smart-1.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\ow2\asm\asm\5.0.4\asm-5.0.4.jar;C:\Users\Aleksandar_Rachev\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\assertj\assertj-core\3.11.1\assertj-core-3.11.1.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\mockito\mockito-core\2.23.4\mockito-core-2.23.4.jar;C:\Users\Aleksandar_Rachev\.m2\repository\net\bytebuddy\byte-buddy-agent\1.9.10\byte-buddy-agent-1.9.10.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\objenesis\objenesis\2.6\objenesis-2.6.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\hamcrest\hamcrest-library\1.3\hamcrest-library-1.3.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\skyscreamer\jsonassert\1.5.0\jsonassert-1.5.0.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-test\5.1.5.RELEASE\spring-test-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\xmlunit\xmlunit-core\2.6.2\xmlunit-core-2.6.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\2.1.3.RELEASE\spring-boot-starter-jdbc-2.1.3.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\com\zaxxer\HikariCP\3.2.0\HikariCP-3.2.0.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-jdbc\5.1.5.RELEASE\spring-jdbc-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\javax\persistence\javax.persistence-api\2.2\javax.persistence-api-2.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\data\spring-data-jpa\2.1.5.RELEASE\spring-data-jpa-2.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\data\spring-data-commons\2.1.5.RELEASE\spring-data-commons-2.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-orm\5.1.5.RELEASE\spring-orm-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\springframework\spring-tx\5.1.5.RELEASE\spring-tx-5.1.5.RELEASE.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\aspectj\aspectjrt\1.9.2\aspectjrt-1.9.2.jar;C:\Users\Aleksandar_Rachev\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\Aleksandar_Rachev"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2019-03-19"/>
+    <property name="java.home" value="C:\Program Files\JDK\openjdk-12_windows-x64_bin\jdk-12"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Projects\Emag\EmagProject"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="C:\Users\ALEKSA~1\AppData\Local\Temp\surefire6896915549531689868\surefirebooter10275821721353757644.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="12+33"/>
+    <property name="user.name" value="Aleksandar_Rachev"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\Aleksandar_Rachev\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\ALEKSA~1\AppData\Local\Temp\"/>
+    <property name="java.version" value="12"/>
+    <property name="user.dir" value="C:\Projects\Emag\EmagProject"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.library.path" value="C:\Program Files\JDK\openjdk-12_windows-x64_bin\jdk-12\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\TortoiseSVN\bin;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Program Files\nodejs\;C:\Program Files\JDK\openjdk-12_windows-x64_bin\jdk-12\bin;C:\Maven\apache-maven-3.6.1-bin\apache-maven-3.6.1\bin;C:\Users\Aleksandar_Rachev\AppData\Local\Microsoft\WindowsApps;C:\Users\Aleksandar_Rachev\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Aleksandar_Rachev\AppData\Roaming\npm;C:\Program Files\JDK\openjdk-12_windows-x64_bin\jdk-12\bin;;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="12+33"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="56.0"/>
+  </properties>
+  <testcase name="addPromotionSuccess" classname="finalproject.emag.controller.PromotionControllerTest" time="1.986">
+    <failure message="Status expected:&lt;200&gt; but was:&lt;400&gt;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: Status expected:<200> but was:<400>
+	at finalproject.emag.controller.PromotionControllerTest.addPromotionSuccess(PromotionControllerTest.java:51)
+]]></failure>
+    <system-out><![CDATA[2019-07-02 16:32:17.258  INFO 11480 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [finalproject.emag.controller.PromotionControllerTest], using SpringBootContextLoader
+2019-07-02 16:32:17.259  INFO 11480 --- [           main] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [finalproject.emag.controller.PromotionControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2019-07-02 16:32:17.259  INFO 11480 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [finalproject.emag.controller.PromotionControllerTest]: PromotionControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2019-07-02 16:32:17.261  INFO 11480 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration finalproject.emag.EmagApplication for test class finalproject.emag.controller.PromotionControllerTest
+2019-07-02 16:32:17.263  INFO 11480 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2019-07-02 16:32:17.263  INFO 11480 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@341c0dfc, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@7e0b68e5, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@507fecf3, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@3f1d4ecf, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6bbac73d, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4e53c6ef, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6164b3a2, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@345af277, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@96448ee, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@59509393, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1d6dc2b8, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@7ec75228]
+{"startDate":{"year":2016,"month":"AUGUST","monthValue":8,"dayOfMonth":16,"dayOfWeek":"TUESDAY","leapYear":true,"dayOfYear":229,"era":"CE","chronology":{"id":"ISO","calendarType":"iso8601"}},"endDate":{"year":2016,"month":"SEPTEMBER","monthValue":9,"dayOfMonth":16,"dayOfWeek":"FRIDAY","leapYear":true,"dayOfYear":260,"era":"CE","chronology":{"id":"ISO","calendarType":"iso8601"}},"newPrice":500.0}
+Hibernate: select user0_.id as id1_5_0_, user0_.admin as admin2_5_0_, user0_.birth_date as birth_da3_5_0_, user0_.email as email4_5_0_, user0_.image_url as image_ur5_5_0_, user0_.full_name as full_nam6_5_0_, user0_.password as password7_5_0_, user0_.phone_number as phone_nu8_5_0_, user0_.subscribed as subscrib9_5_0_, user0_.username as usernam10_5_0_ from users user0_ where user0_.id=?
+Hibernate: select user0_.id as id1_5_0_, user0_.admin as admin2_5_0_, user0_.birth_date as birth_da3_5_0_, user0_.email as email4_5_0_, user0_.image_url as image_ur5_5_0_, user0_.full_name as full_nam6_5_0_, user0_.password as password7_5_0_, user0_.phone_number as phone_nu8_5_0_, user0_.subscribed as subscrib9_5_0_, user0_.username as usernam10_5_0_ from users user0_ where user0_.id=?
+2019-07-02 16:32:17.291  WARN 11480 --- [           main] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Expected array or string.; nested exception is com.fasterxml.jackson.databind.exc.MismatchedInputException: Expected array or string.
+ at [Source: (PushbackInputStream); line: 1, column: 14] (through reference chain: finalproject.emag.model.dto.PromotionProductDTO["startDate"])]
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /products/promotions/2
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json"]
+             Body = {"startDate":{"year":2016,"month":"AUGUST","monthValue":8,"dayOfMonth":16,"dayOfWeek":"TUESDAY","leapYear":true,"dayOfYear":229,"era":"CE","chronology":{"id":"ISO","calendarType":"iso8601"}},"endDate":{"year":2016,"month":"SEPTEMBER","monthValue":9,"dayOfMonth":16,"dayOfWeek":"FRIDAY","leapYear":true,"dayOfYear":260,"era":"CE","chronology":{"id":"ISO","calendarType":"iso8601"}},"newPrice":500.0}
+    Session Attrs = {user=ShowUserDTO(id=2, email=admin@abv.bg, name=Admin, username=admin, phoneNumber=666, birthDate=2019-07-01, subscribed=false, admin=true, imageUrl=null)}
+
+Handler:
+             Type = finalproject.emag.controller.PromotionsController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.PromotionsController.addPromotion(java.lang.Long,finalproject.emag.model.dto.PromotionProductDTO,javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.http.converter.HttpMessageNotReadableException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = []
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /products/1
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public finalproject.emag.model.pojo.Product finalproject.emag.controller.ProductController.getProduct(long) throws finalproject.emag.util.exception.ProductNotFoundException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"id":1,"category":{"id":1,"name":"Computers"},"name":"Asus PC","price":2000.0,"quantity":5,"imageUrl":null}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /products/search/Asus
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public java.util.List<finalproject.emag.model.pojo.Product> finalproject.emag.controller.ProductController.searchProducts(java.lang.String)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = [{"id":1,"category":{"id":1,"name":"Computers"},"name":"Asus PC","price":2000.0,"quantity":5,"imageUrl":null}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = PUT
+      Request URI = /products/1/quantity/-1
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {user=ShowUserDTO(id=2, email=admin@abv.bg, name=Admin, username=admin, phoneNumber=666, birthDate=2019-07-01, subscribed=false, admin=true, imageUrl=null)}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.changeProductQuantity(long,int,javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = finalproject.emag.util.exception.InvalidQuantityException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"You can't change the quantity to this value!"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = PUT
+      Request URI = /products/1/quantity/50
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.changeProductQuantity(long,int,javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = finalproject.emag.util.exception.NotLoggedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"You are not logged."}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /products
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public java.util.List<finalproject.emag.model.pojo.Product> finalproject.emag.controller.ProductController.getAllProducts()
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = [{"id":1,"category":{"id":1,"name":"Computers"},"name":"Asus PC","price":2000.0,"quantity":5,"imageUrl":null},{"id":2,"category":{"id":2,"name":"Mobile phones"},"name":"Samsung S10","price":1200.0,"quantity":1,"imageUrl":null},{"id":3,"category":{"id":3,"name":"Accessories"},"name":"Charger","price":10.0,"quantity":50,"imageUrl":null},{"id":4,"category":{"id":4,"name":"White tech"},"name":"Whirlpool","price":1500.0,"quantity":7,"imageUrl":null}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /products/filter
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json"]
+             Body = {"from":1000.0,"to":2000.0,"order":"DESC"}
+    Session Attrs = {}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public java.util.List<finalproject.emag.model.pojo.Product> finalproject.emag.controller.ProductController.getAllProductsFiltered(finalproject.emag.model.dto.FilterParamsDTO)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = [{"id":1,"category":{"id":1,"name":"Computers"},"name":"Asus PC","price":2000.0,"quantity":5,"imageUrl":null},{"id":4,"category":{"id":4,"name":"White tech"},"name":"Whirlpool","price":1500.0,"quantity":7,"imageUrl":null},{"id":2,"category":{"id":2,"name":"Mobile phones"},"name":"Samsung S10","price":1200.0,"quantity":1,"imageUrl":null}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /products/category/4/filter
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json"]
+             Body = {"from":1000.0,"to":2000.0,"order":"ASC"}
+    Session Attrs = {}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public java.util.List<finalproject.emag.model.pojo.Product> finalproject.emag.controller.ProductController.getAllProductsBySubcategoryFiltered(long,finalproject.emag.model.dto.FilterParamsDTO)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = [{"id":4,"category":{"id":4,"name":"White tech"},"name":"Whirlpool","price":1500.0,"quantity":7,"imageUrl":null}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = PUT
+      Request URI = /products/10/quantity/50
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {user=ShowUserDTO(id=2, email=admin@abv.bg, name=Admin, username=admin, phoneNumber=666, birthDate=2019-07-01, subscribed=false, admin=true, imageUrl=null)}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.changeProductQuantity(long,int,javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = finalproject.emag.util.exception.ProductNotFoundException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"Product not found"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /products/1/add
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.addToCart(long,javax.servlet.http.HttpSession) throws java.lang.Exception
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = finalproject.emag.util.exception.NotLoggedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"You are not logged."}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /products/view/cart
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {user=ShowUserDTO(id=1, email=gosho@abv.bg, name=Georgi Petkov, username=gosho, phoneNumber=0345345, birthDate=2019-07-01, subscribed=true, admin=false, imageUrl=null)}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public java.util.List<finalproject.emag.model.dto.CartViewProductDTO> finalproject.emag.controller.ProductController.viewCart(javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = finalproject.emag.util.exception.EmptyCartException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"Your cart is empty."}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /products/order
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {user=ShowUserDTO(id=1, email=gosho@abv.bg, name=Georgi Petkov, username=gosho, phoneNumber=0345345, birthDate=2019-07-01, subscribed=true, admin=false, imageUrl=null)}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.makeOrder(javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = finalproject.emag.util.exception.EmptyCartException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"Your cart is empty."}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = PUT
+      Request URI = /products/1/quantity/50
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {user=ShowUserDTO(id=1, email=gosho@abv.bg, name=Georgi Petkov, username=gosho, phoneNumber=0345345, birthDate=2019-07-01, subscribed=true, admin=false, imageUrl=null)}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.changeProductQuantity(long,int,javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = finalproject.emag.util.exception.NotAdminException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"You are not admin."}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /products
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json"]
+             Body = {"name":"HP","price":5000.0,"quantity":6,"categoryId":1}
+    Session Attrs = {user=ShowUserDTO(id=2, email=admin@abv.bg, name=Admin, username=admin, phoneNumber=666, birthDate=2019-07-01, subscribed=false, admin=true, imageUrl=null)}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.addProduct(finalproject.emag.model.dto.ProductAddDTO,javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"Product added"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /products/1/add
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {user=ShowUserDTO(id=1, email=gosho@abv.bg, name=Georgi Petkov, username=gosho, phoneNumber=0345345, birthDate=2019-07-01, subscribed=true, admin=false, imageUrl=null), cart={CartProductDTO(id=1, category=Category(id=1, name=Computers), name=Asus PC, price=2000.0)=1}}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.addToCart(long,javax.servlet.http.HttpSession) throws java.lang.Exception
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"Product added to cart"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /products/order
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.makeOrder(javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = finalproject.emag.util.exception.NotLoggedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"You are not logged."}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /products/view/cart
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public java.util.List<finalproject.emag.model.dto.CartViewProductDTO> finalproject.emag.controller.ProductController.viewCart(javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = finalproject.emag.util.exception.NotLoggedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"You are not logged."}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = PUT
+      Request URI = /products/1/quantity/50
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {user=ShowUserDTO(id=2, email=admin@abv.bg, name=Admin, username=admin, phoneNumber=666, birthDate=2019-07-01, subscribed=false, admin=true, imageUrl=null)}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.changeProductQuantity(long,int,javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"Quantity changed"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /products
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json"]
+             Body = {"name":"HP","price":null,"quantity":null,"categoryId":1}
+    Session Attrs = {user=ShowUserDTO(id=2, email=admin@abv.bg, name=Admin, username=admin, phoneNumber=666, birthDate=2019-07-01, subscribed=false, admin=true, imageUrl=null)}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.addProduct(finalproject.emag.model.dto.ProductAddDTO,javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.web.bind.MethodArgumentNotValidException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = []
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /products
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json"]
+             Body = {"name":"HP","price":5000.0,"quantity":6,"categoryId":1}
+    Session Attrs = {user=ShowUserDTO(id=1, email=gosho@abv.bg, name=Georgi Petkov, username=gosho, phoneNumber=0345345, birthDate=2019-07-01, subscribed=true, admin=false, imageUrl=null)}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.addProduct(finalproject.emag.model.dto.ProductAddDTO,javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = finalproject.emag.util.exception.NotAdminException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"You are not admin."}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /products/view/cart
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {user=ShowUserDTO(id=1, email=gosho@abv.bg, name=Georgi Petkov, username=gosho, phoneNumber=0345345, birthDate=2019-07-01, subscribed=true, admin=false, imageUrl=null), cart={CartProductDTO(id=4, category=Category(id=4, name=White tech), name=Whirlpool, price=1500.0)=1}}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public java.util.List<finalproject.emag.model.dto.CartViewProductDTO> finalproject.emag.controller.ProductController.viewCart(javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = [{"id":4,"category":{"id":4,"name":"White tech"},"name":"Whirlpool","price":1500.0,"quantity":1}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /products/10/add
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {user=ShowUserDTO(id=1, email=gosho@abv.bg, name=Georgi Petkov, username=gosho, phoneNumber=0345345, birthDate=2019-07-01, subscribed=true, admin=false, imageUrl=null)}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.addToCart(long,javax.servlet.http.HttpSession) throws java.lang.Exception
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = finalproject.emag.util.exception.ProductNotFoundException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"Product not found"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = DELETE
+      Request URI = /products/1
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {user=ShowUserDTO(id=1, email=gosho@abv.bg, name=Georgi Petkov, username=gosho, phoneNumber=0345345, birthDate=2019-07-01, subscribed=true, admin=false, imageUrl=null)}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.deleteProduct(long,javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = finalproject.emag.util.exception.NotAdminException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"You are not admin."}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /products
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json"]
+             Body = {"name":"HP","price":5000.0,"quantity":6,"categoryId":1}
+    Session Attrs = {}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.addProduct(finalproject.emag.model.dto.ProductAddDTO,javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = finalproject.emag.util.exception.NotLoggedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"You are not logged."}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = DELETE
+      Request URI = /products/1
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {user=ShowUserDTO(id=2, email=admin@abv.bg, name=Admin, username=admin, phoneNumber=666, birthDate=2019-07-01, subscribed=false, admin=true, imageUrl=null)}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.deleteProduct(long,javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"Product deleted"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = DELETE
+      Request URI = /products/1
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.deleteProduct(long,javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = finalproject.emag.util.exception.NotLoggedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"You are not logged."}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /products/order
+       Parameters = {}
+          Headers = [Accept:"application/json"]
+             Body = null
+    Session Attrs = {user=ShowUserDTO(id=1, email=gosho@abv.bg, name=Georgi Petkov, username=gosho, phoneNumber=0345345, birthDate=2019-07-01, subscribed=true, admin=false, imageUrl=null), cart={CartProductDTO(id=4, category=Category(id=4, name=White tech), name=Whirlpool, price=1500.0)=1}}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.ProductController.makeOrder(javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = {"msg":"Order made"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /products/filter
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json"]
+             Body = {"from":1000.0,"to":2000.0,"order":"ASC"}
+    Session Attrs = {}
+
+Handler:
+             Type = finalproject.emag.controller.ProductController
+           Method = public java.util.List<finalproject.emag.model.pojo.Product> finalproject.emag.controller.ProductController.getAllProductsFiltered(finalproject.emag.model.dto.FilterParamsDTO)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json;charset=UTF-8"]
+     Content type = application/json;charset=UTF-8
+             Body = [{"id":2,"category":{"id":2,"name":"Mobile phones"},"name":"Samsung S10","price":1200.0,"quantity":1,"imageUrl":null},{"id":4,"category":{"id":4,"name":"White tech"},"name":"Whirlpool","price":1500.0,"quantity":6,"imageUrl":null}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /products/promotions/2
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Accept:"application/json"]
+             Body = {"startDate":{"year":2016,"month":"AUGUST","monthValue":8,"dayOfMonth":16,"dayOfWeek":"TUESDAY","leapYear":true,"dayOfYear":229,"era":"CE","chronology":{"id":"ISO","calendarType":"iso8601"}},"endDate":{"year":2016,"month":"SEPTEMBER","monthValue":9,"dayOfMonth":16,"dayOfWeek":"FRIDAY","leapYear":true,"dayOfYear":260,"era":"CE","chronology":{"id":"ISO","calendarType":"iso8601"}},"newPrice":500.0}
+    Session Attrs = {user=ShowUserDTO(id=2, email=admin@abv.bg, name=Admin, username=admin, phoneNumber=666, birthDate=2019-07-01, subscribed=false, admin=true, imageUrl=null)}
+
+Handler:
+             Type = finalproject.emag.controller.PromotionsController
+           Method = public org.springframework.http.ResponseEntity finalproject.emag.controller.PromotionsController.addPromotion(java.lang.Long,finalproject.emag.model.dto.PromotionProductDTO,javax.servlet.http.HttpSession) throws finalproject.emag.util.exception.BaseException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.http.converter.HttpMessageNotReadableException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = []
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  </testcase>
+</testsuite>

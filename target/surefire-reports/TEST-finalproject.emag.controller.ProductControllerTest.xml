@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="finalproject.emag.EmagApplicationTests" time="1.552" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="finalproject.emag.controller.ProductControllerTest" time="9.888" tests="27" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -58,5 +58,31 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="56.0"/>
   </properties>
-  <testcase name="contextLoads" classname="finalproject.emag.EmagApplicationTests" time="0"/>
+  <testcase name="getProductById" classname="finalproject.emag.controller.ProductControllerTest" time="0.221"/>
+  <testcase name="getAllProductsByName" classname="finalproject.emag.controller.ProductControllerTest" time="0.165"/>
+  <testcase name="changeQuantityTestInvalidQuality" classname="finalproject.emag.controller.ProductControllerTest" time="0.078"/>
+  <testcase name="changeQuantityTestNotLogged" classname="finalproject.emag.controller.ProductControllerTest" time="0.046"/>
+  <testcase name="getAllProducts" classname="finalproject.emag.controller.ProductControllerTest" time="0.104"/>
+  <testcase name="getAllProductsFilteredDesc" classname="finalproject.emag.controller.ProductControllerTest" time="0.106"/>
+  <testcase name="getAllProductsByCategoryFiltered" classname="finalproject.emag.controller.ProductControllerTest" time="0.089"/>
+  <testcase name="changeQuantityTestMissingProduct" classname="finalproject.emag.controller.ProductControllerTest" time="0.116"/>
+  <testcase name="putItemInCartNotLogged" classname="finalproject.emag.controller.ProductControllerTest" time="0.048"/>
+  <testcase name="viewCartEmpty" classname="finalproject.emag.controller.ProductControllerTest" time="0.083"/>
+  <testcase name="makeOrderCartEmpty" classname="finalproject.emag.controller.ProductControllerTest" time="0.086"/>
+  <testcase name="changeQuantityTestNotAdmin" classname="finalproject.emag.controller.ProductControllerTest" time="0.083"/>
+  <testcase name="addProductSuccess" classname="finalproject.emag.controller.ProductControllerTest" time="0.103"/>
+  <testcase name="putItemInCartSuccess" classname="finalproject.emag.controller.ProductControllerTest" time="0.096"/>
+  <testcase name="makeOrderNotLogged" classname="finalproject.emag.controller.ProductControllerTest" time="0.048"/>
+  <testcase name="viewCartNotLogged" classname="finalproject.emag.controller.ProductControllerTest" time="0.048"/>
+  <testcase name="changeQuantityTestSuccess" classname="finalproject.emag.controller.ProductControllerTest" time="0.047"/>
+  <testcase name="addProductMissingFields" classname="finalproject.emag.controller.ProductControllerTest" time="0.128"/>
+  <testcase name="addProductNotAdmin" classname="finalproject.emag.controller.ProductControllerTest" time="0.092"/>
+  <testcase name="viewCartSuccess" classname="finalproject.emag.controller.ProductControllerTest" time="0.108"/>
+  <testcase name="putItemInCartProductMissing" classname="finalproject.emag.controller.ProductControllerTest" time="0.121"/>
+  <testcase name="deleteProductNotAdmin" classname="finalproject.emag.controller.ProductControllerTest" time="0.092"/>
+  <testcase name="addProductNotLogged" classname="finalproject.emag.controller.ProductControllerTest" time="0.062"/>
+  <testcase name="deleteProductSuccess" classname="finalproject.emag.controller.ProductControllerTest" time="0.101"/>
+  <testcase name="deleteProductNotLogged" classname="finalproject.emag.controller.ProductControllerTest" time="0.057"/>
+  <testcase name="makeOrderSuccess" classname="finalproject.emag.controller.ProductControllerTest" time="0.159"/>
+  <testcase name="getAllProductsFilteredAsc" classname="finalproject.emag.controller.ProductControllerTest" time="0.082"/>
 </testsuite>

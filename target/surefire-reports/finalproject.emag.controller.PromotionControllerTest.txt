@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: finalproject.emag.controller.PromotionControllerTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 2.132 s <<< FAILURE! - in finalproject.emag.controller.PromotionControllerTest
+addPromotionSuccess(finalproject.emag.controller.PromotionControllerTest)  Time elapsed: 1.986 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<400>
+	at finalproject.emag.controller.PromotionControllerTest.addPromotionSuccess(PromotionControllerTest.java:51)
+

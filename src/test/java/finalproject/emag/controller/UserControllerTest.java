@@ -25,6 +25,7 @@ public class UserControllerTest extends AbstractTest {
     @Before
     public void addTestUsers() {
         User registerUser = new User();
+        registerUser.setId(3);
         registerUser.setEmail("test@abv.bg");
         registerUser.setPassword(PasswordEncoder.hashPassword("123"));
         registerUser.setName("Test");
@@ -32,6 +33,7 @@ public class UserControllerTest extends AbstractTest {
         userRepository.save(registerUser);
 
         User registerUser1 = new User();
+        registerUser1.setId(4);
         registerUser1.setEmail("test1@abv.bg");
         registerUser1.setPassword(PasswordEncoder.hashPassword("123"));
         registerUser1.setName("Test1");

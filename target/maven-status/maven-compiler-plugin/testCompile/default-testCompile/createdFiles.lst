@@ -1,2 +1,6 @@
+finalproject\emag\controller\AbstractTest.class
+finalproject\emag\controller\ReviewControllerTest.class
+finalproject\emag\controller\UserControllerTest.class
+finalproject\emag\controller\ProductControllerTest.class
+finalproject\emag\service\UserServiceTest.class
 finalproject\emag\EmagApplicationTests.class
-finalproject\emag\controller\HomeControllerTest.class
